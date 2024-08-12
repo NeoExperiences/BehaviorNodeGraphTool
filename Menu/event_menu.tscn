@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdrgllg5uacxk"]
+
+[ext_resource type="Script" path="res://Menu/Scripts/event_menu.gd" id="1_kag6j"]
+
+[node name="EventMenu" type="Panel"]
+top_level = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kag6j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -463.5
+offset_top = 48.0
+offset_right = 463.5
+offset_bottom = 648.0
+grow_horizontal = 2
+
+[node name="EventPanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="EventLabel" type="Label" parent="VBoxContainer/EventPanelContainer"]
+layout_mode = 2
+text = "Events"
+horizontal_alignment = 1
+
+[node name="HeaderHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HeaderHBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HeaderHBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(30, 31)
+layout_mode = 2
+text = "#
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HeaderHBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HeaderHBoxContainer/PanelContainer2"]
+custom_minimum_size = Vector2(680, 0)
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/HeaderHBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HeaderHBoxContainer/PanelContainer3"]
+custom_minimum_size = Vector2(188, 31)
+layout_mode = 2
+text = "Type"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer2"]
+custom_minimum_size = Vector2(0, 490)
+layout_mode = 2
+vertical_scroll_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="AddEvent" type="Button" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Event"
+
+[node name="RemoveEvent" type="Button" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Remove Event"
+
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/AddEvent" to="." method="_on_add_event_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/RemoveEvent" to="." method="_on_remove_event_pressed"]

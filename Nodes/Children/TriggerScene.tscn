@@ -1,0 +1,162 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6sj07yeumu2l"]
+
+[ext_resource type="Script" path="res://Nodes/Children/Scripts/TriggerScene.gd" id="1_mom2a"]
+[ext_resource type="Script" path="res://Nodes/Children/Scripts/eventsOptionButton.gd" id="2_entv6"]
+[ext_resource type="Script" path="res://Nodes/Children/Scripts/payloadOptionButton.gd" id="3_biudp"]
+
+[node name="TriggerScene" type="PanelContainer"]
+script = ExtResource("1_mom2a")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TriggerNameLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "Trigger #1"
+horizontal_alignment = 1
+
+[node name="localTime" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/localTime"]
+layout_mode = 2
+text = "   localTime"
+
+[node name="Space" type="Control" parent="VBoxContainer/localTime"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="localTimeLine" type="LineEdit" parent="VBoxContainer/localTime"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="id" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="idLabel" type="Label" parent="VBoxContainer/id"]
+layout_mode = 2
+text = "   id
+"
+
+[node name="Space" type="Control" parent="VBoxContainer/id"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="idSpinBox" type="SpinBox" parent="VBoxContainer/id"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+max_value = 1000.0
+
+[node name="eventsOptionButton" type="OptionButton" parent="VBoxContainer/id"]
+visible = false
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("2_entv6")
+
+[node name="payload" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="payloadLabel" type="Label" parent="VBoxContainer/payload"]
+layout_mode = 2
+text = "   payload"
+
+[node name="Space" type="Control" parent="VBoxContainer/payload"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="payloadOptionButton" type="OptionButton" parent="VBoxContainer/payload"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("3_biudp")
+
+[node name="relativeToEndOfClip" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/relativeToEndOfClip"]
+layout_mode = 2
+text = "   relativeToEndOfClip"
+
+[node name="Space" type="Control" parent="VBoxContainer/relativeToEndOfClip"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="relativeToEndOfClipButton" type="OptionButton" parent="VBoxContainer/relativeToEndOfClip"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 2
+selected = 1
+popup/item_0/text = "False"
+popup/item_0/id = 0
+popup/item_1/text = "True"
+popup/item_1/id = 1
+
+[node name="acyclic" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/acyclic"]
+layout_mode = 2
+text = "   acyclic"
+
+[node name="Space" type="Control" parent="VBoxContainer/acyclic"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="acyclicButton" type="OptionButton" parent="VBoxContainer/acyclic"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "False"
+popup/item_0/id = 0
+popup/item_1/text = "True"
+popup/item_1/id = 1
+
+[node name="isAnnotation" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/isAnnotation"]
+layout_mode = 2
+text = "   isAnnotation"
+
+[node name="Space" type="Control" parent="VBoxContainer/isAnnotation"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="isAnnotationButton" type="OptionButton" parent="VBoxContainer/isAnnotation"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "False"
+popup/item_0/id = 0
+popup/item_1/text = "True"
+popup/item_1/id = 1
+
+[connection signal="text_changed" from="VBoxContainer/localTime/localTimeLine" to="." method="_on_local_time_line_text_changed"]
+[connection signal="value_changed" from="VBoxContainer/id/idSpinBox" to="." method="_on_id_spin_box_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/id/eventsOptionButton" to="." method="_on_events_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/payload/payloadOptionButton" to="." method="_on_payload_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/relativeToEndOfClip/relativeToEndOfClipButton" to="." method="_on_relative_to_end_of_clip_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/acyclic/acyclicButton" to="." method="_on_acyclic_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/isAnnotation/isAnnotationButton" to="." method="_on_is_annotation_button_item_selected"]

@@ -1,0 +1,394 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu5nfho13j5pc"]
+
+[ext_resource type="Script" path="res://Nodes/Children/Scripts/TransitionScene.gd" id="1_ah1xr"]
+[ext_resource type="Script" path="res://Nodes/Children/Scripts/transitionButton.gd" id="2_wnn72"]
+
+[node name="TransitionScene" type="PanelContainer"]
+offset_right = 305.0
+offset_bottom = 101.0
+script = ExtResource("1_ah1xr")
+
+[node name="transitionContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="transitionContainer"]
+layout_mode = 2
+
+[node name="TransitionNameLabel" type="Label" parent="transitionContainer/PanelContainer"]
+layout_mode = 2
+text = "Transition #1"
+horizontal_alignment = 1
+
+[node name="ShowButton" type="Button" parent="transitionContainer"]
+layout_mode = 2
+text = "Show Data"
+
+[node name="dataContainer" type="VBoxContainer" parent="transitionContainer"]
+layout_mode = 2
+
+[node name="eventId" type="HBoxContainer" parent="transitionContainer/dataContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="transitionContainer/dataContainer/eventId"]
+layout_mode = 2
+text = "   eventId"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/eventId"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="eventIdSpinBox" type="SpinBox" parent="transitionContainer/dataContainer/eventId"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+max_value = 1000.0
+
+[node name="toStateId" type="HBoxContainer" parent="transitionContainer/dataContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="transitionContainer/dataContainer/toStateId"]
+layout_mode = 2
+text = "   toStateId"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/toStateId"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="toStateIdSpinBox" type="SpinBox" parent="transitionContainer/dataContainer/toStateId"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+max_value = 1000.0
+
+[node name="triggerIntervalButton" type="Button" parent="transitionContainer/dataContainer"]
+visible = false
+layout_mode = 2
+text = "Show Trigger Interval"
+
+[node name="triggerInterval" type="VBoxContainer" parent="transitionContainer/dataContainer"]
+visible = false
+layout_mode = 2
+
+[node name="enterEventId" type="HBoxContainer" parent="transitionContainer/dataContainer/triggerInterval"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="transitionContainer/dataContainer/triggerInterval/enterEventId"]
+layout_mode = 2
+text = "   enterEventId"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/triggerInterval/enterEventId"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="triggerIntervalEnterEventIdSpinBox" type="SpinBox" parent="transitionContainer/dataContainer/triggerInterval/enterEventId"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+min_value = -1.0
+max_value = 1000.0
+value = -1.0
+
+[node name="exitEventId" type="HBoxContainer" parent="transitionContainer/dataContainer/triggerInterval"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="transitionContainer/dataContainer/triggerInterval/exitEventId"]
+layout_mode = 2
+text = "   exitEventId"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/triggerInterval/exitEventId"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="triggerIntervalExitEventIdSpinBox" type="SpinBox" parent="transitionContainer/dataContainer/triggerInterval/exitEventId"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+min_value = -1.0
+max_value = 1000.0
+value = -1.0
+
+[node name="enterTime" type="HBoxContainer" parent="transitionContainer/dataContainer/triggerInterval"]
+layout_mode = 2
+
+[node name="enterTimeLabel" type="Label" parent="transitionContainer/dataContainer/triggerInterval/enterTime"]
+layout_mode = 2
+text = "   enterTime"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/triggerInterval/enterTime"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="triggerIntervalEnterTimeLine" type="LineEdit" parent="transitionContainer/dataContainer/triggerInterval/enterTime"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="exitTime" type="HBoxContainer" parent="transitionContainer/dataContainer/triggerInterval"]
+layout_mode = 2
+
+[node name="enterTimeLabel" type="Label" parent="transitionContainer/dataContainer/triggerInterval/exitTime"]
+layout_mode = 2
+text = "   exitTime"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/triggerInterval/exitTime"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="triggerIntervalExitTimeLine" type="LineEdit" parent="transitionContainer/dataContainer/triggerInterval/exitTime"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="initiateIntervalButton" type="Button" parent="transitionContainer/dataContainer"]
+visible = false
+layout_mode = 2
+text = "Show Initiate Interval"
+
+[node name="initiateInterval" type="VBoxContainer" parent="transitionContainer/dataContainer"]
+visible = false
+layout_mode = 2
+
+[node name="enterEventId" type="HBoxContainer" parent="transitionContainer/dataContainer/initiateInterval"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="transitionContainer/dataContainer/initiateInterval/enterEventId"]
+layout_mode = 2
+text = "   enterEventId"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/initiateInterval/enterEventId"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="initiateIntervalEnterEventIdSpinBox" type="SpinBox" parent="transitionContainer/dataContainer/initiateInterval/enterEventId"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+min_value = -1.0
+max_value = 1000.0
+value = -1.0
+
+[node name="exitEventId" type="HBoxContainer" parent="transitionContainer/dataContainer/initiateInterval"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="transitionContainer/dataContainer/initiateInterval/exitEventId"]
+layout_mode = 2
+text = "   exitEventId"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/initiateInterval/exitEventId"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="initiateIntervalExitEventIdSpinBox" type="SpinBox" parent="transitionContainer/dataContainer/initiateInterval/exitEventId"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+min_value = -1.0
+max_value = 1000.0
+value = -1.0
+
+[node name="enterTime" type="HBoxContainer" parent="transitionContainer/dataContainer/initiateInterval"]
+layout_mode = 2
+
+[node name="enterTimeLabel" type="Label" parent="transitionContainer/dataContainer/initiateInterval/enterTime"]
+layout_mode = 2
+text = "   enterTime"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/initiateInterval/enterTime"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="initiateIntervalEnterTimeLine" type="LineEdit" parent="transitionContainer/dataContainer/initiateInterval/enterTime"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="exitTime" type="HBoxContainer" parent="transitionContainer/dataContainer/initiateInterval"]
+layout_mode = 2
+
+[node name="enterTimeLabel" type="Label" parent="transitionContainer/dataContainer/initiateInterval/exitTime"]
+layout_mode = 2
+text = "   exitTime"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/initiateInterval/exitTime"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="initiateIntervalExitTimeLine" type="LineEdit" parent="transitionContainer/dataContainer/initiateInterval/exitTime"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="fromNestedStateID" type="HBoxContainer" parent="transitionContainer/dataContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="transitionContainer/dataContainer/fromNestedStateID"]
+layout_mode = 2
+text = "   fromNestedStateId"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/fromNestedStateID"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="fromNestedStateIDSpinBox" type="SpinBox" parent="transitionContainer/dataContainer/fromNestedStateID"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+max_value = 1000.0
+
+[node name="toNestedStateId" type="HBoxContainer" parent="transitionContainer/dataContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="transitionContainer/dataContainer/toNestedStateId"]
+layout_mode = 2
+text = "   toNestedStateId"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/toNestedStateId"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="toNestedStateIdSpinBox" type="SpinBox" parent="transitionContainer/dataContainer/toNestedStateId"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+max_value = 1000.0
+
+[node name="priority" type="HBoxContainer" parent="transitionContainer/dataContainer"]
+layout_mode = 2
+
+[node name="priorityLabel" type="Label" parent="transitionContainer/dataContainer/priority"]
+layout_mode = 2
+text = "   priority"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/priority"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="prioritySpinBox" type="SpinBox" parent="transitionContainer/dataContainer/priority"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+max_value = 1000.0
+
+[node name="Flags" type="HBoxContainer" parent="transitionContainer/dataContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="transitionContainer/dataContainer/Flags"]
+layout_mode = 2
+text = "   flags"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/Flags"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="FlagsPopupButton" type="Button" parent="transitionContainer/dataContainer/Flags"]
+layout_mode = 2
+text = "Options"
+
+[node name="FlagsPopupMenu" type="PopupMenu" parent="transitionContainer/dataContainer/Flags"]
+position = Vector2i(600, 200)
+size = Vector2i(404, 323)
+theme_override_font_sizes/font_size = 12
+hide_on_checkable_item_selection = false
+allow_search = false
+item_count = 15
+item_0/text = "USE_TRIGGER_INTERVAL"
+item_0/checkable = 1
+item_0/id = 0
+item_1/text = "USE_INITIATE_INTERVAL"
+item_1/checkable = 1
+item_1/id = 1
+item_2/text = "UNINTERRUPTIBLE_WHILE_PLAYING"
+item_2/checkable = 1
+item_2/id = 2
+item_3/text = "UNINTERRUPTIBLE_WHILE_DELAYED"
+item_3/checkable = 1
+item_3/id = 3
+item_4/text = "DELAY_STATE_CHANGE"
+item_4/checkable = 1
+item_4/id = 4
+item_5/text = "DISABLED"
+item_5/checkable = 1
+item_5/id = 5
+item_6/text = "DISALLOW_RETURN_TO_PREVIOUS_STATE"
+item_6/checkable = 1
+item_6/id = 6
+item_7/text = "DISALLOW_RANDOM_TRANSITION"
+item_7/checkable = 1
+item_7/id = 7
+item_8/text = "DISABLE_CONDITION"
+item_8/checkable = 1
+item_8/id = 8
+item_9/text = "ALLOW_SELF_TRANSITION_BY_TRANSITION_FROM_ANY_STATE"
+item_9/checkable = 1
+item_9/id = 9
+item_10/text = "IS_GLOBAL_WILDCARD"
+item_10/checkable = 1
+item_10/id = 10
+item_11/text = "IS_LOCAL_WILDCARD"
+item_11/checkable = 1
+item_11/id = 11
+item_12/text = "FROM_NESTED_STATE_ID_IS_VALID"
+item_12/checkable = 1
+item_12/id = 12
+item_13/text = "TO_NESTED_STATE_ID_IS_VALID"
+item_13/checkable = 1
+item_13/id = 13
+item_14/text = "ABUT_AT_END_OF_FROM_GENERATOR"
+item_14/checkable = 1
+item_14/id = 14
+
+[node name="transition" type="HBoxContainer" parent="transitionContainer/dataContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="transitionContainer/dataContainer/transition"]
+layout_mode = 2
+text = "   transition"
+
+[node name="Space" type="Control" parent="transitionContainer/dataContainer/transition"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="transitionButton" type="OptionButton" parent="transitionContainer/dataContainer/transition"]
+clip_contents = true
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+clip_text = true
+fit_to_longest_item = false
+script = ExtResource("2_wnn72")
+
+[connection signal="pressed" from="transitionContainer/ShowButton" to="." method="_on_show_button_pressed"]
+[connection signal="value_changed" from="transitionContainer/dataContainer/eventId/eventIdSpinBox" to="." method="_on_event_id_spin_box_value_changed"]
+[connection signal="value_changed" from="transitionContainer/dataContainer/toStateId/toStateIdSpinBox" to="." method="_on_to_state_id_spin_box_value_changed"]
+[connection signal="value_changed" from="transitionContainer/dataContainer/triggerInterval/enterEventId/triggerIntervalEnterEventIdSpinBox" to="." method="_on_from_nested_state_id_spin_box_value_changed"]
+[connection signal="value_changed" from="transitionContainer/dataContainer/triggerInterval/exitEventId/triggerIntervalExitEventIdSpinBox" to="." method="_on_to_nested_state_id_spin_box_value_changed"]
+[connection signal="value_changed" from="transitionContainer/dataContainer/initiateInterval/enterEventId/initiateIntervalEnterEventIdSpinBox" to="." method="_on_from_nested_state_id_spin_box_value_changed"]
+[connection signal="value_changed" from="transitionContainer/dataContainer/initiateInterval/exitEventId/initiateIntervalExitEventIdSpinBox" to="." method="_on_to_nested_state_id_spin_box_value_changed"]
+[connection signal="value_changed" from="transitionContainer/dataContainer/fromNestedStateID/fromNestedStateIDSpinBox" to="." method="_on_from_nested_state_id_spin_box_value_changed"]
+[connection signal="value_changed" from="transitionContainer/dataContainer/toNestedStateId/toNestedStateIdSpinBox" to="." method="_on_to_nested_state_id_spin_box_value_changed"]
+[connection signal="value_changed" from="transitionContainer/dataContainer/priority/prioritySpinBox" to="." method="_on_priority_spin_box_value_changed"]
+[connection signal="pressed" from="transitionContainer/dataContainer/Flags/FlagsPopupButton" to="." method="_on_flags_popup_button_pressed"]
+[connection signal="index_pressed" from="transitionContainer/dataContainer/Flags/FlagsPopupMenu" to="." method="_on_flags_popup_menu_index_pressed"]
+[connection signal="item_selected" from="transitionContainer/dataContainer/transition/transitionButton" to="." method="_on_transition_button_item_selected"]

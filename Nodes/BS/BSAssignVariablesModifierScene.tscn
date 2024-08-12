@@ -1,0 +1,1187 @@
+[gd_scene load_steps=7 format=3 uid="uid://bq0ecjgxrvgkx"]
+
+[ext_resource type="Script" path="res://Nodes/BS/Scripts/BSAssignVariablesModifierScene.gd" id="1_fsubi"]
+[ext_resource type="Texture2D" uid="uid://dtc4ja5slmyqt" path="res://ConfirmDeleteButton.png" id="2_2rexl"]
+[ext_resource type="Texture2D" uid="uid://dtrsj56jbquo8" path="res://PinButton.png" id="3_5lxdb"]
+[ext_resource type="Texture2D" uid="uid://csb3wjekhlmy1" path="res://UnpinButton.png" id="4_udjhr"]
+[ext_resource type="Texture2D" uid="uid://jrafqhji2unw" path="res://DeleteButton.png" id="5_nr86r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y45yo"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.168627, 0.211765, 0.266667, 0.898039)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 1
+anti_aliasing_size = 2.0
+
+[node name="BSAssignVariablesModifier" type="GraphNode"]
+offset_right = 188.0
+offset_bottom = 144.0
+title = "BSAssignVariablesModifier"
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = true
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = false
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 1, 1, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
+script = ExtResource("1_fsubi")
+
+[node name="connection" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="connectionLabel" type="Label" parent="connection"]
+layout_mode = 2
+text = "connection
+"
+
+[node name="Space" type="Control" parent="connection"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="EditButton" type="Button" parent="connection"]
+layout_mode = 2
+text = "Edit"
+
+[node name="variableBindingSet" type="Label" parent="."]
+layout_mode = 2
+text = "variableBindingSet"
+horizontal_alignment = 2
+
+[node name="Name" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "AssignVariablesModifier"
+placeholder_text = "Name"
+
+[node name="DataPopupPanel" type="PopupPanel" parent="."]
+transparent_bg = true
+initial_position = 1
+size = Vector2i(577, 605)
+visible = true
+borderless = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_y45yo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DataPopupPanel"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 572.0
+offset_bottom = 600.0
+
+[node name="BaseNode" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ConfirmDeleteButton" type="TextureButton" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+visible = false
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("2_2rexl")
+
+[node name="baseNodeLabel" type="Label" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 18
+text = "   BSAssignVariablesModifier"
+vertical_alignment = 2
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="baseNodeLabel2" type="Label" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "#"
+vertical_alignment = 1
+
+[node name="nodeIDSpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+min_value = 90.0
+max_value = 9999.0
+value = 90.0
+rounded = true
+
+[node name="PinButton" type="TextureButton" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_5lxdb")
+texture_pressed = ExtResource("4_udjhr")
+
+[node name="DeleteButton" type="TextureButton" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_nr86r")
+
+[node name="PanelContainer" type="PanelContainer" parent="DataPopupPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="FoldingPanel" type="VBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+custom_minimum_size = Vector2(0, 560)
+layout_mode = 2
+vertical_scroll_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="userData" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/userData"]
+layout_mode = 2
+text = "   userData"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/userData"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="userDataButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/userData"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "0"
+popup/item_0/id = 0
+popup/item_1/text = "1"
+popup/item_1/id = 1
+popup/item_2/text = "2"
+popup/item_2/id = 2
+popup/item_3/text = "3"
+popup/item_3/id = 3
+
+[node name="enable" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/enable"]
+layout_mode = 2
+text = "   enable"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/enable"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="enableButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/enable"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 2
+selected = 1
+popup/item_0/text = "False"
+popup/item_0/id = 0
+popup/item_1/text = "True"
+popup/item_1/id = 1
+
+[node name="floatVariable1" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable1"]
+layout_mode = 2
+text = "   floatVariable1"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable1"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable1Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable1"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable2" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable2"]
+layout_mode = 2
+text = "   floatVariable2"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable2Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable2"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable3" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable3"]
+layout_mode = 2
+text = "   floatVariable3"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable3"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable3Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable3"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable4" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable4"]
+layout_mode = 2
+text = "   floatVariable4"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable4"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable4Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable4"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable5" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable5"]
+layout_mode = 2
+text = "   floatVariable5"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable5"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable5Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable5"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable6" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable6"]
+layout_mode = 2
+text = "   floatVariable6"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable6"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable6Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable6"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable7" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable7"]
+layout_mode = 2
+text = "   floatVariable7"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable7"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable7Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable7"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable8" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable8"]
+layout_mode = 2
+text = "   floatVariable8"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable8"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable8Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable8"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable9" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable9"]
+layout_mode = 2
+text = "   floatVariable9"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable9"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable9Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable9"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable10" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable10"]
+layout_mode = 2
+text = "   floatVariable10"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable10"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable10Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable10"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable11" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable11"]
+layout_mode = 2
+text = "   floatVariable11"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable11"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable11Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable11"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable12" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable12"]
+layout_mode = 2
+text = "   floatVariable12"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable12"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable12Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable12"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable13" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable13"]
+layout_mode = 2
+text = "   floatVariable13"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable13"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable13Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable13"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable14" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable14"]
+layout_mode = 2
+text = "   floatVariable14"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable14"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable14Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable14"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable15" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable15"]
+layout_mode = 2
+text = "   floatVariable15"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable15"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable15Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable15"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable16" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable16"]
+layout_mode = 2
+text = "   floatVariable16"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable16"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable16Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable16"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable17" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable17"]
+layout_mode = 2
+text = "   floatVariable17"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable17"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable17Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable17"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable18" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable18"]
+layout_mode = 2
+text = "   floatVariable18"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable18"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable18Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable18"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable19" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable19"]
+layout_mode = 2
+text = "   floatVariable19"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable19"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable19Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable19"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatVariable20" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable20"]
+layout_mode = 2
+text = "   floatVariable20"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable20"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatVariable20Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable20"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue1" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue1"]
+layout_mode = 2
+text = "   floatValue1"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue1"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue1Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue1"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue2" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue2"]
+layout_mode = 2
+text = "   floatValue2"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue2Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue2"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue3" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue3"]
+layout_mode = 2
+text = "   floatValue3"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue3"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue3Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue3"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue4" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue4"]
+layout_mode = 2
+text = "   floatValue4"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue4"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue4Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue4"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue5" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue5"]
+layout_mode = 2
+text = "   floatValue5"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue5"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue5Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue5"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue6" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue6"]
+layout_mode = 2
+text = "   floatValue6"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue6"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue6Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue6"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue7" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue7"]
+layout_mode = 2
+text = "   floatValue7"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue7"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue7Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue7"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue8" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue8"]
+layout_mode = 2
+text = "   floatValue8"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue8"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue8Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue8"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue9" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue9"]
+layout_mode = 2
+text = "   floatValue9"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue9"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue9Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue9"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue10" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue10"]
+layout_mode = 2
+text = "   floatValue10"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue10"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue10Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue10"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue11" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue11"]
+layout_mode = 2
+text = "   floatValue11"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue11"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue11Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue11"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue12" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue12"]
+layout_mode = 2
+text = "   floatValue12"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue12"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue12Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue12"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue13" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue13"]
+layout_mode = 2
+text = "   floatValue13"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue13"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue13Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue13"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue14" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue14"]
+layout_mode = 2
+text = "   floatValue14"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue14"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue14Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue14"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue15" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue15"]
+layout_mode = 2
+text = "   floatValue15"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue15"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue15Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue15"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue16" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue16"]
+layout_mode = 2
+text = "   floatValue16"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue16"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue16Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue16"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue17" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue17"]
+layout_mode = 2
+text = "   floatValue17"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue17"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue17Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue17"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue18" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue18"]
+layout_mode = 2
+text = "   floatValue18"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue18"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue18Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue18"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue19" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue19"]
+layout_mode = 2
+text = "   floatValue19"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue19"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue19Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue19"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="floatValue20" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue20"]
+layout_mode = 2
+text = "   floatValue20"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue20"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="floatValue20Line" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue20"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="intVariable1" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable1"]
+layout_mode = 2
+text = "   intVariable1"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable1"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="intVariable1SpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable1"]
+layout_mode = 2
+
+[node name="intVariable2" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable2"]
+layout_mode = 2
+text = "   intVariable2"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="intVariable2SpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable2"]
+layout_mode = 2
+
+[node name="intVariable3" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable3"]
+layout_mode = 2
+text = "   intVariable3"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable3"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="intVariable3SpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable3"]
+layout_mode = 2
+
+[node name="intVariable4" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable4"]
+layout_mode = 2
+text = "   intVariable4"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable4"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="intVariable4SpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable4"]
+layout_mode = 2
+
+[node name="intValue1" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue1"]
+layout_mode = 2
+text = "   intValue1"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue1"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="intValue1SpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue1"]
+layout_mode = 2
+
+[node name="intValue2" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue2"]
+layout_mode = 2
+text = "   intValue2"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="intValue2SpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue2"]
+layout_mode = 2
+
+[node name="intValue3" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue3"]
+layout_mode = 2
+text = "   intValue3"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue3"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="intValue3SpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue3"]
+layout_mode = 2
+
+[node name="intValue4" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue4"]
+layout_mode = 2
+text = "   intValue4"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue4"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="intValue4SpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue4"]
+layout_mode = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="connection/EditButton" to="." method="_on_edit_button_pressed"]
+[connection signal="text_changed" from="Name" to="." method="_on_name_text_changed"]
+[connection signal="popup_hide" from="DataPopupPanel" to="." method="_on_popup_panel_popup_hide"]
+[connection signal="pressed" from="DataPopupPanel/VBoxContainer/BaseNode/ConfirmDeleteButton" to="." method="_on_confirm_delete_button_pressed"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/BaseNode/nodeIDSpinBox" to="." method="_on_node_id_spin_box_value_changed"]
+[connection signal="toggled" from="DataPopupPanel/VBoxContainer/BaseNode/PinButton" to="." method="_on_pin_button_toggled"]
+[connection signal="pressed" from="DataPopupPanel/VBoxContainer/BaseNode/DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/userData/userDataButton" to="." method="_on_user_data_button_item_selected"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/enable/enableButton" to="." method="_on_enable_button_item_selected"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable1/floatVariable1Line" to="." method="_on_float_variable_1_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable2/floatVariable2Line" to="." method="_on_float_variable_2_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable3/floatVariable3Line" to="." method="_on_float_variable_3_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable4/floatVariable4Line" to="." method="_on_float_variable_4_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable5/floatVariable5Line" to="." method="_on_float_variable_5_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable6/floatVariable6Line" to="." method="_on_float_variable_6_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable7/floatVariable7Line" to="." method="_on_float_variable_7_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable8/floatVariable8Line" to="." method="_on_float_variable_8_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable9/floatVariable9Line" to="." method="_on_float_variable_9_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable10/floatVariable10Line" to="." method="_on_float_variable_10_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable11/floatVariable11Line" to="." method="_on_float_variable_11_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable12/floatVariable12Line" to="." method="_on_float_variable_12_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable13/floatVariable13Line" to="." method="_on_float_variable_13_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable14/floatVariable14Line" to="." method="_on_float_variable_14_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable15/floatVariable15Line" to="." method="_on_float_variable_15_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable16/floatVariable16Line" to="." method="_on_float_variable_16_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable17/floatVariable17Line" to="." method="_on_float_variable_17_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable18/floatVariable18Line" to="." method="_on_float_variable_18_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable19/floatVariable19Line" to="." method="_on_float_variable_19_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatVariable20/floatVariable20Line" to="." method="_on_float_variable_20_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue1/floatValue1Line" to="." method="_on_float_value_1_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue2/floatValue2Line" to="." method="_on_float_value_2_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue3/floatValue3Line" to="." method="_on_float_value_3_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue4/floatValue4Line" to="." method="_on_float_value_4_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue5/floatValue5Line" to="." method="_on_float_value_5_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue6/floatValue6Line" to="." method="_on_float_value_6_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue7/floatValue7Line" to="." method="_on_float_value_7_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue8/floatValue8Line" to="." method="_on_float_value_8_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue9/floatValue9Line" to="." method="_on_float_value_9_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue10/floatValue10Line" to="." method="_on_float_value_10_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue11/floatValue11Line" to="." method="_on_float_value_11_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue12/floatValue12Line" to="." method="_on_float_value_12_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue13/floatValue13Line" to="." method="_on_float_value_13_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue14/floatValue14Line" to="." method="_on_float_value_14_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue15/floatValue15Line" to="." method="_on_float_value_15_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue16/floatValue16Line" to="." method="_on_float_value_16_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue17/floatValue17Line" to="." method="_on_float_value_17_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue18/floatValue18Line" to="." method="_on_float_value_18_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue19/floatValue19Line" to="." method="_on_float_value_19_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/floatValue20/floatValue20Line" to="." method="_on_float_value_20_line_text_changed"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable1/intVariable1SpinBox" to="." method="_on_int_variable_1_spin_box_value_changed"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable2/intVariable2SpinBox" to="." method="_on_int_variable_2_spin_box_value_changed"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable3/intVariable3SpinBox" to="." method="_on_int_variable_3_spin_box_value_changed"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intVariable4/intVariable4SpinBox" to="." method="_on_int_variable_4_spin_box_value_changed"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue1/intValue1SpinBox" to="." method="_on_int_value_1_spin_box_value_changed"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue2/intValue2SpinBox" to="." method="_on_int_value_2_spin_box_value_changed"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue3/intValue3SpinBox" to="." method="_on_int_value_3_spin_box_value_changed"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ScrollContainer/HBoxContainer/VBoxContainer/intValue4/intValue4SpinBox" to="." method="_on_int_value_4_spin_box_value_changed"]

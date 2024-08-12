@@ -1,0 +1,164 @@
+[gd_scene load_steps=2 format=3 uid="uid://chvd3x7mweojm"]
+
+[ext_resource type="Script" path="res://Menu/Scripts/transition_menu_row.gd" id="1_cie8i"]
+
+[node name="VariableContainer" type="Panel"]
+custom_minimum_size = Vector2(0, 31)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -7.0
+offset_bottom = -617.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cie8i")
+
+[node name="ValuesRowContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 862.0
+offset_bottom = 31.0
+
+[node name="IDNumberContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="IDNumberLabel" type="Label" parent="ValuesRowContainer/IDNumberContainer"]
+custom_minimum_size = Vector2(30, 31)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="NameLine" type="LineEdit" parent="ValuesRowContainer/NameContainer"]
+custom_minimum_size = Vector2(175, 31)
+layout_mode = 2
+placeholder_text = "Name"
+
+[node name="VariableBindingSetContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="VariableBindingSetLine" type="LineEdit" parent="ValuesRowContainer/VariableBindingSetContainer"]
+layout_mode = 2
+placeholder_text = "null"
+
+[node name="SelfTransitionContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="SelfTransitionButton" type="OptionButton" parent="ValuesRowContainer/SelfTransitionContainer"]
+custom_minimum_size = Vector2(115, 31)
+layout_mode = 2
+clip_text = true
+item_count = 4
+selected = 0
+popup/item_0/text = "DEFAULT"
+popup/item_0/id = 0
+popup/item_1/text = "CONTINUE"
+popup/item_1/id = 1
+popup/item_2/text = "RESET"
+popup/item_2/id = 2
+popup/item_3/text = "BLEND"
+popup/item_3/id = 3
+
+[node name="EventModeContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="EventModeButton" type="OptionButton" parent="ValuesRowContainer/EventModeContainer"]
+custom_minimum_size = Vector2(130, 31)
+layout_mode = 2
+clip_text = true
+item_count = 4
+selected = 0
+popup/item_0/text = "DEFAULT"
+popup/item_0/id = 0
+popup/item_1/text = "PROCESS_ALL"
+popup/item_1/id = 1
+popup/item_2/text = "IGNORE_FROM_GENERATOR"
+popup/item_2/id = 2
+popup/item_3/text = "IGNORE_TO_GENERATOR"
+popup/item_3/id = 3
+
+[node name="DurationContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="DurationLine" type="LineEdit" parent="ValuesRowContainer/DurationContainer"]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="ToGeneratorStartContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="ToGeneratorStartLine" type="LineEdit" parent="ValuesRowContainer/ToGeneratorStartContainer"]
+custom_minimum_size = Vector2(90, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="FlagsContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="FlagsButton" type="OptionButton" parent="ValuesRowContainer/FlagsContainer"]
+custom_minimum_size = Vector2(115, 31)
+layout_mode = 2
+clip_text = true
+item_count = 5
+selected = 0
+popup/item_0/text = "NONE"
+popup/item_0/id = 0
+popup/item_1/text = "IGNORE_FROM_WORLD_FROM_MODEL"
+popup/item_1/id = 1
+popup/item_2/text = "SYNC"
+popup/item_2/id = 2
+popup/item_3/text = "IGNORE_TO_WORLD_FROM_MODEL"
+popup/item_3/id = 3
+popup/item_4/text = "IGNORE_TO_WORLD_FROM_MODEL_ROTATION"
+popup/item_4/id = 4
+
+[node name="EndModeContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="EndModeButton" type="OptionButton" parent="ValuesRowContainer/EndModeContainer"]
+custom_minimum_size = Vector2(115, 31)
+layout_mode = 2
+clip_text = true
+item_count = 2
+selected = 0
+popup/item_0/text = "NONE"
+popup/item_0/id = 0
+popup/item_1/text = "TRANSITION_UNTIL_END_OF_FROM_GENERATOR"
+popup/item_1/id = 1
+
+[node name="BlendCurveContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="BlendCurveButton" type="OptionButton" parent="ValuesRowContainer/BlendCurveContainer"]
+custom_minimum_size = Vector2(115, 31)
+layout_mode = 2
+clip_text = true
+item_count = 4
+selected = 0
+popup/item_0/text = "Smooth"
+popup/item_0/id = 0
+popup/item_1/text = "Linear"
+popup/item_1/id = 1
+popup/item_2/text = "Linear to Smooth"
+popup/item_2/id = 2
+popup/item_3/text = "Smooth to Linear"
+popup/item_3/id = 3
+
+[connection signal="text_changed" from="ValuesRowContainer/NameContainer/NameLine" to="." method="_on_name_line_text_changed"]
+[connection signal="text_changed" from="ValuesRowContainer/VariableBindingSetContainer/VariableBindingSetLine" to="." method="_on_variable_binding_set_line_text_changed"]
+[connection signal="item_selected" from="ValuesRowContainer/SelfTransitionContainer/SelfTransitionButton" to="." method="_on_self_transition_button_item_selected"]
+[connection signal="item_selected" from="ValuesRowContainer/EventModeContainer/EventModeButton" to="." method="_on_event_mode_button_item_selected"]
+[connection signal="text_changed" from="ValuesRowContainer/DurationContainer/DurationLine" to="." method="_on_duration_line_text_changed"]
+[connection signal="text_changed" from="ValuesRowContainer/ToGeneratorStartContainer/ToGeneratorStartLine" to="." method="_on_to_generator_start_line_text_changed"]
+[connection signal="item_selected" from="ValuesRowContainer/FlagsContainer/FlagsButton" to="." method="_on_flags_button_item_selected"]
+[connection signal="item_selected" from="ValuesRowContainer/EndModeContainer/EndModeButton" to="." method="_on_end_mode_button_item_selected"]
+[connection signal="item_selected" from="ValuesRowContainer/BlendCurveContainer/BlendCurveButton" to="." method="_on_blend_curve_button_item_selected"]

@@ -1,0 +1,93 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5br5hra8y6a4"]
+
+[ext_resource type="Script" path="res://Nodes/Children/Scripts/BindingScene.gd" id="1_6bi2d"]
+
+[node name="BindingScene" type="PanelContainer"]
+offset_right = 305.0
+offset_bottom = 101.0
+script = ExtResource("1_6bi2d")
+
+[node name="bindingContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="bindingContainer"]
+layout_mode = 2
+
+[node name="BindingNameLabel" type="Label" parent="bindingContainer/PanelContainer"]
+layout_mode = 2
+text = "Binding #1"
+horizontal_alignment = 1
+
+[node name="ShowButton" type="Button" parent="bindingContainer"]
+layout_mode = 2
+text = "Hide Data"
+
+[node name="dataContainer" type="VBoxContainer" parent="bindingContainer"]
+layout_mode = 2
+
+[node name="memberPath" type="HBoxContainer" parent="bindingContainer/dataContainer"]
+layout_mode = 2
+
+[node name="Space" type="Control" parent="bindingContainer/dataContainer/memberPath"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="memberPathLineEdit" type="LineEdit" parent="bindingContainer/dataContainer/memberPath"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "memberPath"
+
+[node name="Space2" type="Control" parent="bindingContainer/dataContainer/memberPath"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="variableIndex" type="HBoxContainer" parent="bindingContainer/dataContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="bindingContainer/dataContainer/variableIndex"]
+layout_mode = 2
+text = "   variableIndex"
+
+[node name="Space" type="Control" parent="bindingContainer/dataContainer/variableIndex"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="variableIndexSpinBox" type="SpinBox" parent="bindingContainer/dataContainer/variableIndex"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+max_value = 1000.0
+
+[node name="bindingType" type="HBoxContainer" parent="bindingContainer/dataContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="bindingContainer/dataContainer/bindingType"]
+layout_mode = 2
+text = "   bindingType"
+
+[node name="Space" type="Control" parent="bindingContainer/dataContainer/bindingType"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="bindingTypeButton" type="OptionButton" parent="bindingContainer/dataContainer/bindingType"]
+clip_contents = true
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+clip_text = true
+item_count = 2
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "VARIABLE"
+popup/item_0/id = 0
+popup/item_1/text = "CHARACTER_PROPERTY"
+popup/item_1/id = 1
+
+[connection signal="pressed" from="bindingContainer/ShowButton" to="." method="_on_show_button_pressed"]
+[connection signal="text_changed" from="bindingContainer/dataContainer/memberPath/memberPathLineEdit" to="." method="_on_member_path_line_edit_text_changed"]
+[connection signal="value_changed" from="bindingContainer/dataContainer/variableIndex/variableIndexSpinBox" to="." method="_on_variable_index_spin_box_value_changed"]
+[connection signal="item_selected" from="bindingContainer/dataContainer/bindingType/bindingTypeButton" to="." method="_on_binding_type_button_item_selected"]

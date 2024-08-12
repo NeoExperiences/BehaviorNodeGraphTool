@@ -1,0 +1,457 @@
+[gd_scene load_steps=8 format=3 uid="uid://brhjr32wev880"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_0j202"]
+[ext_resource type="PackedScene" uid="uid://4vi8jwsrw73u" path="res://Menu/variable_menu.tscn" id="2_hcxtk"]
+[ext_resource type="PackedScene" uid="uid://cdrgllg5uacxk" path="res://Menu/event_menu.tscn" id="3_61hw3"]
+[ext_resource type="PackedScene" uid="uid://b2ob6eych510j" path="res://Menu/transition_menu.tscn" id="4_v48ou"]
+[ext_resource type="PackedScene" uid="uid://0grjj2ekfct" path="res://Menu/properties_menu.tscn" id="5_qvv8r"]
+[ext_resource type="PackedScene" uid="uid://7qblcvp8q87d" path="res://Menu/payload_menu.tscn" id="6_xu8jy"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ck3fk"]
+allow_unpress = true
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0j202")
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+title = "Behavior Graphing Tool Ver. 0.1A Hotfix"
+initial_position = 1
+size = Vector2i(500, 158)
+visible = true
+unresizable = true
+ok_button_text = "Accept"
+dialog_text = "This is an Alpha Release of the Behavior Graphing Tool. Please send proper feedback and bug reports to @NeoExperiences or to my personal email at dantebumer@gmail.com.
+Close this window to begin working."
+dialog_autowrap = true
+
+[node name="NewFileConfirmationDialog" type="ConfirmationDialog" parent="."]
+initial_position = 1
+size = Vector2i(230, 85)
+dialog_text = "     Create new behavior?"
+
+[node name="SaveFileDialog" type="FileDialog" parent="."]
+initial_position = 1
+size = Vector2i(600, 400)
+ok_button_text = "Save"
+access = 2
+root_subfolder = "Saves"
+filters = PackedStringArray("*.bgsav")
+
+[node name="LoadFileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(600, 400)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+root_subfolder = "Saves"
+filters = PackedStringArray("*.bgsav")
+
+[node name="ExportFileDialog" type="FileDialog" parent="."]
+title = "Export a File"
+initial_position = 1
+size = Vector2i(600, 400)
+ok_button_text = "Export"
+access = 2
+root_subfolder = "Export"
+filters = PackedStringArray("*.xml")
+
+[node name="ContextMenu" type="PopupMenu" parent="."]
+size = Vector2i(237, 35)
+item_count = 1
+item_0/text = "Create Node"
+item_0/id = 0
+
+[node name="CreateNodeMenu" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CreateNodeMenuList" type="PopupMenu" parent="CreateNodeMenu"]
+position = Vector2i(10, 50)
+size = Vector2i(323, 412)
+item_count = 15
+item_0/text = "BGSGamebryoSequenceGenerator"
+item_0/id = 0
+item_1/text = "BS..."
+item_1/id = 1
+item_2/text = "DynamicAnimationTaggingGenerator"
+item_2/id = 2
+item_3/text = "hkbB..."
+item_3/id = 3
+item_4/text = "hkbC..."
+item_4/id = 4
+item_5/text = "hkbDampingModifier"
+item_5/id = 5
+item_5/disabled = true
+item_6/text = "hkbE..."
+item_6/id = 6
+item_7/text = "hkbG..."
+item_7/id = 7
+item_8/text = "hkbKeyframeBonesModifier"
+item_8/id = 8
+item_9/text = "hkbM..."
+item_9/id = 9
+item_10/text = "hkbP..."
+item_10/id = 10
+item_11/text = "hkbR..."
+item_11/id = 11
+item_12/text = "hkbS..."
+item_12/id = 12
+item_13/text = "hkbT..."
+item_13/id = 13
+item_14/text = "hkbVariableBindingSet"
+item_14/id = 14
+
+[node name="CreateNodeMenuBS" type="PopupMenu" parent="CreateNodeMenu"]
+position = Vector2i(10, 50)
+size = Vector2i(293, 278)
+hide_on_item_selection = false
+item_count = 10
+item_0/text = "BSAssignVariablesModifier"
+item_0/id = 0
+item_1/text = "BSBehaviorGraphSwapGenerator"
+item_1/id = 1
+item_2/text = "BSCyclicBlendTransitionGenerator"
+item_2/id = 2
+item_3/text = "BSGetTimeStepModifier"
+item_3/id = 3
+item_4/text = "BSInterpValueModifier"
+item_4/id = 4
+item_5/text = "BSIsActiveModifier"
+item_5/id = 5
+item_6/text = "BSLookAtModifier"
+item_6/id = 6
+item_6/disabled = true
+item_7/text = "BSModifyOnceModifier"
+item_7/id = 7
+item_8/text = "BSRagdollContactListenerModifier"
+item_8/id = 8
+item_8/disabled = true
+item_9/text = "BSTimerModifier"
+item_9/id = 9
+
+[node name="CreateNodeMenuhkbB" type="PopupMenu" parent="CreateNodeMenu"]
+position = Vector2i(10, 50)
+size = Vector2i(284, 143)
+hide_on_item_selection = false
+item_count = 5
+item_0/text = "hkbBehaviorReferenceGenerator"
+item_0/id = 0
+item_1/text = "hkbBlenderGenerator"
+item_1/id = 1
+item_2/text = "hkbBlenderGeneratorChild"
+item_2/id = 2
+item_3/text = "hkbBoneIndexArray"
+item_3/id = 3
+item_4/text = "hkbBoneWeightArray"
+item_4/id = 4
+
+[node name="CreateNodeMenuhkbC" type="PopupMenu" parent="CreateNodeMenu"]
+position = Vector2i(10, 50)
+size = Vector2i(183, 62)
+hide_on_item_selection = false
+item_count = 2
+item_0/text = "hkbClipGenerator"
+item_0/id = 0
+item_1/text = "hkbClipTriggerArray"
+item_1/id = 1
+
+[node name="CreateNodeMenuhkbE" type="PopupMenu" parent="CreateNodeMenu"]
+position = Vector2i(10, 50)
+size = Vector2i(284, 143)
+hide_on_item_selection = false
+item_count = 5
+item_0/text = "hkbEvaluateExpressionModifier"
+item_0/id = 0
+item_1/text = "hkbEventDrivenModifier"
+item_1/id = 1
+item_2/text = "hkbEventRangeDataArray"
+item_2/id = 2
+item_3/text = "hkbEventsFromRangeModifier"
+item_3/id = 3
+item_4/text = "hkbExpressionDataArray"
+item_4/id = 4
+
+[node name="CreateNodeMenuhkbG" type="PopupMenu" parent="CreateNodeMenu"]
+position = Vector2i(10, 50)
+size = Vector2i(260, 62)
+hide_on_item_selection = false
+item_count = 2
+item_0/text = "hkbGeneratorTransitionEffect"
+item_0/id = 0
+item_1/text = "hkbGetUpModifier"
+item_1/id = 1
+
+[node name="CreateNodeMenuhkbM" type="PopupMenu" parent="CreateNodeMenu"]
+position = Vector2i(10, 50)
+size = Vector2i(258, 89)
+hide_on_item_selection = false
+item_count = 3
+item_0/text = "hkbManualSelectorGenerator"
+item_0/id = 0
+item_1/text = "hkbModifierGenerator"
+item_1/id = 1
+item_2/text = "hkbModifierList"
+item_2/id = 2
+
+[node name="CreateNodeMenuhkbP" type="PopupMenu" parent="CreateNodeMenu"]
+position = Vector2i(10, 50)
+size = Vector2i(314, 62)
+hide_on_item_selection = false
+item_count = 2
+item_0/text = "hkbPoseMatchingGenerator"
+item_0/id = 0
+item_1/text = "hkbPoweredRagdollControlsModifier"
+item_1/id = 1
+
+[node name="CreateNodeMenuhkbS" type="PopupMenu" parent="CreateNodeMenu"]
+position = Vector2i(10, 50)
+size = Vector2i(317, 116)
+hide_on_item_selection = false
+item_count = 4
+item_0/text = "hkbStateMachine"
+item_0/id = 0
+item_1/text = "hkbStateMachineEventPropertyArray"
+item_1/id = 1
+item_2/text = "hkbStateMachineStateInfo"
+item_2/id = 2
+item_3/text = "hkbStateMachineTransitionInfoArray"
+item_3/id = 3
+
+[node name="CreateNodeMenuhkbR" type="PopupMenu" parent="CreateNodeMenu"]
+position = Vector2i(10, 50)
+size = Vector2i(323, 62)
+hide_on_item_selection = false
+item_count = 2
+item_0/text = "hkbReferencePoseGenerator"
+item_0/id = 0
+item_1/text = "hkbRigidBodyRagdollControlsModifier"
+item_1/id = 1
+
+[node name="CreateNodeMenuhkbT" type="PopupMenu" parent="CreateNodeMenu"]
+position = Vector2i(10, 50)
+size = Vector2i(183, 62)
+hide_on_item_selection = false
+item_count = 2
+item_0/text = "hkbTimerModifier"
+item_0/id = 0
+item_1/text = "hkbTwistModifier"
+item_1/id = 1
+
+[node name="GraphMenu" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VariableMenu" parent="GraphMenu" instance=ExtResource("2_hcxtk")]
+visible = false
+layout_mode = 1
+
+[node name="EventMenu" parent="GraphMenu" instance=ExtResource("3_61hw3")]
+visible = false
+layout_mode = 1
+
+[node name="TransitionMenu" parent="GraphMenu" instance=ExtResource("4_v48ou")]
+visible = false
+layout_mode = 1
+
+[node name="PropertiesMenu" parent="GraphMenu" instance=ExtResource("5_qvv8r")]
+visible = false
+layout_mode = 1
+
+[node name="PayloadsMenu" parent="GraphMenu" instance=ExtResource("6_xu8jy")]
+visible = false
+layout_mode = 1
+
+[node name="Buttons" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NewButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 0
+offset_left = 305.0
+offset_top = 10.0
+offset_right = 375.0
+offset_bottom = 45.0
+text = "New"
+
+[node name="SaveButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 0
+offset_left = 455.0
+offset_top = 10.0
+offset_right = 525.0
+offset_bottom = 45.0
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 0
+offset_left = 380.0
+offset_top = 10.0
+offset_right = 450.0
+offset_bottom = 45.0
+text = "Load"
+
+[node name="ExportButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 1
+offset_left = 530.0
+offset_top = 10.0
+offset_right = 627.0
+offset_bottom = 45.0
+text = "Export XML"
+
+[node name="ImportButton" type="Button" parent="Buttons"]
+visible = false
+top_level = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -411.0
+offset_top = 10.0
+offset_right = -286.0
+offset_bottom = 44.0
+grow_horizontal = 0
+toggle_mode = true
+text = "Import XML"
+
+[node name="CreateNodeButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 115.0
+offset_bottom = 85.0
+text = "Create Node"
+
+[node name="EventPayloadsButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -91.0
+offset_top = 10.0
+offset_right = -14.0
+offset_bottom = 45.0
+grow_horizontal = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ck3fk")
+text = "Payloads
+"
+
+[node name="TransitionsButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -189.0
+offset_top = 10.0
+offset_right = -94.0
+offset_bottom = 45.0
+grow_horizontal = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ck3fk")
+text = "Transitions"
+
+[node name="EventsButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -430.0
+offset_top = 10.0
+offset_right = -371.0
+offset_bottom = 45.0
+grow_horizontal = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ck3fk")
+text = "Events"
+
+[node name="PropertiesButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -282.0
+offset_top = 10.0
+offset_right = -193.0
+offset_bottom = 45.0
+grow_horizontal = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ck3fk")
+text = "Properties"
+
+[node name="VariablesButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -366.0
+offset_top = 10.0
+offset_right = -286.0
+offset_bottom = 45.0
+grow_horizontal = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ck3fk")
+text = "Variables"
+
+[node name="GraphEdit" type="GraphEdit" parent="."]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+right_disconnects = true
+
+[connection signal="confirmed" from="NewFileConfirmationDialog" to="." method="_on_new_file_confirmation_dialog_confirmed"]
+[connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
+[connection signal="file_selected" from="LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
+[connection signal="file_selected" from="ExportFileDialog" to="." method="_on_export_file_dialog_file_selected"]
+[connection signal="id_pressed" from="ContextMenu" to="." method="_on_context_menu_id_pressed"]
+[connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuList" to="." method="_on_create_node_menu_list_id_pressed"]
+[connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuBS" to="." method="_on_create_node_menu_bs_id_pressed"]
+[connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbB" to="." method="_on_create_node_menuhkb_b_id_pressed"]
+[connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbC" to="." method="_on_create_node_menuhkb_c_id_pressed"]
+[connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbE" to="." method="_on_create_node_menuhkb_e_id_pressed"]
+[connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbG" to="." method="_on_create_node_menuhkb_g_id_pressed"]
+[connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbM" to="." method="_on_create_node_menuhkb_m_id_pressed"]
+[connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbP" to="." method="_on_create_node_menuhkb_p_id_pressed"]
+[connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbS" to="." method="_on_create_node_menuhkb_s_id_pressed"]
+[connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbR" to="." method="_on_create_node_menuhkb_r_id_pressed"]
+[connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbT" to="." method="_on_create_node_menuhkb_t_id_pressed"]
+[connection signal="pressed" from="Buttons/NewButton" to="." method="_on_new_button_pressed"]
+[connection signal="pressed" from="Buttons/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="Buttons/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="Buttons/ExportButton" to="." method="_on_export_button_pressed"]
+[connection signal="pressed" from="Buttons/ImportButton" to="." method="_on_import_button_pressed"]
+[connection signal="pressed" from="Buttons/CreateNodeButton" to="." method="_on_create_node_button_pressed"]
+[connection signal="toggled" from="Buttons/EventPayloadsButton" to="." method="_on_event_payloads_button_toggled"]
+[connection signal="toggled" from="Buttons/TransitionsButton" to="." method="_on_transitions_button_toggled"]
+[connection signal="toggled" from="Buttons/EventsButton" to="." method="_on_events_button_toggled"]
+[connection signal="toggled" from="Buttons/PropertiesButton" to="." method="_on_properties_button_toggled"]
+[connection signal="toggled" from="Buttons/VariablesButton" to="." method="_on_variables_button_toggled"]
+[connection signal="connection_request" from="GraphEdit" to="." method="_on_graph_edit_connection_request"]
+[connection signal="copy_nodes_request" from="GraphEdit" to="." method="_on_graph_edit_copy_nodes_request"]
+[connection signal="disconnection_request" from="GraphEdit" to="." method="_on_graph_edit_disconnection_request"]
+[connection signal="node_deselected" from="GraphEdit" to="." method="_on_graph_edit_node_deselected"]
+[connection signal="node_selected" from="GraphEdit" to="." method="_on_graph_edit_node_selected"]
+[connection signal="paste_nodes_request" from="GraphEdit" to="." method="_on_graph_edit_paste_nodes_request"]

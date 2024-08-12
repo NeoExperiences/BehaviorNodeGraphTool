@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://roqvaoc2cv56"]
+
+[ext_resource type="Script" path="res://Nodes/Children/Scripts/boneIndexScene.gd" id="1_3rlnk"]
+
+[node name="boneIndexScene" type="PanelContainer"]
+offset_right = 305.0
+offset_bottom = 31.0
+script = ExtResource("1_3rlnk")
+
+[node name="boneIndexContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="dataContainer" type="VBoxContainer" parent="boneIndexContainer"]
+layout_mode = 2
+
+[node name="boneIndex" type="HBoxContainer" parent="boneIndexContainer/dataContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="boneIndexContainer/dataContainer/boneIndex"]
+layout_mode = 2
+text = "   boneIndex"
+
+[node name="Space" type="Control" parent="boneIndexContainer/dataContainer/boneIndex"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="boneIndexSpinBox" type="SpinBox" parent="boneIndexContainer/dataContainer/boneIndex"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+max_value = 1000.0
+
+[connection signal="value_changed" from="boneIndexContainer/dataContainer/boneIndex/boneIndexSpinBox" to="." method="_on_bone_index_spin_box_value_changed"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://doudbvl7xjm7x"]
+
+[ext_resource type="Script" path="res://Nodes/Scripts/hkRootLevelContainer.gd" id="1_13fv5"]
+
+[node name="hkRootLevelContainer" type="GraphNode"]
+offset_right = 240.0
+offset_bottom = 78.0
+title = "hkRootLevelContainer"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_13fv5")
+
+[node name="variantPort" type="Label" parent="."]
+layout_mode = 2
+text = "variant"
+horizontal_alignment = 2
+
+[connection signal="slot_updated" from="." to="." method="_on_slot_updated"]

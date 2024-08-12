@@ -1,0 +1,113 @@
+[gd_scene load_steps=2 format=3 uid="uid://b10lx3b3vpplh"]
+
+[ext_resource type="Script" path="res://Menu/Scripts/variable_menu_row.gd" id="1_esww5"]
+
+[node name="VariableContainer" type="Panel"]
+custom_minimum_size = Vector2(0, 31)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -234.0
+offset_bottom = -617.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_esww5")
+
+[node name="ValuesRowContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 862.0
+offset_bottom = 31.0
+
+[node name="IDNumberContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="IDNumberLabel" type="Label" parent="ValuesRowContainer/IDNumberContainer"]
+custom_minimum_size = Vector2(30, 31)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="NameLine" type="LineEdit" parent="ValuesRowContainer/NameContainer"]
+custom_minimum_size = Vector2(250, 31)
+layout_mode = 2
+placeholder_text = "Name"
+
+[node name="TypesContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="TypesButton" type="OptionButton" parent="ValuesRowContainer/TypesContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(120, 31)
+layout_mode = 2
+clip_text = true
+item_count = 8
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "BOOL"
+popup/item_0/id = 0
+popup/item_1/text = "INT8"
+popup/item_1/id = 1
+popup/item_2/text = "INT16"
+popup/item_2/id = 2
+popup/item_3/text = "INT32"
+popup/item_3/id = 3
+popup/item_4/text = "REAL"
+popup/item_4/id = 4
+popup/item_5/text = "POINTER"
+popup/item_5/id = 5
+popup/item_6/text = "VECTOR4"
+popup/item_6/id = 6
+popup/item_7/text = "QUATERNION"
+popup/item_7/id = 7
+
+[node name="ValuesContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="ValuesLine" type="LineEdit" parent="ValuesRowContainer/ValuesContainer"]
+custom_minimum_size = Vector2(105, 30)
+layout_mode = 2
+text = "0"
+alignment = 2
+max_length = 11
+expand_to_text_length = true
+
+[node name="MinValuesContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="MinValuesLine" type="LineEdit" parent="ValuesRowContainer/MinValuesContainer"]
+custom_minimum_size = Vector2(130, 30)
+layout_mode = 2
+text = "0"
+alignment = 2
+max_length = 11
+
+[node name="MaxValuesContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="MaxValuesLine" type="LineEdit" parent="ValuesRowContainer/MaxValuesContainer"]
+custom_minimum_size = Vector2(130, 30)
+layout_mode = 2
+text = "0"
+alignment = 2
+max_length = 11
+
+[node name="QuadValuesContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="QuadValuesLine" type="LineEdit" parent="ValuesRowContainer/QuadValuesContainer"]
+custom_minimum_size = Vector2(123, 30)
+layout_mode = 2
+text = "(0.0 0.0 0.0 0.0)"
+alignment = 1
+editable = false
+
+[connection signal="text_changed" from="ValuesRowContainer/NameContainer/NameLine" to="." method="_on_name_line_text_changed"]
+[connection signal="item_selected" from="ValuesRowContainer/TypesContainer/TypesButton" to="." method="_on_types_button_item_selected"]
+[connection signal="text_changed" from="ValuesRowContainer/ValuesContainer/ValuesLine" to="." method="_on_values_line_text_changed"]
+[connection signal="text_changed" from="ValuesRowContainer/MinValuesContainer/MinValuesLine" to="." method="_on_min_values_line_text_changed"]
+[connection signal="text_changed" from="ValuesRowContainer/MaxValuesContainer/MaxValuesLine" to="." method="_on_max_values_line_text_changed"]
+[connection signal="text_changed" from="ValuesRowContainer/QuadValuesContainer/QuadValuesLine" to="." method="_on_quad_values_line_text_changed"]

@@ -1,0 +1,115 @@
+[gd_scene load_steps=4 format=3 uid="uid://r60popcpc74t"]
+
+[ext_resource type="Script" path="res://Nodes/Children/RangeScene.gd" id="1_levkt"]
+[ext_resource type="Script" path="res://Nodes/Children/Scripts/eventsOptionButton.gd" id="2_0vuxh"]
+[ext_resource type="Script" path="res://Nodes/Children/Scripts/payloadOptionButton.gd" id="3_5x7kd"]
+
+[node name="RangeScene" type="PanelContainer"]
+script = ExtResource("1_levkt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="RangeNameLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "Event Data #1"
+horizontal_alignment = 1
+
+[node name="upperBound" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/upperBound"]
+layout_mode = 2
+text = "   upperBound"
+
+[node name="Space2" type="Control" parent="VBoxContainer/upperBound"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="upperBoundLineEdit" type="LineEdit" parent="VBoxContainer/upperBound"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "1.0"
+alignment = 2
+max_length = 19
+
+[node name="id" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="idLabel" type="Label" parent="VBoxContainer/id"]
+layout_mode = 2
+text = "   id
+"
+
+[node name="Space" type="Control" parent="VBoxContainer/id"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="idSpinBox" type="SpinBox" parent="VBoxContainer/id"]
+custom_minimum_size = Vector2(85, 0)
+layout_direction = 2
+layout_mode = 2
+max_value = 1000.0
+
+[node name="eventsOptionButton" type="OptionButton" parent="VBoxContainer/id"]
+visible = false
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("2_0vuxh")
+
+[node name="payload" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="payloadLabel" type="Label" parent="VBoxContainer/payload"]
+layout_mode = 2
+text = "   payload"
+
+[node name="Space" type="Control" parent="VBoxContainer/payload"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="payloadOptionButton" type="OptionButton" parent="VBoxContainer/payload"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("3_5x7kd")
+
+[node name="eventMode" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/eventMode"]
+layout_mode = 2
+text = "   eventMode"
+
+[node name="Space" type="Control" parent="VBoxContainer/eventMode"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="eventModeButton" type="OptionButton" parent="VBoxContainer/eventMode"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "ON_ENTER_RANGE"
+popup/item_0/id = 0
+popup/item_1/text = "WHEN_IN_RANGE"
+popup/item_1/id = 1
+
+[connection signal="text_changed" from="VBoxContainer/upperBound/upperBoundLineEdit" to="." method="_on_upper_bound_line_edit_text_changed"]
+[connection signal="value_changed" from="VBoxContainer/id/idSpinBox" to="." method="_on_id_spin_box_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/id/eventsOptionButton" to="." method="_on_events_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/payload/payloadOptionButton" to="." method="_on_payload_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/eventMode/eventModeButton" to="." method="_on_event_mode_button_item_selected"]

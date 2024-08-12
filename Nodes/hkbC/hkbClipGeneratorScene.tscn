@@ -1,0 +1,403 @@
+[gd_scene load_steps=7 format=3 uid="uid://drs4tbfjccbw4"]
+
+[ext_resource type="Script" path="res://Nodes/hkbC/Scripts/hkbClipGeneratorScene.gd" id="1_3yr4y"]
+[ext_resource type="Texture2D" uid="uid://dtc4ja5slmyqt" path="res://ConfirmDeleteButton.png" id="2_0yrwy"]
+[ext_resource type="Texture2D" uid="uid://dtrsj56jbquo8" path="res://PinButton.png" id="3_h6cte"]
+[ext_resource type="Texture2D" uid="uid://csb3wjekhlmy1" path="res://UnpinButton.png" id="4_l5w3h"]
+[ext_resource type="Texture2D" uid="uid://jrafqhji2unw" path="res://DeleteButton.png" id="5_4drgl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y45yo"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.168627, 0.211765, 0.266667, 0.898039)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 1
+anti_aliasing_size = 2.0
+
+[node name="hkbClipGenerator" type="GraphNode"]
+offset_right = 188.0
+offset_bottom = 144.0
+title = "hkbClipGenerator"
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = true
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = true
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 1, 1, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
+script = ExtResource("1_3yr4y")
+
+[node name="connection" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="connectionLabel" type="Label" parent="connection"]
+layout_mode = 2
+text = "connection
+"
+
+[node name="Space" type="Control" parent="connection"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="EditButton" type="Button" parent="connection"]
+layout_mode = 2
+text = "Edit"
+
+[node name="variableBindingSet" type="Label" parent="."]
+layout_mode = 2
+text = "variableBindingSet"
+horizontal_alignment = 2
+
+[node name="triggers" type="Label" parent="."]
+layout_mode = 2
+text = "triggers"
+horizontal_alignment = 2
+
+[node name="Name" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "ClipGenerator"
+placeholder_text = "Name"
+
+[node name="DataPopupPanel" type="PopupPanel" parent="."]
+transparent_bg = true
+initial_position = 1
+size = Vector2i(474, 426)
+borderless = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_y45yo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DataPopupPanel"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 469.0
+offset_bottom = 421.0
+
+[node name="BaseNode" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ConfirmDeleteButton" type="TextureButton" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+visible = false
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("2_0yrwy")
+
+[node name="baseNodeLabel" type="Label" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 18
+text = "   hkbClipGenerator"
+vertical_alignment = 2
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="baseNodeLabel2" type="Label" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "#"
+vertical_alignment = 1
+
+[node name="nodeIDSpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+min_value = 90.0
+max_value = 9999.0
+value = 90.0
+rounded = true
+
+[node name="PinButton" type="TextureButton" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_h6cte")
+texture_pressed = ExtResource("4_l5w3h")
+
+[node name="DeleteButton" type="TextureButton" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_4drgl")
+
+[node name="PanelContainer" type="PanelContainer" parent="DataPopupPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="FoldingPanel" type="VBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="userData" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData"]
+layout_mode = 2
+text = "   userData"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="userDataButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "0"
+popup/item_0/id = 0
+popup/item_1/text = "1"
+popup/item_1/id = 1
+popup/item_2/text = "2"
+popup/item_2/id = 2
+popup/item_3/text = "3"
+popup/item_3/id = 3
+
+[node name="enable" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable"]
+layout_mode = 2
+text = "   enable"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="enableButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 2
+selected = 1
+popup/item_0/text = "False"
+popup/item_0/id = 0
+popup/item_1/text = "True"
+popup/item_1/id = 1
+
+[node name="animationName" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Space2" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/animationName"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="animationNameLine" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/animationName"]
+custom_minimum_size = Vector2(450, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "..\\Animation.hkt"
+alignment = 2
+
+[node name="cropStartAmountLocalTime" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/cropStartAmountLocalTime"]
+layout_mode = 2
+text = "   cropStartAmountLocalTime"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/cropStartAmountLocalTime"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="cropStartAmountLocalTimeLine" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/cropStartAmountLocalTime"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="cropEndAmountLocalTime" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/cropEndAmountLocalTime"]
+layout_mode = 2
+text = "   cropEndAmountLocalTime"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/cropEndAmountLocalTime"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="cropEndAmountLocalTimeLine" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/cropEndAmountLocalTime"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="startTime" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startTime"]
+layout_mode = 2
+text = "   startTime"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startTime"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="startTimeLine" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startTime"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="playbackSpeed" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/playbackSpeed"]
+layout_mode = 2
+text = "   playbackSpeed"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/playbackSpeed"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="playbackSpeedLine" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/playbackSpeed"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "1.0"
+placeholder_text = "1.0"
+alignment = 2
+max_length = 20
+
+[node name="enforcedDuration" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enforcedDuration"]
+layout_mode = 2
+text = "   enforcedDuration"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enforcedDuration"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="enforcedDurationLine" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enforcedDuration"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "1.0"
+placeholder_text = "1.0"
+alignment = 2
+max_length = 20
+
+[node name="userControlledTimeFraction" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userControlledTimeFraction"]
+layout_mode = 2
+text = "   userControlledTimeFraction"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userControlledTimeFraction"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="userControlledTimeFractionLine" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userControlledTimeFraction"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+text = "0.0"
+placeholder_text = "0.0"
+alignment = 2
+max_length = 20
+
+[node name="mode" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/mode"]
+layout_mode = 2
+text = "   mode"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/mode"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="modeButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/mode"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "SINGLE_PLAY"
+popup/item_0/id = 0
+popup/item_1/text = "LOOPING"
+popup/item_1/id = 1
+popup/item_2/text = "USER_CONTROLLED"
+popup/item_2/id = 2
+
+[node name="flagsIndex" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/flagsIndex"]
+layout_mode = 2
+text = "   flags"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/flagsIndex"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="flagsIndexSpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/flagsIndex"]
+layout_mode = 2
+rounded = true
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="connection/EditButton" to="." method="_on_edit_button_pressed"]
+[connection signal="text_changed" from="Name" to="." method="_on_name_text_changed"]
+[connection signal="popup_hide" from="DataPopupPanel" to="." method="_on_popup_panel_popup_hide"]
+[connection signal="pressed" from="DataPopupPanel/VBoxContainer/BaseNode/ConfirmDeleteButton" to="." method="_on_confirm_delete_button_pressed"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/BaseNode/nodeIDSpinBox" to="." method="_on_node_id_spin_box_value_changed"]
+[connection signal="toggled" from="DataPopupPanel/VBoxContainer/BaseNode/PinButton" to="." method="_on_pin_button_toggled"]
+[connection signal="pressed" from="DataPopupPanel/VBoxContainer/BaseNode/DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData/userDataButton" to="." method="_on_user_data_button_item_selected"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable/enableButton" to="." method="_on_enable_button_item_selected"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/animationName/animationNameLine" to="." method="_on_animation_name_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/cropStartAmountLocalTime/cropStartAmountLocalTimeLine" to="." method="_on_crop_start_amount_local_time_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/cropEndAmountLocalTime/cropEndAmountLocalTimeLine" to="." method="_on_crop_end_amount_local_time_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startTime/startTimeLine" to="." method="_on_start_time_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/playbackSpeed/playbackSpeedLine" to="." method="_on_playback_speed_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enforcedDuration/enforcedDurationLine" to="." method="_on_enforced_duration_line_text_changed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userControlledTimeFraction/userControlledTimeFractionLine" to="." method="_on_user_controlled_time_fraction_line_text_changed"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/mode/modeButton" to="." method="_on_mode_button_item_selected"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/flagsIndex/flagsIndexSpinBox" to="." method="_on_flags_index_spin_box_value_changed"]

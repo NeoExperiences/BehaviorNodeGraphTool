@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://cffh1kpnvnb37"]
+
+[ext_resource type="Script" path="res://Menu/Scripts/event_menu_row.gd" id="1_bqhyn"]
+
+[node name="EventContainer" type="Panel"]
+custom_minimum_size = Vector2(0, 31)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -234.0
+offset_bottom = -617.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bqhyn")
+
+[node name="ValuesRowContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 862.0
+offset_bottom = 31.0
+
+[node name="IDNumberContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="IDNumberLabel" type="Label" parent="ValuesRowContainer/IDNumberContainer"]
+custom_minimum_size = Vector2(30, 31)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="NameLine" type="LineEdit" parent="ValuesRowContainer/NameContainer"]
+custom_minimum_size = Vector2(680, 31)
+layout_mode = 2
+placeholder_text = "Name"
+
+[node name="TypesContainer" type="PanelContainer" parent="ValuesRowContainer"]
+layout_mode = 2
+
+[node name="TypesButton" type="OptionButton" parent="ValuesRowContainer/TypesContainer"]
+custom_minimum_size = Vector2(188, 31)
+layout_mode = 2
+clip_text = true
+item_count = 2
+selected = 0
+popup/item_0/text = "FLAG_NONE"
+popup/item_0/id = 0
+popup/item_1/text = "FLAG_SYNC_POINT"
+popup/item_1/id = 2
+
+[connection signal="text_changed" from="ValuesRowContainer/NameContainer/NameLine" to="." method="_on_name_line_text_changed"]
+[connection signal="item_selected" from="ValuesRowContainer/TypesContainer/TypesButton" to="." method="_on_types_button_item_selected"]
