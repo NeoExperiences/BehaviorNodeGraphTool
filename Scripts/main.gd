@@ -517,41 +517,49 @@ func _on_variables_button_toggled(toggled_on):
 	if toggled_on:
 		$GraphEdit.hide()
 		$Buttons/CreateNodeButton.hide()
+		$Buttons/CreditsButton.hide()
 		variableMenu.show()
 	else:
 		variableMenu.hide()
 		$GraphEdit.show()
-		$Buttons/CreateNodeButton.hide()
+		$Buttons/CreateNodeButton.show()
+		$Buttons/CreditsButton.show()
 
 func _on_events_button_toggled(toggled_on):
 	if toggled_on:
 		$GraphEdit.hide()
 		$Buttons/CreateNodeButton.hide()
+		$Buttons/CreditsButton.hide()
 		eventMenu.show()
 	else:
 		eventMenu.hide()
 		$GraphEdit.show()
 		$Buttons/CreateNodeButton.show()
+		$Buttons/CreditsButton.show()
 
 func _on_properties_button_toggled(toggled_on):
 	if toggled_on:
 		$GraphEdit.hide()
 		$Buttons/CreateNodeButton.hide()
+		$Buttons/CreditsButton.hide()
 		propertiesMenu.show()
 	else:
 		propertiesMenu.hide()
 		$GraphEdit.show()
 		$Buttons/CreateNodeButton.show()
+		$Buttons/CreditsButton.show()
 
 func _on_transitions_button_toggled(toggled_on):
 	if toggled_on:
 		$GraphEdit.hide()
 		$Buttons/CreateNodeButton.hide()
+		$Buttons/CreditsButton.hide()
 		transitionMenu.show()
 	else:
 		transitionMenu.hide()
 		$GraphEdit.show()
 		$Buttons/CreateNodeButton.show()
+		$Buttons/CreditsButton.show()
 
 func _on_event_payloads_button_toggled(toggled_on):
 	if toggled_on:
@@ -562,6 +570,7 @@ func _on_event_payloads_button_toggled(toggled_on):
 		eventPayloadsMenu.hide()
 		$GraphEdit.show()
 		$Buttons/CreateNodeButton.show()
+		$Buttons/CreditsButton.show()
 
 func _acquire_global_values():
 	globalVariable.globalTransitionList		= $GraphMenu/TransitionMenu.transitionList
@@ -583,4 +592,5 @@ func _load_global_values(loadedTransitionList, loadedEventList, loadedPayloadLis
 	$GraphMenu/VariableMenu._load_global_values()
 	_acquire_global_values()
 
-
+func _on_credits_button_pressed():
+	$AcceptDialog.show()

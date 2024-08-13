@@ -22,12 +22,13 @@ script = ExtResource("1_0j202")
 [node name="AcceptDialog" type="AcceptDialog" parent="."]
 title = "Behavior Graphing Tool Ver. 0.1.1 Open Alpha"
 initial_position = 1
-size = Vector2i(500, 158)
-visible = true
+size = Vector2i(500, 300)
 unresizable = true
 ok_button_text = "Accept"
-dialog_text = "This is an Alpha Release of the Behavior Graphing Tool. Please send proper feedback and bug reports to @NeoExperiences or to my personal email at dantebumer@gmail.com.
-Close this window to begin working."
+dialog_text = "This is an Alpha Release of the Behavior Graphing Tool.
+Please send proper feedback and bug reports to @NeoExperiences or to my personal email at dantebumer@gmail.com.
+Been working on this tool for the past year, but been doing most of the heavy lifting during winter vacations. Development will slow down on the coming weeks due to college taking most of my time once again.
+Close this window to continue working."
 dialog_autowrap = true
 
 [node name="NewFileConfirmationDialog" type="ConfirmationDialog" parent="."]
@@ -327,6 +328,19 @@ grow_horizontal = 0
 toggle_mode = true
 text = "Import XML"
 
+[node name="CreditsButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -41.0
+offset_right = 40.0
+offset_bottom = -9.0
+grow_vertical = 0
+text = "?"
+
 [node name="CreateNodeButton" type="Button" parent="Buttons"]
 top_level = true
 layout_mode = 0
@@ -443,6 +457,7 @@ right_disconnects = true
 [connection signal="pressed" from="Buttons/LoadButton" to="." method="_on_load_button_pressed"]
 [connection signal="pressed" from="Buttons/ExportButton" to="." method="_on_export_button_pressed"]
 [connection signal="pressed" from="Buttons/ImportButton" to="." method="_on_import_button_pressed"]
+[connection signal="pressed" from="Buttons/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="Buttons/CreateNodeButton" to="." method="_on_create_node_button_pressed"]
 [connection signal="toggled" from="Buttons/EventPayloadsButton" to="." method="_on_event_payloads_button_toggled"]
 [connection signal="toggled" from="Buttons/TransitionsButton" to="." method="_on_transitions_button_toggled"]
