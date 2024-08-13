@@ -25,7 +25,7 @@ initial_position = 1
 size = Vector2i(500, 300)
 unresizable = true
 ok_button_text = "Accept"
-dialog_text = "This is an Alpha Release of the Behavior Graphing Tool.
+dialog_text = "This is an Alpha Release of the Behavior Node Graph Tool.
 Please send proper feedback and bug reports to @NeoExperiences or to my personal email at dantebumer@gmail.com.
 Been working on this tool for the past year, but been doing most of the heavy lifting during winter vacations. Development will slow down on the coming weeks due to college taking most of my time once again.
 Close this window to continue working."
