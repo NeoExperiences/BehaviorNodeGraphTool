@@ -19,8 +19,8 @@ corner_radius_bottom_left = 1
 anti_aliasing_size = 2.0
 
 [node name="BSAssignVariablesModifier" type="GraphNode"]
-offset_right = 188.0
-offset_bottom = 144.0
+offset_right = 300.0
+offset_bottom = 160.0
 title = "BSAssignVariablesModifier"
 slot/0/left_enabled = true
 slot/0/left_type = 0
@@ -83,7 +83,6 @@ placeholder_text = "Name"
 transparent_bg = true
 initial_position = 1
 size = Vector2i(577, 605)
-visible = true
 borderless = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_y45yo")
 

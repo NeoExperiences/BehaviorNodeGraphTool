@@ -20,7 +20,7 @@ grow_vertical = 2
 script = ExtResource("1_0j202")
 
 [node name="AcceptDialog" type="AcceptDialog" parent="."]
-title = "Behavior Graphing Tool Ver. 0.1A Hotfix"
+title = "Behavior Graphing Tool Ver. 0.1.1 Open Alpha"
 initial_position = 1
 size = Vector2i(500, 158)
 visible = true

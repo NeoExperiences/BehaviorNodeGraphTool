@@ -26,10 +26,26 @@ func _ready():
 	$Name.text = nodeName
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData/userDataButton.selected = userData
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startStateID/startStateIDSpinBox.value = startStateId
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId/randomTransitionEventIdSpinBox.value = randomTransitionEventId
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId/transitionToNextHigherStateEventIdSpinBox.value = transitionToNextHigherStateEventId
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId/transitionToNextLowerStateEventIdSpinBox.value = transitionToNextLowerStateEventId
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/syncVariableIndex/syncVariableIndexSpinBox.value = syncVariableIndex
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId/randomTransitionEventIdOptionButton._updateEvents()
+	if randomTransitionEventId == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId/randomTransitionEventIdOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId/randomTransitionEventIdOptionButton.selected = randomTransitionEventId + 1
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId/transitionToNextHigherStateEventIdOptionButton._updateEvents()
+	if transitionToNextHigherStateEventId == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId/transitionToNextHigherStateEventIdOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId/transitionToNextHigherStateEventIdOptionButton.selected = transitionToNextHigherStateEventId + 1
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId/transitionToNextLowerStateEventIdOptionButton._updateEvents()
+	if transitionToNextLowerStateEventId == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId/transitionToNextLowerStateEventIdOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId/transitionToNextLowerStateEventIdOptionButton.selected = transitionToNextLowerStateEventId + 1
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/syncVariableIndex/syncVariableIndexOptionButton._updateVariables()
+	if syncVariableIndex == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/syncVariableIndex/syncVariableIndexOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/syncVariableIndex/syncVariableIndexOptionButton.selected = syncVariableIndex + 1
 	if wrapAroundStateId:
 		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/wrapAroundStateId/wrapAroundStateIdButton.selected = 1
 	else:
@@ -48,12 +64,16 @@ func _ready():
 			$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/selfTransitionMode/selfTransitionModeButton.selected = 1
 		"SELF_TRANSITION_MODE_FORCE_TRANSITION_TO_START_STATE":
 			$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/selfTransitionMode/selfTransitionModeButton.selected = 2
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/payload/eventToSendPayloadOptionButton._updatePayloads()
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/id/idSpinBox.value = eventId
-	if payload == -1:
-		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/payload/eventToSendPayloadOptionButton.selected = 0
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/id/eventToSendidOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payload/eventToSendPayloadOptionButton._updatePayloads()
+	if eventId == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/id/eventToSendidOptionButton.selected = 0
 	else:
-		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/payload/eventToSendPayloadOptionButton.selected = payload
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/id/eventToSendidOptionButton.selected = eventId + 1
+	if payload == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payload/eventToSendPayloadOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payload/eventToSendPayloadOptionButton.selected = payload
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.double_click:
@@ -117,12 +137,6 @@ func _on_sync_variable_index_spin_box_value_changed(value):
 	syncVariableIndex = int(value)
 
 
-func _on_update_payload_button_pressed():
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/payload/eventToSendPayloadOptionButton._updatePayloads()
-
-func _on_id_spin_box_value_changed(value):
-	eventId = value
-
 func _on_event_to_send_payload_option_button_item_selected(index):
 	if index == 0:
 		payload = -1
@@ -153,13 +167,40 @@ func _on_self_transition_mode_button_item_selected(index):
 		2:
 			selfTransitionMode = "SELF_TRANSITION_MODE_FORCE_TRANSITION_TO_START_STATE"
 
-
-
-func _on_show_event_to_send_button_pressed():
-	if !$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend.visible:
-		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend.visible = 1
-		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ShowEventToSendButton.text = "Hide Event To Send on Change"
+func _on_event_to_sendid_option_button_item_selected(index):
+	if index == 0:
+		eventId = -1
 	else:
-		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend.visible = 0
-		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ShowEventToSendButton.text = "Show Event To Send on Change"
-	$DataPopupPanel.reset_size()
+		eventId = index - 1
+
+func _on_random_transition_event_id_option_button_item_selected(index):
+	if index == 0:
+		randomTransitionEventId = -1
+	else:
+		randomTransitionEventId = index - 1
+
+func _on_transition_to_next_higher_state_event_id_option_button_item_selected(index):
+	if index == 0:
+		transitionToNextHigherStateEventId = -1
+	else:
+		transitionToNextHigherStateEventId = index - 1
+
+func _on_transition_to_next_lower_state_event_id_option_button_item_selected(index):
+	if index == 0:
+		transitionToNextLowerStateEventId = -1
+	else:
+		transitionToNextLowerStateEventId = index - 1
+
+func _on_sync_variable_index_option_button_item_selected(index):
+	if index == 0:
+		syncVariableIndex = -1
+	else:
+		syncVariableIndex = index - 1
+
+func _on_graph_data_button_pressed():
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId/randomTransitionEventIdOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId/transitionToNextHigherStateEventIdOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId/transitionToNextLowerStateEventIdOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/syncVariableIndex/syncVariableIndexOptionButton._updateVariables()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/id/eventToSendidOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payload/eventToSendPayloadOptionButton._updatePayloads()

@@ -56,19 +56,20 @@ func initial_instance():
 	var NodeRoot = globalVariable.hkRootLevelContainer.instantiate()
 	NodeRoot.title += ' - #' + str(nodeIndex)
 	NodeRoot.nodeID = nodeIndex
+	NodeRoot.position_offset = Vector2(0, 60)
 	$GraphEdit.add_child(NodeRoot)
 	nodeIndex += 1
 	var NodeGraph = globalVariable.hkbBehaviorGraph.instantiate()
 	NodeGraph.title += ' - #' + str(nodeIndex)
 	NodeGraph.nodeID = nodeIndex
-	NodeGraph.position_offset = Vector2(300, 0)
+	NodeGraph.position_offset = Vector2(300, 20)
 	$GraphEdit.add_child(NodeGraph)
 	nodeIndex += 1
 	$GraphEdit.connect_node(str(NodeRoot.name), 0, str(NodeGraph.name), 0)
 	var StateMachine = globalVariable.hkbStateMachine.instantiate()
 	StateMachine.title += ' - #' + str(nodeIndex)
 	StateMachine.nodeID = nodeIndex
-	StateMachine.position_offset = Vector2(600, 0)
+	StateMachine.position_offset = Vector2(640, 0)
 	$GraphEdit.add_child(StateMachine)
 	nodeIndex += 1
 	$GraphEdit.connect_node(str(NodeGraph.name), 0, str(StateMachine.name), 0)

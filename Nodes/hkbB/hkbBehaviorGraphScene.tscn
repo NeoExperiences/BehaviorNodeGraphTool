@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Nodes/hkbB/Scripts/hkbBehaviorGraph.gd" id="1_vfitp"]
 
 [node name="hkbBehaviorGraph" type="GraphNode"]
-offset_right = 240.0
-offset_bottom = 78.0
+offset_right = 280.0
+offset_bottom = 140.0
 title = "hkbBehaviorGraph"
 slot/0/left_enabled = true
 slot/0/left_type = 0

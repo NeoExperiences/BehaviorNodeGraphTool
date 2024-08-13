@@ -4,7 +4,7 @@
 
 [node name="hkRootLevelContainer" type="GraphNode"]
 offset_right = 240.0
-offset_bottom = 78.0
+offset_bottom = 80.0
 title = "hkRootLevelContainer"
 slot/0/left_enabled = false
 slot/0/left_type = 0

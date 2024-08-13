@@ -19,8 +19,8 @@ corner_radius_bottom_left = 1
 anti_aliasing_size = 2.0
 
 [node name="hkbGetUpModifier" type="GraphNode"]
-offset_right = 188.0
-offset_bottom = 144.0
+offset_right = 240.0
+offset_bottom = 160.0
 title = "hkbGetUpModifier"
 slot/0/left_enabled = true
 slot/0/left_type = 0

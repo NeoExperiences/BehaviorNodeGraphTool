@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bxr24yucoys5v"]
 
-[ext_resource type="Script" path="res://Nodes/hkbE/hkbEventRangeDataArrayScene.gd" id="1_w8117"]
+[ext_resource type="Script" path="res://Nodes/hkbE/Scripts/hkbEventRangeDataArrayScene.gd" id="1_w8117"]
 [ext_resource type="Texture2D" uid="uid://dtc4ja5slmyqt" path="res://ConfirmDeleteButton.png" id="2_j5aga"]
 [ext_resource type="Texture2D" uid="uid://dtrsj56jbquo8" path="res://PinButton.png" id="3_2losu"]
 [ext_resource type="Texture2D" uid="uid://csb3wjekhlmy1" path="res://UnpinButton.png" id="4_6m73c"]
@@ -19,8 +19,8 @@ corner_radius_bottom_left = 1
 anti_aliasing_size = 2.0
 
 [node name="hkbEventRangeDataArray" type="GraphNode"]
-offset_right = 297.0
-offset_bottom = 86.0
+offset_right = 300.0
+offset_bottom = 100.0
 title = "hkbEventRangeDataArray"
 slot/0/left_enabled = true
 slot/0/left_type = 0

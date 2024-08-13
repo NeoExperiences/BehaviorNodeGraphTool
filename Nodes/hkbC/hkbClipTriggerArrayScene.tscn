@@ -19,8 +19,8 @@ corner_radius_bottom_left = 1
 anti_aliasing_size = 2.0
 
 [node name="hkbClipTriggerArray" type="GraphNode"]
-offset_right = 297.0
-offset_bottom = 86.0
+offset_right = 360.0
+offset_bottom = 100.0
 title = "hkbClipTriggerArray"
 slot/0/left_enabled = true
 slot/0/left_type = 0
@@ -34,6 +34,7 @@ slot/0/draw_stylebox = true
 script = ExtResource("1_ebwqp")
 
 [node name="connection" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="connectionLabel" type="Label" parent="connection"]

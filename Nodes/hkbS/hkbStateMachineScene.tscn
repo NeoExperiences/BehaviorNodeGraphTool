@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgc3wr1e67j4d"]
+[gd_scene load_steps=10 format=3 uid="uid://dgc3wr1e67j4d"]
 
 [ext_resource type="Script" path="res://Nodes/hkbS/Scripts/hkbStateMachineScene.gd" id="1_j81sg"]
 [ext_resource type="Script" path="res://Nodes/hkbS/Scripts/eventToSendPayloadOptionButton.gd" id="2_00a0s"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://csb3wjekhlmy1" path="res://UnpinButton.png" id="3_6tf54"]
 [ext_resource type="Texture2D" uid="uid://jrafqhji2unw" path="res://DeleteButton.png" id="4_3w75a"]
 [ext_resource type="Texture2D" uid="uid://dtc4ja5slmyqt" path="res://ConfirmDeleteButton.png" id="5_itvea"]
+[ext_resource type="Script" path="res://Nodes/hkbS/Scripts/eventToSendidOptionButton.gd" id="6_heh4c"]
+[ext_resource type="Script" path="res://Nodes/hkbS/Scripts/VariableOptionButton.gd" id="7_xodpk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y45yo"]
 content_margin_left = 5.0
@@ -20,8 +22,8 @@ corner_radius_bottom_left = 1
 anti_aliasing_size = 2.0
 
 [node name="hkbStateMachineScene" type="GraphNode"]
-custom_minimum_size = Vector2(325, 200)
-offset_right = 325.0
+custom_minimum_size = Vector2(340, 200)
+offset_right = 330.0
 offset_bottom = 200.0
 title = "hkbStateMachine"
 slot/0/left_enabled = true
@@ -111,7 +113,7 @@ placeholder_text = "Name"
 [node name="DataPopupPanel" type="PopupPanel" parent="."]
 transparent_bg = true
 initial_position = 1
-size = Vector2i(600, 392)
+size = Vector2i(600, 489)
 borderless = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_y45yo")
 
@@ -120,7 +122,7 @@ custom_minimum_size = Vector2(590, 0)
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 595.0
-offset_bottom = 387.0
+offset_bottom = 484.0
 
 [node name="BaseNode" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer"]
 layout_mode = 2
@@ -175,6 +177,22 @@ layout_mode = 2
 [node name="FoldingPanel" type="VBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer"]
 layout_mode = 2
 
+[node name="UpdateGraphData" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Space2" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/UpdateGraphData"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="GraphDataButton" type="Button" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/UpdateGraphData"]
+custom_minimum_size = Vector2(560, 32)
+layout_mode = 2
+text = "Update Graph Data"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/UpdateGraphData"]
+layout_mode = 2
+size_flags_horizontal = 6
+
 [node name="userData" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 layout_mode = 2
 
@@ -221,54 +239,63 @@ layout_mode = 2
 
 [node name="randomTransitionEventIdLabel" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId"]
 layout_mode = 2
-text = "   randomTransition"
+text = "   randomTransitionEventId"
 
 [node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="randomTransitionEventIdSpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId"]
+[node name="randomTransitionEventIdOptionButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId"]
+custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
-min_value = -1.0
-max_value = 9999.0
-value = -1.0
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("6_heh4c")
 
 [node name="transitionToNextHigherStateEventId" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 layout_mode = 2
 
 [node name="transitionToNextHigherStateEventIdLabel" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId"]
 layout_mode = 2
-text = "   transitionToHigherState"
+text = "   transitionToNextHigherStateEventId"
 
 [node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="transitionToNextHigherStateEventIdSpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId"]
+[node name="transitionToNextHigherStateEventIdOptionButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId"]
+custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
-min_value = -1.0
-max_value = 9999.0
-value = -1.0
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("6_heh4c")
 
 [node name="transitionToNextLowerStateEventId" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 layout_mode = 2
 
 [node name="transitionToNextLowerStateEventIdLabel" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId"]
 layout_mode = 2
-text = "   transitionToLowerState"
+text = "   transitionToNextLowerStateEventId"
 
 [node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="transitionToNextLowerStateEventIdSpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId"]
+[node name="transitionToNextLowerStateEventIdOptionButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId"]
+custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
-min_value = -1.0
-max_value = 9999.0
-value = -1.0
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("6_heh4c")
 
 [node name="syncVariableIndex" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 layout_mode = 2
@@ -282,11 +309,14 @@ custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="syncVariableIndexSpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/syncVariableIndex"]
+[node name="syncVariableIndexOptionButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/syncVariableIndex"]
+custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
-min_value = -1.0
-max_value = 9999.0
-value = -1.0
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("7_xodpk")
 
 [node name="wrapAroundStateId" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 layout_mode = 2
@@ -362,67 +392,48 @@ popup/item_1/id = 1
 popup/item_2/text = "FORCE_TRANSITION_TO_START_STATE"
 popup/item_2/id = 2
 
-[node name="ShowEventToSendButton" type="Button" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-text = "Show Event To Send on Change"
-
-[node name="EventToSend" type="PanelContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
-visible = false
+[node name="PanelContainer" type="PanelContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend"]
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/PanelContainer"]
+layout_mode = 2
+text = "EventToSend"
+horizontal_alignment = 1
+
+[node name="id" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 layout_mode = 2
 
-[node name="UpdatePayload" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer"]
-layout_mode = 2
-
-[node name="Space2" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/UpdatePayload"]
-layout_mode = 2
-size_flags_horizontal = 6
-
-[node name="updatePayloadButton" type="Button" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/UpdatePayload"]
-custom_minimum_size = Vector2(270, 32)
-layout_mode = 2
-text = "Update Payload List"
-
-[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/UpdatePayload"]
-layout_mode = 2
-size_flags_horizontal = 6
-
-[node name="id" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer"]
-layout_mode = 2
-
-[node name="idLabel" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/id"]
+[node name="idLabel" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/id"]
 layout_mode = 2
 text = "   id
 "
 
-[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/id"]
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/id"]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="idSpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/id"]
-custom_minimum_size = Vector2(85, 0)
-layout_direction = 2
+[node name="eventToSendidOptionButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/id"]
+custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
-min_value = -1.0
-max_value = 1000.0
-value = -1.0
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("6_heh4c")
 
-[node name="payload" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer"]
+[node name="payload" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 layout_mode = 2
 
-[node name="payloadLabel" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/payload"]
+[node name="payloadLabel" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payload"]
 layout_mode = 2
 text = "   payload"
 
-[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/payload"]
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payload"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="eventToSendPayloadOptionButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/payload"]
+[node name="eventToSendPayloadOptionButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payload"]
 custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
 item_count = 1
@@ -439,15 +450,14 @@ script = ExtResource("2_00a0s")
 [connection signal="value_changed" from="DataPopupPanel/VBoxContainer/BaseNode/nodeIDSpinBox" to="." method="_on_node_id_spin_box_value_changed"]
 [connection signal="toggled" from="DataPopupPanel/VBoxContainer/BaseNode/PinButton" to="." method="_on_pin_button_toggled"]
 [connection signal="pressed" from="DataPopupPanel/VBoxContainer/BaseNode/DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="pressed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/UpdateGraphData/GraphDataButton" to="." method="_on_graph_data_button_pressed"]
 [connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData/userDataButton" to="." method="_on_user_data_button_item_selected"]
 [connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startStateID/startStateIDSpinBox" to="." method="_on_start_state_id_spin_box_value_changed"]
-[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId/randomTransitionEventIdSpinBox" to="." method="_on_random_transition_event_id_spin_box_value_changed"]
-[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId/transitionToNextHigherStateEventIdSpinBox" to="." method="_on_transition_to_next_higher_state_event_id_spin_box_value_changed"]
-[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId/transitionToNextLowerStateEventIdSpinBox" to="." method="_on_transition_to_next_lower_state_event_id_spin_box_value_changed"]
-[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/syncVariableIndex/syncVariableIndexSpinBox" to="." method="_on_sync_variable_index_spin_box_value_changed"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId/randomTransitionEventIdOptionButton" to="." method="_on_random_transition_event_id_option_button_item_selected"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId/transitionToNextHigherStateEventIdOptionButton" to="." method="_on_transition_to_next_higher_state_event_id_option_button_item_selected"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId/transitionToNextLowerStateEventIdOptionButton" to="." method="_on_transition_to_next_lower_state_event_id_option_button_item_selected"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/syncVariableIndex/syncVariableIndexOptionButton" to="." method="_on_sync_variable_index_option_button_item_selected"]
 [connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startStateMode/startStateModeButton" to="." method="_on_start_state_mode_button_item_selected"]
 [connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/selfTransitionMode/selfTransitionModeButton" to="." method="_on_self_transition_mode_button_item_selected"]
-[connection signal="pressed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ShowEventToSendButton" to="." method="_on_show_event_to_send_button_pressed"]
-[connection signal="pressed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/UpdatePayload/updatePayloadButton" to="." method="_on_update_payload_button_pressed"]
-[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/id/idSpinBox" to="." method="_on_id_spin_box_value_changed"]
-[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/payload/eventToSendPayloadOptionButton" to="." method="_on_event_to_send_payload_option_button_item_selected"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/id/eventToSendidOptionButton" to="." method="_on_event_to_sendid_option_button_item_selected"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payload/eventToSendPayloadOptionButton" to="." method="_on_event_to_send_payload_option_button_item_selected"]

@@ -19,8 +19,8 @@ corner_radius_bottom_left = 1
 anti_aliasing_size = 2.0
 
 [node name="hkbVariableBindingSet" type="GraphNode"]
-offset_right = 297.0
-offset_bottom = 86.0
+offset_right = 300.0
+offset_bottom = 100.0
 title = "hkbVariableBindingSet"
 slot/0/left_enabled = true
 slot/0/left_type = 0

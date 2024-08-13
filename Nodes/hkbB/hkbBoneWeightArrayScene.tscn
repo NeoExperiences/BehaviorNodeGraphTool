@@ -19,9 +19,9 @@ corner_radius_bottom_left = 1
 anti_aliasing_size = 2.0
 
 [node name="hkbBoneWeightArray" type="GraphNode"]
-offset_right = 297.0
-offset_bottom = 86.0
-title = "hkbBoneIndexArray"
+offset_right = 300.0
+offset_bottom = 100.0
+title = "hkbBoneWeightArray"
 slot/0/left_enabled = true
 slot/0/left_type = 0
 slot/0/left_color = Color(1, 1, 1, 1)
@@ -53,7 +53,7 @@ text = "Edit"
 [node name="DataPopupPanel" type="PopupPanel" parent="."]
 transparent_bg = true
 initial_position = 1
-size = Vector2i(509, 574)
+size = Vector2i(509, 580)
 borderless = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_y45yo")
 

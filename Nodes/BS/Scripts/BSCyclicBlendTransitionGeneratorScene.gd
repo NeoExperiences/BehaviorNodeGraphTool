@@ -24,10 +24,33 @@ func _ready():
 	$DataPopupPanel/VBoxContainer/BaseNode/nodeIDSpinBox.value = nodeID
 	$Name.text = nodeName
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData/userDataButton.selected = userData
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idFreezeBlend/FreezeBlendidOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idEventToCrossBlend/EventToCrossBlendidOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idTransitionOutEvent/TransitionOutEventidOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idTransitionInEvent/TransitionInEventEventidOptionButton._updateEvents()
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payloadFreezeBlend/FreezeBlendPayloadOptionButton._updatePayloads()
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payloadEventToCrossBlend/EventToCrossBlendPayloadOptionButton._updatePayloads()
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payloadTransitionOutEvent/TransitionOutEventPayloadOptionButton._updatePayloads()
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payloadTransitionInEvent/TransitionInEventEventPayloadOptionButton._updatePayloads()
+	
+	if EventToFreezeBlendValueID == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idFreezeBlend/FreezeBlendidOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idFreezeBlend/FreezeBlendidOptionButton.selected = EventToFreezeBlendValueID + 1
+	if EventToCrossBlendID == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idEventToCrossBlend/EventToCrossBlendidOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idEventToCrossBlend/EventToCrossBlendidOptionButton.selected = EventToCrossBlendID + 1
+	if TransitionOutEventID == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idTransitionOutEvent/TransitionOutEventidOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idTransitionOutEvent/TransitionOutEventidOptionButton.selected = TransitionOutEventID + 1
+	if TransitionInEventID == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idTransitionInEvent/TransitionInEventEventidOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idTransitionInEvent/TransitionInEventEventidOptionButton.selected = TransitionInEventID + 1
+	
+	
 	if EventToFreezeBlendValuePayload == -1:
 		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payloadFreezeBlend/FreezeBlendPayloadOptionButton.selected = 0
 	else:
@@ -44,10 +67,13 @@ func _ready():
 		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payloadTransitionInEvent/TransitionInEventEventPayloadOptionButton.selected = 0
 	else:
 		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payloadTransitionInEvent/TransitionInEventEventPayloadOptionButton.selected = TransitionInEventPayload
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idFreezeBlend/FreezeBlendidSpinBox.value = EventToFreezeBlendValueID
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idEventToCrossBlend/EventToCrossBlendidSpinBox.value = EventToCrossBlendID
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idTransitionOutEvent/TransitionOutEventidSpinBox.value = TransitionOutEventID
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idTransitionInEvent/TransitionInEventEventidSpinBox.value = TransitionInEventID
+
+	
+	
+	#$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idFreezeBlend/FreezeBlendidSpinBox.value = EventToFreezeBlendValueID
+	#$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idEventToCrossBlend/EventToCrossBlendidSpinBox.value = EventToCrossBlendID
+	#$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idTransitionOutEvent/TransitionOutEventidSpinBox.value = TransitionOutEventID
+	#$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idTransitionInEvent/TransitionInEventEventidSpinBox.value = TransitionInEventID
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.double_click:
@@ -90,7 +116,11 @@ func _on_user_data_button_item_selected(index):
 func _on_name_text_changed(new_text):
 	nodeName = new_text
 
-func _on_update_payload_button_pressed():
+func _on_update_events_button_pressed():
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idFreezeBlend/FreezeBlendidOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idEventToCrossBlend/EventToCrossBlendidOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idTransitionOutEvent/TransitionOutEventidOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/idTransitionInEvent/TransitionInEventEventidOptionButton._updateEvents()
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payloadFreezeBlend/FreezeBlendPayloadOptionButton._updatePayloads()
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payloadEventToCrossBlend/EventToCrossBlendPayloadOptionButton._updatePayloads()
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/payloadTransitionOutEvent/TransitionOutEventPayloadOptionButton._updatePayloads()
@@ -135,11 +165,26 @@ func _on_transition_in_event_event_payload_option_button_item_selected(index):
 	else:
 		TransitionInEventPayload = index
 
+func _on_freeze_blendid_option_button_item_selected(index):
+	if index == 0:
+		EventToFreezeBlendValueID = -1
+	else:
+		EventToFreezeBlendValueID = index - 1
 
+func _on_event_to_cross_blendid_option_button_item_selected(index):
+	if index == 0:
+		EventToCrossBlendID = -1
+	else:
+		EventToCrossBlendID = index - 1
 
+func _on_transition_out_eventid_option_button_item_selected(index):
+	if index == 0:
+		TransitionOutEventID = -1
+	else:
+		TransitionOutEventID = index - 1
 
-
-
-
-
-
+func _on_transition_in_event_eventid_option_button_item_selected(index):
+	if index == 0:
+		TransitionInEventID = -1
+	else:
+		TransitionInEventID = index - 1
