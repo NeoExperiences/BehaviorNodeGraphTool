@@ -9,7 +9,7 @@ func _initialize_behavior(file):
 # Close the XML file.
 func _finish_behavior(file):
 	file.store_string('    </hksection>\r\n')
-	file.store_string('</hkpackfile>')
+	file.store_string('</hkpackfile>\r\n')
 
 func _process_node(file, node, nodeExportIndex, transitionArrayLength, payloadArrayLength):
 	match node.nodeTypeID:
@@ -1537,6 +1537,7 @@ func _parse_hkbVariableValueSet(file, variableArray, nodeExportIndex): # Done
 	var quadValuesArray = []
 	var pointerCounter = 0
 	file.store_string('        <hkobject class="hkbVariableValueSet" name="#' + str(nodeExportIndex) +'" signature="0xeb5f7e25">\r\n')
+	file.store_string('            <!-- memSizeAndRefCount SERIALIZE_IGNORED -->\r\n')
 	if variableArray.size():
 		file.store_string('            <hkparam name="wordVariableValues" numelements="' + str(variableArray.size()) + '">\r\n')
 		for variable in variableArray:
