@@ -7,4 +7,4 @@ Godot v4.2.1
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE` and `COPYING.MIT` for more information.
