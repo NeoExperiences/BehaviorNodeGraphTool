@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6ywaqan5akgh"
-path="res://.godot/imported/editicon.png-8067d0656d93799745cb23075ac7c4e4.ctex"
+path="res://.godot/imported/editicon.png-80ff933a7ee92f75948beaa662fbf56d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://editicon.png"
-dest_files=["res://.godot/imported/editicon.png-8067d0656d93799745cb23075ac7c4e4.ctex"]
+source_file="res://Resources/editicon.png"
+dest_files=["res://.godot/imported/editicon.png-80ff933a7ee92f75948beaa662fbf56d.ctex"]
 
 [params]
 

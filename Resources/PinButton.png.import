@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csb3wjekhlmy1"
-path="res://.godot/imported/UnpinButton.png-478078fa1a0a575593079e0fb0a8d746.ctex"
+uid="uid://dtrsj56jbquo8"
+path="res://.godot/imported/PinButton.png-97831a8e417b407c1cf3071e2fc3b92f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UnpinButton.png"
-dest_files=["res://.godot/imported/UnpinButton.png-478078fa1a0a575593079e0fb0a8d746.ctex"]
+source_file="res://Resources/PinButton.png"
+dest_files=["res://.godot/imported/PinButton.png-97831a8e417b407c1cf3071e2fc3b92f.ctex"]
 
 [params]
 
