@@ -57,6 +57,7 @@ func show_popup():
 
 func _on_popup_panel_popup_hide():
 	self.draggable = true
+	self.selected = false
 	$DataPopupPanel/VBoxContainer/BaseNode/DeleteButton.show()
 	$DataPopupPanel/VBoxContainer/BaseNode/ConfirmDeleteButton.hide()
 
