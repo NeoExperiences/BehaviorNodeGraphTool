@@ -5,36 +5,38 @@ func _load_XML(path, graphEdit):
 	var rootNode = parsedFile.root
 	var connections = []
 	print("Root Node: ", rootNode.attributes)
-	for root in rootNode.children:
-		for object in root.children:
-			print(object.attributes.name, " - ", object.attributes.class)
-			_object_processing(object, graphEdit, connections)
-			print("[")
-			var child_count = 0
-			for parameter in object.children:
-				print("	", " #", child_count," - " , parameter.attributes.name, " = ", parameter.content)
-				child_count += 1
-				if parameter.attributes.name == "eventToSendWhenStateOrTransitionChanges":
-					print("		", parameter.children[0].children[0].attributes.name, " = ", parameter.children[0].children[0].content)
-					print("		", parameter.children[0].children[1].attributes.name, " = ", parameter.children[0].children[1].content)
-				#if parameter.attributes.has("name"):
-					#if parameter.attributes.name == "states":
-						#var connections = parameter.content.split("#")
-						#print("	", parameter.attributes.name, " = ")
-						#for state in connections:
-							#if state:
-								#print("	", state.strip_edges())
-					#else:
-						#print("	", parameter.attributes.name, " = ", parameter.content)
-				#elif parameter.attributes.has("numelements"):
-					#for subparameter in parameter.children:
-						#if subparameter.content == "":
-							#for subparameter2 in subparameter.children:
-								#print("		", subparameter2.attributes.name, " = ", subparameter2.content)
-						#else:
-							#print("		",subparameter.content)
-				
-			print("]")
+	import_transitions(rootNode.children[0].children)
+	import_payload(rootNode.children[0].children)
+	import_values(rootNode.children[0].children[-3], rootNode.children[0].children[-2], rootNode.children[0].children[-1])
+	graphEdit.get_parent()._instantiate_global_values()
+	for object in rootNode.children[0].children:
+		print(object.attributes.name, " - ", object.attributes.class)
+		_object_processing(object, graphEdit, connections)
+		print("[")
+		var child_count = 0
+		for parameter in object.children:
+			print("	", " #", child_count," - " , parameter.attributes.name, " = ", parameter.content)
+			child_count += 1
+			#if parameter.attributes.name == "eventToSendWhenStateOrTransitionChanges":
+				#print("		", parameter.children[0].children[0].attributes.name, " = ", parameter.children[0].children[0].content)
+				#print("		", parameter.children[0].children[1].attributes.name, " = ", parameter.children[0].children[1].content)
+								#if parameter.attributes.has("name"):
+									#if parameter.attributes.name == "states":
+										#var connections = parameter.content.split("#")
+										#print("	", parameter.attributes.name, " = ")
+										#for state in connections:
+											#if state:
+												#print("	", state.strip_edges())
+									#else:
+										#print("	", parameter.attributes.name, " = ", parameter.content)
+								#elif parameter.attributes.has("numelements"):
+									#for subparameter in parameter.children:
+										#if subparameter.content == "":
+											#for subparameter2 in subparameter.children:
+												#print("		", subparameter2.attributes.name, " = ", subparameter2.content)
+										#else:
+											#print("		",subparameter.content)
+		print("]")
 	print("Connections: ", connections)
 	for connection in connections:
 		for from_node in graphEdit.get_children():
@@ -49,8 +51,6 @@ func _object_processing(object, graphEdit, connections):
 					print("hkRootLevelContainer loaded.")
 					var loadedNode = globalVariable.hkRootLevelContainer.instantiate()
 					base_node_values(loadedNode, object)
-					print("Children: ",object.children[0].attributes.name)
-					print("Children Children: ",object.children[0].children[0])
 					#if object.children[0].children[0].children[2].content != "null":
 						#connections.append(0, [int(object.attributes.name.replace("#","")), int(object.children[0].children[0].children[2].content.replace("#",""))])
 					if object.children[0].children[0].children[2].content != "null":
@@ -530,3 +530,74 @@ func _object_processing(object, graphEdit, connections):
 func base_node_values(loadedNode, object):
 	loadedNode.title += ' - ' + str(object.attributes.name)
 	loadedNode.nodeID = int(object.attributes.name.replace("#",""))
+
+func import_transitions(objectList):
+	var transitionIndex = 0
+	for object in objectList:
+		if object.attributes.class == "hkbBlendingTransitionEffect":
+			transitionIndex += 1
+			var transitionData = {
+				"transitionID": transitionIndex,
+				"transitionName": object.children[2].content,
+				"transitionVariableBindingSet": 0,
+				"transitionSelfTransitionMode": 0,
+				"transitionEventMode": 0,
+				"transitionDuration": object.children[5].content,
+				"transitionToGeneratorStartTimeFraction": object.children[6].content,
+				"transitionFlags": 0,
+				"transitionEndMode": 0,
+				"transitionBlendCurve": int(object.children[9].content)
+			}
+			if object.children[0].content != "null":
+				transitionData.transitionVariableBindingSet = int(object.children[0].content.replace("#",""))
+			if object.children[3].content == "SELF_TRANSITION_MODE_CONTINUE_IF_CYCLIC_BLEND_IF_ACYCLIC":
+				transitionData.transitionSelfTransitionMode = 0
+			elif object.children[3].content == "SELF_TRANSITION_MODE_CONTINUE":
+				transitionData.transitionSelfTransitionMode = 1
+			elif object.children[3].content == "SELF_TRANSITION_MODE_RESET":
+				transitionData.transitionSelfTransitionMode = 2
+			elif object.children[3].content == "SELF_TRANSITION_MODE_BLEND":
+				transitionData.transitionSelfTransitionMode = 3
+			if object.children[4].content == "EVENT_MODE_DEFAULT":
+				transitionData.transitionEndMode = 0
+			elif object.children[4].content == "EVENT_MODE_PROCESS_ALL":
+				transitionData.transitionEndMode = 1
+			elif object.children[4].content == "EVENT_MODE_IGNORE_FROM_GENERATOR":
+				transitionData.transitionEndMode = 2
+			elif object.children[4].content == "EVENT_MODE_IGNORE_TO_GENERATOR":
+				transitionData.transitionEndMode = 3
+			if object.children[7].content == "FLAG_NONE":
+				transitionData.transitionFlags = 0
+			elif object.children[7].content == "FLAG_IGNORE_FROM_WORLD_FROM_MODEL":
+				transitionData.transitionFlags = 1
+			elif object.children[7].content == "FLAG_SYNC":
+				transitionData.transitionFlags = 2
+			elif object.children[7].content == "FLAG_IGNORE_TO_WORLD_FROM_MODEL":
+				transitionData.transitionFlags = 3
+			elif object.children[7].content == "FLAG_IGNORE_TO_WORLD_FROM_MODEL_ROTATION":
+				transitionData.transitionFlags = 4
+			if object.children[8].content == "END_MODE_NONE":
+				transitionData.transitionEndMode = 0
+			else:
+				transitionData.transitionEndMode = 1
+			globalVariable.globalTransitionList.append(transitionData)
+
+func import_payload(objectList):
+	var payloadIndex = 0
+	for object in objectList:
+		if object.attributes.class == "hkbStringEventPayload":
+			payloadIndex += 1
+			var payloadData = {
+				"payloadID": payloadIndex,
+				"payloadName": object.children[0].content,
+			}
+			globalVariable.globalPayloadList.append(payloadData)
+
+func import_values(hkbBehaviorGraphData, hkbVariableValueSet, hkbBehaviorGraphStringData):
+	
+	print(hkbBehaviorGraphData.attributes.name, " - ", hkbBehaviorGraphData.attributes.class)
+	print(hkbVariableValueSet.attributes.name, " - ", hkbVariableValueSet.attributes.class)
+	print(hkbBehaviorGraphStringData.attributes.name, " - ", hkbBehaviorGraphStringData.attributes.class)
+	print(hkbBehaviorGraphStringData.children[0].attributes.name, " = ", hkbBehaviorGraphStringData.children[0].attributes.numelements)
+	for event in hkbBehaviorGraphStringData.children[0].children:
+		print(event.content)

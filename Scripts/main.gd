@@ -593,12 +593,15 @@ func _load_global_values(loadedTransitionList, loadedEventList, loadedPayloadLis
 	globalVariable.globalPayloadList		= loadedPayloadList
 	globalVariable.globalPropertiesList		= loadedPropertiesList
 	globalVariable.globalVariableList		= loadedVariableList
+	_instantiate_global_values()
+	_acquire_global_values()
+
+func _instantiate_global_values():
 	$GraphMenu/TransitionMenu._load_global_values()
 	$GraphMenu/EventMenu._load_global_values()
 	$GraphMenu/PayloadsMenu._load_global_values()
 	$GraphMenu/PropertiesMenu._load_global_values()
 	$GraphMenu/VariableMenu._load_global_values()
-	_acquire_global_values()
 
 func _on_credits_button_pressed():
 	$AcceptDialog.show()
