@@ -137,7 +137,7 @@ placeholder_text = "Name"
 [node name="DataPopupPanel" type="PopupPanel" parent="."]
 transparent_bg = true
 initial_position = 1
-size = Vector2i(509, 181)
+size = Vector2i(509, 146)
 borderless = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_y45yo")
 
@@ -145,7 +145,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_y45yo")
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 504.0
-offset_bottom = 176.0
+offset_bottom = 141.0
 
 [node name="BaseNode" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer"]
 layout_mode = 2
@@ -199,32 +199,6 @@ layout_mode = 2
 
 [node name="FoldingPanel" type="VBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer"]
 layout_mode = 2
-
-[node name="userData" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData"]
-layout_mode = 2
-text = "   userData"
-
-[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_horizontal = 6
-
-[node name="userDataButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData"]
-custom_minimum_size = Vector2(70, 30)
-layout_mode = 2
-item_count = 4
-selected = 0
-popup/item_0/text = "0"
-popup/item_0/id = 0
-popup/item_1/text = "1"
-popup/item_1/id = 1
-popup/item_2/text = "2"
-popup/item_2/id = 2
-popup/item_3/text = "3"
-popup/item_3/id = 3
 
 [node name="stateId" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 layout_mode = 2
@@ -290,7 +264,6 @@ popup/item_1/id = 1
 [connection signal="value_changed" from="DataPopupPanel/VBoxContainer/BaseNode/nodeIDSpinBox" to="." method="_on_node_id_spin_box_value_changed"]
 [connection signal="toggled" from="DataPopupPanel/VBoxContainer/BaseNode/PinButton" to="." method="_on_pin_button_toggled"]
 [connection signal="pressed" from="DataPopupPanel/VBoxContainer/BaseNode/DeleteButton" to="." method="_on_delete_button_pressed"]
-[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData/userDataButton" to="." method="_on_user_data_button_item_selected"]
 [connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/stateId/stateIdSpinBox" to="." method="_on_state_id_spin_box_value_changed"]
 [connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/probability/probabilityLineEdit" to="." method="_on_probability_line_edit_text_changed"]
 [connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable/enableButton" to="." method="_on_enable_button_item_selected"]

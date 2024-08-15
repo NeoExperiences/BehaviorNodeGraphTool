@@ -13,6 +13,9 @@ var behaviorParserScript = preload("res://Scripts/behavior_parser.gd").new()
 # File Management Script
 var fileManagementScript = preload("res://Scripts/file_management.gd").new()
 
+# XML Import Script
+var xmlImportScript = preload("res://Scripts/xml_import.gd").new()
+
 # Context Menu
 @onready var contextMenu		= $ContextMenu
 @onready var createNodeMenuList = $CreateNodeMenu/CreateNodeMenuList
@@ -411,7 +414,7 @@ func _create_node_diccionary(child, nodeConnection0, nodeConnection1, nodeConnec
 		"syncToGeneratorStartTime": child.get("syncToGeneratorStartTime"),
 		"selfTransitionMode": child.get("selfTransitionMode"),
 		"eventId": child.get("eventId"),
- 		"payload": child.get("payload"),
+		"payload": child.get("payload"),
 		"pSequence": child.get("pSequence"),
 		"eBlendModeFunction": child.get("eBlendModeFunction"),
 		"fPercent": child.get("fPercent"),
@@ -509,8 +512,87 @@ func _create_node_diccionary(child, nodeConnection0, nodeConnection1, nodeConnec
 	}
 	return data
 
-#func _on_import_button_pressed():
-	# TODO: Implement an XML loading system.
+func _on_import_button_pressed():
+	$ImportFileDialog.show()
+
+func _on_import_file_dialog_file_selected(path):
+	_clean_up_graph()
+	xmlImportScript._load_XML(path, $GraphEdit)
+	$GraphEdit.arrange_nodes()
+
+#func _on_import_file_dialog_file_selected(path):  # TODO: Implement an XML loading system.
+	#var parser = XMLParser.new()
+	#var error = parser.open(path)
+	#print("#################################")
+	#print("---------------------------------")
+	#print("#################################")
+	#if error != OK:
+		#print("Error opening XML file: ", error)
+		#return
+	##while parser.read() == OK:
+		##if parser.get_node_type() == XMLParser.NODE_ELEMENT:
+			##var node_name = parser.get_node_name()
+			##print("Node name: ", node_name)
+			##for i in range(parser.get_attribute_count()):
+				##var attr_name = parser.get_attribute_name(i)
+				##var attr_value = parser.get_attribute_value(i)
+				##print("Attribute: ", attr_name, " = ", attr_value)
+	#while parser.read() != ERR_FILE_EOF:
+		#if parser.get_node_type() == XMLParser.NODE_ELEMENT:
+			#var node_name = parser.get_node_name()
+			#var attributes_dict = {}
+			#for idx in range(parser.get_attribute_count()):
+				#attributes_dict[parser.get_attribute_name(idx)] = parser.get_attribute_value(idx)
+			#if parser.get_node_name() == "hkobject":
+				#xmlImportScript._object_processing(attributes_dict.class, $GraphEdit)
+				##$GraphEdit.add_child(instance_node(attributes_dict.class))
+			#parser.read()
+			#var text_value = parser.get_node_data().strip_edges()  # Remove any leading/trailing whitespace
+			#if text_value != "":
+				#print("The ", node_name, " element has the following attributes: ", attributes_dict.name, " = ", text_value)
+			#else:
+				#print("The ", node_name, " element has the following attributes: ", attributes_dict)
+
+				
+	#var counter = 0
+	#while parser.read() == OK:
+		#counter += 1
+		#match parser.get_node_type():
+			#1:
+				#print("---------------------------------")
+				#print("Node #", counter ," Type: NODE_ELEMENT")
+			#3:
+				#if parser.get_node_data().strip_edges() != "":
+					#print("Node #", counter ," Type: NODE_TEXT")
+		#if parser.get_node_type() == XMLParser.NODE_ELEMENT:
+			#var node_name = parser.get_node_name()
+			#var attributes = {}
+			#for i in range(parser.get_attribute_count()):
+				#var attr_name = parser.get_attribute_name(i)
+				#var attr_value = parser.get_attribute_value(i)
+				#attributes[attr_name] = attr_value
+				#print("Attribute Name: ", attr_name, " Attribute Value: ", attr_value)
+		#elif parser.get_node_type() == XMLParser.NODE_TEXT:
+			#var text_value = parser.get_node_data().strip_edges()  # Remove any leading/trailing whitespace
+			#if text_value != "":
+				#print("Text Value: ", text_value)
+	#while parser.read() == OK:
+		#if parser.get_node_type() == XMLParser.NODE_ELEMENT:
+			##if parser.get_node_name() == "hkobject":
+				##print(parser.get_attribute_name(0))
+			##else:
+			#var node_name = parser.get_node_name()
+			#var attributes = {}
+			#for i in range(parser.get_attribute_count()):
+				#var attr_name = parser.get_attribute_name(i)
+				#var attr_value = parser.get_attribute_value(i)
+				#attributes[attr_name] = attr_value
+				#print("Attribute: ", attr_value, " Name: ", parser.get_node_name())
+			#parser.read()
+			#var text_value = parser.get_node_data().strip_edges()  # Remove any leading/trailing whitespace
+			#if text_value != "":
+				#print("Value: ", text_value)
+			#print("---------------------------------")
 
 # Behavior Info Menus
 func _on_variables_button_toggled(toggled_on):
@@ -594,3 +676,7 @@ func _load_global_values(loadedTransitionList, loadedEventList, loadedPayloadLis
 
 func _on_credits_button_pressed():
 	$AcceptDialog.show()
+
+
+
+

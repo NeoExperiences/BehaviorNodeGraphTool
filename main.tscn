@@ -41,7 +41,6 @@ initial_position = 1
 size = Vector2i(600, 400)
 ok_button_text = "Save"
 access = 2
-root_subfolder = "Saves"
 filters = PackedStringArray("*.bgsav")
 
 [node name="LoadFileDialog" type="FileDialog" parent="."]
@@ -51,7 +50,6 @@ size = Vector2i(600, 400)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
-root_subfolder = "Saves"
 filters = PackedStringArray("*.bgsav")
 
 [node name="ExportFileDialog" type="FileDialog" parent="."]
@@ -60,7 +58,15 @@ initial_position = 1
 size = Vector2i(600, 400)
 ok_button_text = "Export"
 access = 2
-root_subfolder = "Export"
+filters = PackedStringArray("*.xml")
+
+[node name="ImportFileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(600, 400)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
 filters = PackedStringArray("*.xml")
 
 [node name="ContextMenu" type="PopupMenu" parent="."]
@@ -433,6 +439,7 @@ right_disconnects = true
 [connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
 [connection signal="file_selected" from="LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
 [connection signal="file_selected" from="ExportFileDialog" to="." method="_on_export_file_dialog_file_selected"]
+[connection signal="file_selected" from="ImportFileDialog" to="." method="_on_import_file_dialog_file_selected"]
 [connection signal="id_pressed" from="ContextMenu" to="." method="_on_context_menu_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuList" to="." method="_on_create_node_menu_list_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuBS" to="." method="_on_create_node_menu_bs_id_pressed"]

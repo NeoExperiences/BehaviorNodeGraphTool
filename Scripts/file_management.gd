@@ -140,7 +140,6 @@ func _node_processing(node, graphEdit, nodeIndex):
 					var loadedNode = globalVariable.hkbStateMachineStateInfo.instantiate()
 					base_node_values(loadedNode, node)
 					loadedNode.nodeName = node.nodeName
-					loadedNode.userData = node.userData
 					loadedNode.stateId = node.stateId
 					loadedNode.probability = node.probability
 					loadedNode.enable = node.enable

@@ -19,6 +19,7 @@ func _ready():
 	$DataPopupPanel/VBoxContainer/BaseNode/nodeIDSpinBox.value = nodeID
 	$Name.text = nodeName
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData/userDataButton.selected = userData
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/pSequence/pSequenceLine.text = pSequence
 	if eBlendModeFunction == "BMF_NONE":
 		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/eBlendModeFunction/eBlendModeFunctionButton.selected = 0
 	elif eBlendModeFunction == "BMF_ONE_MINUS_PERCENT":

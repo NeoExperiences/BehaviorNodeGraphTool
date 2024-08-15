@@ -7,7 +7,6 @@ var buttonToggled = false
 
 #hkbStateMachineStateInfo Values
 @export var nodeName = "SM_StateInfo"
-@export var userData = 0
 @export var stateId = 0
 @export var probability = "1.0"
 @export var enable = true
@@ -17,7 +16,6 @@ var buttonToggled = false
 func _ready():
 	$DataPopupPanel/VBoxContainer/BaseNode/nodeIDSpinBox.value = nodeID
 	$Name.text = nodeName
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData/userDataButton.selected = userData
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/stateId/stateIdSpinBox.value = stateId
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/probability/probabilityLineEdit.text = probability
 	if enable:
@@ -61,9 +59,6 @@ func _on_pin_button_toggled(toggled_on):
 
 func _on_name_text_changed(new_text):
 	nodeName = new_text
-
-func _on_user_data_button_item_selected(index):
-	userData = index
 
 func _on_state_id_spin_box_value_changed(value):
 	stateId = value
