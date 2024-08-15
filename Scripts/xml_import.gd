@@ -3,14 +3,20 @@ extends Node
 func _load_XML(path, graphEdit):
 	var parsedFile = XML.parse_file(path)
 	var rootNode = parsedFile.root
+	var connections = []
 	print("Root Node: ", rootNode.attributes)
 	for root in rootNode.children:
 		for object in root.children:
 			print(object.attributes.name, " - ", object.attributes.class)
-			_object_processing(object, graphEdit)
+			_object_processing(object, graphEdit, connections)
 			print("[")
+			var child_count = 0
 			for parameter in object.children:
-				print("	", parameter.attributes.name, " = ", parameter.content)
+				print("	", " #", child_count," - " , parameter.attributes.name, " = ", parameter.content)
+				child_count += 1
+				if parameter.attributes.name == "eventToSendWhenStateOrTransitionChanges":
+					print("		", parameter.children[0].children[0].attributes.name, " = ", parameter.children[0].children[0].content)
+					print("		", parameter.children[0].children[1].attributes.name, " = ", parameter.children[0].children[1].content)
 				#if parameter.attributes.has("name"):
 					#if parameter.attributes.name == "states":
 						#var connections = parameter.content.split("#")
@@ -29,19 +35,34 @@ func _load_XML(path, graphEdit):
 							#print("		",subparameter.content)
 				
 			print("]")
+	print("Connections: ", connections)
+	for connection in connections:
+		for from_node in graphEdit.get_children():
+			if from_node.get("nodeID") == connection[1]:
+				for to_node in graphEdit.get_children():
+					if to_node.get("nodeID") == connection[2]:
+						graphEdit.connect_node(str(from_node.name), connection[0], str(to_node.name), 0)
 
-func _object_processing(object, graphEdit):
+func _object_processing(object, graphEdit, connections):
 			match object.attributes.class:
 				"hkRootLevelContainer":
 					print("hkRootLevelContainer loaded.")
 					var loadedNode = globalVariable.hkRootLevelContainer.instantiate()
 					base_node_values(loadedNode, object)
+					print("Children: ",object.children[0].attributes.name)
+					print("Children Children: ",object.children[0].children[0])
+					#if object.children[0].children[0].children[2].content != "null":
+						#connections.append(0, [int(object.attributes.name.replace("#","")), int(object.children[0].children[0].children[2].content.replace("#",""))])
+					if object.children[0].children[0].children[2].content != "null":
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].children[0].children[2].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
 				"hkbBehaviorGraph":
 					print("hkbBehaviorGraph loaded.")
 					var loadedNode = globalVariable.hkbBehaviorGraph.instantiate()
 					base_node_values(loadedNode, object)
 					loadedNode.nodeName = object.children[2].content
+					if object.children[4].content != "null":
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[4].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
 				#"hkbBehaviorGraphData":
 					#print("hkbBehaviorGraphData loaded.")
@@ -53,23 +74,47 @@ func _object_processing(object, graphEdit):
 					print("hkbStateMachine loaded.")
 					var loadedNode = globalVariable.hkbStateMachine.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # VariableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
+					loadedNode.eventId = int(object.children[3].children[0].children[0].content)
+					if object.children[3].children[0].children[1].content != "null":
+						loadedNode.payload = object.children[3].children[0].children[1].content
+					else:
+						loadedNode.payload = -1
 					loadedNode.startStateId = int(object.children[5].content)
-					#loadedNode.randomTransitionEventId = node.randomTransitionEventId
-					#loadedNode.transitionToNextHigherStateEventId = node.transitionToNextHigherStateEventId
-					#loadedNode.transitionToNextLowerStateEventId = node.transitionToNextLowerStateEventId
-					#loadedNode.syncVariableIndex = node.syncVariableIndex
-					#loadedNode.wrapAroundStateId = node.wrapAroundStateId
-					#loadedNode.startStateMode = node.startStateMode
-					#loadedNode.selfTransitionMode = node.selfTransitionMode
-					#loadedNode.eventId = node.eventId
-					#loadedNode.payload = node.payload
+					loadedNode.randomTransitionEventId = int(object.children[7].content)
+					loadedNode.transitionToNextHigherStateEventId = int(object.children[8].content)
+					loadedNode.transitionToNextLowerStateEventId = int(object.children[9].content)
+					loadedNode.syncVariableIndex = int(object.children[10].content)
+					if object.children[11].content == "true":
+						loadedNode.wrapAroundStateId = true
+					loadedNode.startStateMode = object.children[13].content
+					loadedNode.selfTransitionMode = object.children[14].content
+					if object.children[15].content != "null": # states
+						for state in object.children[15].content.split("#"):
+							if state:
+								connections.append([1, int(object.attributes.name.replace("#","")), int(state)])
+					if object.children[16].content != "null": # wildcardTransitions
+						connections.append([2, int(object.attributes.name.replace("#","")), int(object.children[16].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
 				"hkbStateMachineStateInfo":
 					print("hkbStateMachineStateInfo loaded.")
 					var loadedNode = globalVariable.hkbStateMachineStateInfo.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # VariableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
+					if object.children[2].content != "null": # enterNotifyEvents
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[2].content.replace("#",""))])
+					if object.children[3].content != "null": # exitNotifyEvents
+						connections.append([2, int(object.attributes.name.replace("#","")), int(object.children[3].content.replace("#",""))])
+					if object.children[4].content != "null": # transitions
+						connections.append([3, int(object.attributes.name.replace("#","")), int(object.children[4].content.replace("#",""))])
+					if object.children[5].content != "null": # generator
+						for generator in object.children[5].content.split("#"):
+							if generator:
+								connections.append([4, int(object.attributes.name.replace("#","")), int(generator)])
 					loadedNode.nodeName = object.children[6].content
 					loadedNode.stateId = int(object.children[7].content)
 					loadedNode.probability = object.children[8].content
@@ -92,8 +137,14 @@ func _object_processing(object, graphEdit):
 					print("hkbModifierGenerator loaded.")
 					var loadedNode = globalVariable.hkbModifierGenerator.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # VariableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
+					if object.children[3].content != "null": # modifier
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[3].content.replace("#",""))])
+					if object.children[4].content != "null": # generator
+						connections.append([2, int(object.attributes.name.replace("#","")), int(object.children[4].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
 				"hkbModifierList":
 					print("hkbModifierList loaded.")

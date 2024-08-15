@@ -321,6 +321,7 @@ text = "Export"
 
 [node name="ImportButton" type="Button" parent="Buttons"]
 top_level = true
+layout_mode = 0
 offset_left = 605.0
 offset_top = 10.0
 offset_right = 675.0
