@@ -99,8 +99,7 @@ func _object_processing(object, graphEdit, connections):
 					loadedNode.transitionToNextHigherStateEventId = int(object.children[8].content)
 					loadedNode.transitionToNextLowerStateEventId = int(object.children[9].content)
 					loadedNode.syncVariableIndex = int(object.children[10].content)
-					if object.children[11].content == "true":
-						loadedNode.wrapAroundStateId = true
+					loadedNode.wrapAroundStateId = string_to_bool(object.children[11].content)
 					loadedNode.startStateMode = object.children[13].content
 					loadedNode.selfTransitionMode = object.children[14].content
 					if object.children[15].content != "null": # states
@@ -129,8 +128,7 @@ func _object_processing(object, graphEdit, connections):
 					loadedNode.nodeName = object.children[6].content
 					loadedNode.stateId = int(object.children[7].content)
 					loadedNode.probability = object.children[8].content
-					if object.children[9].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[9].content)
 					graphEdit.add_child(loadedNode)
 				"hkbStateMachineTransitionInfoArray":
 					print("hkbStateMachineTransitionInfoArray loaded.")
@@ -165,8 +163,7 @@ func _object_processing(object, graphEdit, connections):
 						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					if object.children[4].content != "null": # modifiers
 						for modifier in object.children[4].content.split("#"):
 							if modifier:
@@ -180,8 +177,7 @@ func _object_processing(object, graphEdit, connections):
 						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					loadedNode.groundNormal				= object.children[4].content
 					loadedNode.duration					= object.children[5].content
 					loadedNode.alignWithGroundDuration	= object.children[6].content
@@ -197,9 +193,8 @@ func _object_processing(object, graphEdit, connections):
 						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
-					if object.children[5].content != "null": # VariableBindingSet
+					loadedNode.enable = string_to_bool(object.children[3].content)
+					if object.children[5].content != "null": # keyframedBonesList
 						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
 				"hkbBoneIndexArray":
@@ -228,8 +223,7 @@ func _object_processing(object, graphEdit, connections):
 						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					loadedNode.hierarchyGain = object.children[4].children[0].children[0].children[0].children[0].content
 					loadedNode.velocityDamping = object.children[4].children[0].children[0].children[0].children[1].content
 					loadedNode.accelerationGain = object.children[4].children[0].children[0].children[0].children[2].content
@@ -244,7 +238,7 @@ func _object_processing(object, graphEdit, connections):
 					loadedNode.snapMaxAngularDistance = object.children[4].children[0].children[0].children[0].children[11].content
 					loadedNode.durationToBlend = object.children[4].children[0].children[1].content
 					if object.children[5].content != "null": # Bones
-						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
 					loadedNode.animationBlendFraction = object.children[6].content
 					graphEdit.add_child(loadedNode)
 				"BSIsActiveModifier":
@@ -255,19 +249,7 @@ func _object_processing(object, graphEdit, connections):
 						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
-					print([
-						object.children[4].content, 
-						object.children[6].content, 
-						object.children[8].content, 
-						object.children[10].content, 
-						object.children[12].content, 
-						object.children[5].content, 
-						object.children[7].content, 
-						object.children[9].content, 
-						object.children[11].content, 
-						object.children[13].content])
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					loadedNode.bIsActiveArray	= [
 						string_to_bool(object.children[4].content), 
 						string_to_bool(object.children[6].content), 
@@ -291,31 +273,47 @@ func _object_processing(object, graphEdit, connections):
 					print("hkbManualSelectorGenerator loaded.")
 					var loadedNode = globalVariable.hkbManualSelectorGenerator.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # VariableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
-					#loadedNode.selectedGeneratorIndex					= node.selectedGeneratorIndex
-					#loadedNode.selectedIndexCanChangeAfterActivate 		= node.selectedIndexCanChangeAfterActivate
-					#loadedNode.generatorChangedTransitionEffect 		= node.generatorChangedTransitionEffect
+					if object.children[3].content != "null": # generators
+						for generator in object.children[3].content.split("#"):
+							if generator:
+								connections.append([1, int(object.attributes.name.replace("#","")), int(generator)])
+					loadedNode.selectedGeneratorIndex = int(object.children[4].content)
+					if object.children[5].content != "null": # indexSelector
+						connections.append([2, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
+					loadedNode.selectedIndexCanChangeAfterActivate 		= string_to_bool(object.children[6].content)
+					# TODO: Take into account the transition list.
+					#if object.children[7].content != "null": # generatorChangedTransitionEffect
+						#loadedNode.generatorChangedTransitionEffect 		= int(object.children[7].content.replace("#",""))
 					graphEdit.add_child(loadedNode)
 				"BSModifyOnceModifier":
 					print("BSModifyOnceModifier loaded.")
 					var loadedNode = globalVariable.BSModifyOnceModifier.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # VariableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
+					if object.children[4].content != "null": # pOnActivateModifier
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[4].content.replace("#",""))])
+					if object.children[5].content != "null": # pOnDeactivateModifier
+						connections.append([2, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
 				"hkbEvaluateExpressionModifier":
 					print("hkbEvaluateExpressionModifier loaded.")
 					var loadedNode = globalVariable.hkbEvaluateExpressionModifier.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # VariableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
+					if object.children[4].content != "null": # expressions
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[4].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
 				"hkbExpressionDataArray":
 					print("hkbExpressionDataArray loaded.")
@@ -329,8 +327,7 @@ func _object_processing(object, graphEdit, connections):
 					base_node_values(loadedNode, object)
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					#loadedNode.blendParameter = node.blendParameter
 					#loadedNode.blendSpeed = node.blendSpeed
 					#loadedNode.minSpeedToSwitch = node.minSpeedToSwitch
@@ -347,8 +344,7 @@ func _object_processing(object, graphEdit, connections):
 					base_node_values(loadedNode, object)
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					#loadedNode.blendParameter							= node.blendParameter
 					#loadedNode.maxCyclicBlendParameter					= node.maxCyclicBlendParameter
 					#loadedNode.indexOfSyncMasterChild					= node.indexOfSyncMasterChild
@@ -367,8 +363,7 @@ func _object_processing(object, graphEdit, connections):
 					base_node_values(loadedNode, object)
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					#loadedNode.animationName				 = node.animationName
 					#loadedNode.cropStartAmountLocalTime		 = node.cropStartAmountLocalTime
 					#loadedNode.cropEndAmountLocalTime		 = node.cropEndAmountLocalTime
@@ -393,8 +388,7 @@ func _object_processing(object, graphEdit, connections):
 					base_node_values(loadedNode, object)
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					#loadedNode.activateEventId 	 = node.activateEventId
 					#loadedNode.deactivateEventId = node.deactivateEventId
 					#loadedNode.activeByDefault	 = node.activeByDefault
@@ -405,8 +399,7 @@ func _object_processing(object, graphEdit, connections):
 					base_node_values(loadedNode, object)
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					#loadedNode.maxForce						= node.maxForce
 					#loadedNode.tau							= node.tau
 					#loadedNode.damping 						= node.damping
@@ -423,8 +416,7 @@ func _object_processing(object, graphEdit, connections):
 					base_node_values(loadedNode, object)
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					#loadedNode.alarmTimeSeconds		= node.alarmTimeSeconds
 					#loadedNode.eventId 				= node.eventId
 					#loadedNode.payload				= node.payload
@@ -437,8 +429,7 @@ func _object_processing(object, graphEdit, connections):
 					base_node_values(loadedNode, object)
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					#loadedNode.timeStep				= node.timeStep
 					graphEdit.add_child(loadedNode)
 				"hkbTwistModifier":
@@ -447,8 +438,7 @@ func _object_processing(object, graphEdit, connections):
 					base_node_values(loadedNode, object)
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					#loadedNode.axisOfRotation			 = node.axisOfRotation
 					#loadedNode.twistAngle				 = node.twistAngle
 					#loadedNode.startBoneIndex			 = node.startBoneIndex
@@ -463,8 +453,7 @@ func _object_processing(object, graphEdit, connections):
 					base_node_values(loadedNode, object)
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					loadedNode.source					 = object.children[4].content
 					loadedNode.target					 = object.children[5].content
 					loadedNode.result					 = object.children[6].content
@@ -476,8 +465,7 @@ func _object_processing(object, graphEdit, connections):
 					base_node_values(loadedNode, object)
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					loadedNode.inputValue				 = object.children[4].content
 					loadedNode.lowerBound				 = object.children[5].content
 					graphEdit.add_child(loadedNode)
@@ -536,8 +524,7 @@ func _object_processing(object, graphEdit, connections):
 					base_node_values(loadedNode, object)
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					#loadedNode.floatVariable		= node.floatVariable
 					#loadedNode.floatValue			= node.floatValue
 					#loadedNode.intVariable			= node.intVariable
@@ -556,8 +543,7 @@ func _object_processing(object, graphEdit, connections):
 					base_node_values(loadedNode, object)
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					if object.children[3].content == "false":
-						loadedNode.enable = false
+					loadedNode.enable = string_to_bool(object.children[3].content)
 					#loadedNode.alarmTimeSeconds		= node.alarmTimeSeconds
 					#loadedNode.resetAlarm			= node.resetAlarm
 					#loadedNode.eventId				= node.eventId
