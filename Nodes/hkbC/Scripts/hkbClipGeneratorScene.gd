@@ -8,7 +8,6 @@ var buttonToggled = false
 #hkbClipGenerator Values
 @export var nodeName = "ClipAnimation"
 @export var userData = 0
-@export var enable = true
 @export var animationName = ""
 @export var cropStartAmountLocalTime = "0.0"
 @export var cropEndAmountLocalTime = "0.0"
@@ -24,10 +23,6 @@ func _ready():
 	$DataPopupPanel/VBoxContainer/BaseNode/nodeIDSpinBox.value = nodeID
 	$Name.text = nodeName
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData/userDataButton.selected = userData
-	if enable:
-		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable/enableButton.selected = 1
-	else:
-		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable/enableButton.selected = 0
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/animationName/animationNameLine.text = animationName
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/cropStartAmountLocalTime/cropStartAmountLocalTimeLine.text = cropStartAmountLocalTime
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/cropEndAmountLocalTime/cropEndAmountLocalTimeLine.text = cropEndAmountLocalTime
@@ -78,12 +73,6 @@ func _on_name_text_changed(new_text):
 
 func _on_user_data_button_item_selected(index):
 	userData = index
-
-func _on_enable_button_item_selected(index):
-	if index == 1:
-		enable = true
-	else:
-		enable = false
 
 func _on_animation_name_line_text_changed(new_text):
 	animationName = new_text

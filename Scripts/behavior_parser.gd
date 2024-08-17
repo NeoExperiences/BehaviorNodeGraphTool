@@ -1384,9 +1384,9 @@ func _parse_hkbEventRangeDataArray(file, node, nodeExportIndex, transitionArrayL
 		file.store_string('                        <hkobject class="hkbEventProperty" name="event" signature="0xdb38a15">\r\n')
 		file.store_string('                            <hkparam name="id">' + str(rangeData.eventID) + '</hkparam>\r\n')
 		if rangeData.payloadID != null && rangeData.payloadID != -1:
-			file.store_string('                    <hkparam name="payload">#' + str(nodeExportIndex + rangeData.payloadID + transitionArrayLength) + '</hkparam>\r\n')
+			file.store_string('                            <hkparam name="payload">#' + str(nodeExportIndex + rangeData.payloadID + transitionArrayLength) + '</hkparam>\r\n')
 		else:
-			file.store_string('                    <hkparam name="payload">null</hkparam>\r\n')
+			file.store_string('                            <hkparam name="payload">null</hkparam>\r\n')
 		file.store_string('                        </hkobject>\r\n')
 		file.store_string('                    </hkparam>\r\n')
 		if rangeData.eventMode == 0:

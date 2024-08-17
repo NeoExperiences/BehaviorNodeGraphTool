@@ -58,6 +58,7 @@ initial_position = 1
 size = Vector2i(600, 400)
 ok_button_text = "Export"
 access = 2
+root_subfolder = "Export"
 filters = PackedStringArray("*.xml")
 
 [node name="ImportFileDialog" type="FileDialog" parent="."]
@@ -67,6 +68,7 @@ size = Vector2i(600, 400)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
+root_subfolder = "Export"
 filters = PackedStringArray("*.xml")
 
 [node name="ContextMenu" type="PopupMenu" parent="."]

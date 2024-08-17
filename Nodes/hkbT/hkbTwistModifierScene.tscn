@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://m70u4a3tjqad"]
 
-[ext_resource type="Script" path="res://Nodes/Scripts/hkbTwistModifierScene.gd" id="1_qlub4"]
-[ext_resource type="Texture2D" uid="uid://dtc4ja5slmyqt" path="res://Resources/ConfirmDeleteButton.png" id="2_1v58e"]
-[ext_resource type="Texture2D" uid="uid://dtrsj56jbquo8" path="res://Resources/PinButton.png" id="3_6yxcm"]
-[ext_resource type="Texture2D" uid="uid://csb3wjekhlmy1" path="res://Resources/UnpinButton.png" id="4_6s3y1"]
-[ext_resource type="Texture2D" uid="uid://jrafqhji2unw" path="res://Resources/DeleteButton.png" id="5_ii2lp"]
+[ext_resource type="Script" path="res://Nodes/hkbT/Scripts/hkbTwistModifierScene.gd" id="1_pvv6x"]
+[ext_resource type="Texture2D" uid="uid://dtc4ja5slmyqt" path="res://Resources/ConfirmDeleteButton.png" id="2_mjtcu"]
+[ext_resource type="Texture2D" uid="uid://dtrsj56jbquo8" path="res://Resources/PinButton.png" id="3_ik6uj"]
+[ext_resource type="Texture2D" uid="uid://csb3wjekhlmy1" path="res://Resources/UnpinButton.png" id="4_he5ju"]
+[ext_resource type="Texture2D" uid="uid://jrafqhji2unw" path="res://Resources/DeleteButton.png" id="5_gmn3d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y45yo"]
 content_margin_left = 5.0
@@ -49,7 +49,7 @@ slot/2/right_type = 0
 slot/2/right_color = Color(1, 1, 1, 1)
 slot/2/right_icon = null
 slot/2/draw_stylebox = true
-script = ExtResource("1_qlub4")
+script = ExtResource("1_pvv6x")
 
 [node name="connection" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -99,7 +99,7 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 toggle_mode = true
-texture_normal = ExtResource("2_1v58e")
+texture_normal = ExtResource("2_mjtcu")
 
 [node name="baseNodeLabel" type="Label" parent="DataPopupPanel/VBoxContainer/BaseNode"]
 custom_minimum_size = Vector2(0, 30)
@@ -131,13 +131,13 @@ rounded = true
 [node name="PinButton" type="TextureButton" parent="DataPopupPanel/VBoxContainer/BaseNode"]
 layout_mode = 2
 toggle_mode = true
-texture_normal = ExtResource("3_6yxcm")
-texture_pressed = ExtResource("4_6s3y1")
+texture_normal = ExtResource("3_ik6uj")
+texture_pressed = ExtResource("4_he5ju")
 
 [node name="DeleteButton" type="TextureButton" parent="DataPopupPanel/VBoxContainer/BaseNode"]
 layout_mode = 2
 toggle_mode = true
-texture_normal = ExtResource("5_ii2lp")
+texture_normal = ExtResource("5_gmn3d")
 
 [node name="PanelContainer" type="PanelContainer" parent="DataPopupPanel/VBoxContainer"]
 layout_mode = 2

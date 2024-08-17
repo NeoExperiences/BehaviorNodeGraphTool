@@ -8,7 +8,6 @@ var buttonToggled = false
 #hkbPoseMatchingGenerator Values
 @export var nodeName = "PoseMatchingGenerator"
 @export var userData = 0
-@export var enable = true
 @export var blendParameter = "0.0"
 @export var blendSpeed = "1.0"
 @export var minSpeedToSwitch = "0.20000000298023224"
@@ -24,10 +23,6 @@ func _ready():
 	$DataPopupPanel/VBoxContainer/BaseNode/nodeIDSpinBox.value = nodeID
 	$Name.text = nodeName
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData/userDataButton.selected = userData
-	if enable:
-		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable/enableButton.selected = 1
-	else:
-		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable/enableButton.selected = 0
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/blendParameter/blendParameterLine.text = blendParameter
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/blendSpeed/blendSpeedLine.text = blendSpeed
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/minSpeedToSwitch/minSpeedToSwitchLine.text = minSpeedToSwitch
@@ -78,12 +73,6 @@ func _on_name_text_changed(new_text):
 
 func _on_user_data_button_item_selected(index):
 	userData = index
-
-func _on_enable_button_item_selected(index):
-	if index == 1:
-		enable = true
-	else:
-		enable = false
 
 func _on_blend_parameter_line_text_changed(new_text):
 	blendParameter = new_text

@@ -137,7 +137,6 @@ func _on_transition_to_next_lower_state_event_id_spin_box_value_changed(value):
 func _on_sync_variable_index_spin_box_value_changed(value):
 	syncVariableIndex = int(value)
 
-
 func _on_event_to_send_payload_option_button_item_selected(index):
 	if index == 0:
 		payload = -1

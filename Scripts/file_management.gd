@@ -280,9 +280,8 @@ func _node_processing(node, graphEdit, nodeIndex):
 					print("hkbPoseMatchingGenerator loaded.")
 					var loadedNode = globalVariable.hkbPoseMatchingGenerator.instantiate()
 					base_node_values(loadedNode, node)
-					loadedNode.enable									= node.enable
-					loadedNode.nodeName									= node.nodeName
-					loadedNode.userData									= node.userData
+					loadedNode.nodeName = node.nodeName
+					loadedNode.userData = node.userData
 					loadedNode.blendParameter = node.blendParameter
 					loadedNode.blendSpeed = node.blendSpeed
 					loadedNode.minSpeedToSwitch = node.minSpeedToSwitch
@@ -297,7 +296,6 @@ func _node_processing(node, graphEdit, nodeIndex):
 					print("hkbBlenderGenerator loaded.")
 					var loadedNode = globalVariable.hkbBlenderGenerator.instantiate()
 					base_node_values(loadedNode, node)
-					loadedNode.enable									= node.enable
 					loadedNode.nodeName									= node.nodeName
 					loadedNode.userData									= node.userData
 					loadedNode.blendParameter							= node.blendParameter
@@ -316,7 +314,6 @@ func _node_processing(node, graphEdit, nodeIndex):
 					print("hkbClipGenerator loaded.")
 					var loadedNode = globalVariable.hkbClipGenerator.instantiate()
 					base_node_values(loadedNode, node)
-					loadedNode.enable						 = node.enable
 					loadedNode.nodeName						 = node.nodeName
 					loadedNode.userData						 = node.userData
 					loadedNode.animationName				 = node.animationName
@@ -363,6 +360,7 @@ func _node_processing(node, graphEdit, nodeIndex):
 					loadedNode.poseMatchingBone0 			= node.poseMatchingBone0
 					loadedNode.poseMatchingBone1 			= node.poseMatchingBone1
 					loadedNode.poseMatchingBone2 			= node.poseMatchingBone2
+					loadedNode.mode							= node.mode
 					loadedNode.animationBlendFraction		= node.animationBlendFraction
 					graphEdit.add_child(loadedNode)
 				30:
