@@ -10,33 +10,44 @@ func _load_XML(path, graphEdit):
 	import_values(rootNode.children[0].children[-3], rootNode.children[0].children[-2], rootNode.children[0].children[-1])
 	graphEdit.get_parent()._instantiate_global_values()
 	for object in rootNode.children[0].children:
-		print(object.attributes.name, " - ", object.attributes.class)
-		_object_processing(object, graphEdit, connections)
-		print("[")
-		var child_count = 0
-		for parameter in object.children:
-			print("	", " #", child_count," - " , parameter.attributes.name, " = ", parameter.content)
-			child_count += 1
-			#if parameter.attributes.name == "eventToSendWhenStateOrTransitionChanges":
-				#print("		", parameter.children[0].children[0].attributes.name, " = ", parameter.children[0].children[0].content)
-				#print("		", parameter.children[0].children[1].attributes.name, " = ", parameter.children[0].children[1].content)
-								#if parameter.attributes.has("name"):
-									#if parameter.attributes.name == "states":
-										#var connections = parameter.content.split("#")
-										#print("	", parameter.attributes.name, " = ")
-										#for state in connections:
-											#if state:
-												#print("	", state.strip_edges())
-									#else:
-										#print("	", parameter.attributes.name, " = ", parameter.content)
-								#elif parameter.attributes.has("numelements"):
-									#for subparameter in parameter.children:
-										#if subparameter.content == "":
-											#for subparameter2 in subparameter.children:
-												#print("		", subparameter2.attributes.name, " = ", subparameter2.content)
+		if object.attributes.class != "hkbBehaviorGraphData" and object.attributes.class != "hkbVariableValueSet" and object.attributes.class != "hkbBehaviorGraphStringData":
+			print(object.attributes.name, " - ", object.attributes.class)
+			_object_processing(object, graphEdit, connections)
+			print("[")
+			var child_count = 0
+			for parameter in object.children:
+				
+				print("	", " #", child_count," - " , parameter.attributes.name, " = ", parameter.content)
+				child_count += 1
+				
+				if parameter.attributes.name == "transitions":
+					var transition_count = 1
+					for transition in parameter.children:
+						print("			Transition #", transition_count)
+						for value in transition.children:
+							#print("		", transition.content)
+							child_count += 1
+							print("				", value.attributes.name, " = ", value.content)
+				#if parameter.attributes.name == "eventToSendWhenStateOrTransitionChanges":
+					#print("		", parameter.children[0].children[0].attributes.name, " = ", parameter.children[0].children[0].content)
+					#print("		", parameter.children[0].children[1].attributes.name, " = ", parameter.children[0].children[1].content)
+									#if parameter.attributes.has("name"):
+										#if parameter.attributes.name == "states":
+											#var connections = parameter.content.split("#")
+											#print("	", parameter.attributes.name, " = ")
+											#for state in connections:
+												#if state:
+													#print("	", state.strip_edges())
 										#else:
-											#print("		",subparameter.content)
-		print("]")
+											#print("	", parameter.attributes.name, " = ", parameter.content)
+									#elif parameter.attributes.has("numelements"):
+										#for subparameter in parameter.children:
+											#if subparameter.content == "":
+												#for subparameter2 in subparameter.children:
+													#print("		", subparameter2.attributes.name, " = ", subparameter2.content)
+											#else:
+												#print("		",subparameter.content)
+			print("]")
 	print("Connections: ", connections)
 	for connection in connections:
 		for from_node in graphEdit.get_children():
@@ -150,15 +161,23 @@ func _object_processing(object, graphEdit, connections):
 					print("hkbModifierList loaded.")
 					var loadedNode = globalVariable.hkbModifierList.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # VariableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					if object.children[3].content == "false":
 						loadedNode.enable = false
+					if object.children[4].content != "null": # modifiers
+						for modifier in object.children[4].content.split("#"):
+							if modifier:
+								connections.append([1, int(object.attributes.name.replace("#","")), int(modifier)])
 					graphEdit.add_child(loadedNode)
 				"hkbGetUpModifier":
 					print("hkbGetUpModifier loaded.")
 					var loadedNode = globalVariable.hkbGetUpModifier.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # VariableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					if object.children[3].content == "false":
@@ -174,55 +193,92 @@ func _object_processing(object, graphEdit, connections):
 					print("hkbKeyframeBonesModifier loaded.")
 					var loadedNode = globalVariable.hkbKeyframeBonesModifier.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # VariableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					if object.children[3].content == "false":
 						loadedNode.enable = false
+					if object.children[5].content != "null": # VariableBindingSet
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
 				"hkbBoneIndexArray":
 					print("hkbBoneIndexArray loaded.")
 					var loadedNode = globalVariable.hkbBoneIndexArray.instantiate()
 					base_node_values(loadedNode, object)
-					#loadedNode.boneIndices				= node.boneIndices
+					if object.children[1].content != "null": # boneIndices
+						for bone in object.children[1].content.replace("\r\n"," ").split(" "):
+							if bone:
+								loadedNode.boneIndices.append(int(bone))
 					graphEdit.add_child(loadedNode)
 				"hkbBoneWeightArray":
 					print("hkbBoneWeightArray loaded.")
 					var loadedNode = globalVariable.hkbBoneWeightArray.instantiate()
 					base_node_values(loadedNode, object)
-					#loadedNode.boneWeights				= node.boneWeights
+					if object.children[1].content != "null": # boneWeights
+						for bone in object.children[1].content.replace("\r\n"," ").split(" "):
+							if bone:
+								loadedNode.boneWeights.append(bone)
 					graphEdit.add_child(loadedNode)
 				"hkbRigidBodyRagdollControlsModifier":
 					print("hkbRigidBodyRagdollControlsModifier loaded.")
 					var loadedNode = globalVariable.hkbRigidBodyRagdollControlsModifier.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # VariableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					if object.children[3].content == "false":
 						loadedNode.enable = false
-					#loadedNode.hierarchyGain = node.hierarchyGain
-					#loadedNode.velocityDamping = node.velocityDamping
-					#loadedNode.accelerationGain = node.accelerationGain
-					#loadedNode.velocityGain = node.velocityGain
-					#loadedNode.positionGain = node.positionGain
-					#loadedNode.positionMaxLinearVelocity = node.positionMaxLinearVelocity
-					#loadedNode.positionMaxAngularVelocity = node.positionMaxAngularVelocity
-					#loadedNode.snapGain = node.snapGain
-					#loadedNode.snapMaxLinearVelocity = node.snapMaxLinearVelocity
-					#loadedNode.snapMaxAngularVelocity = node.snapMaxAngularVelocity
-					#loadedNode.snapMaxLinearDistance = node.snapMaxLinearDistance
-					#loadedNode.snapMaxAngularDistance = node.snapMaxAngularDistance
-					#loadedNode.durationToBlend = node.durationToBlend
-					#loadedNode.animationBlendFraction = node.animationBlendFraction
+					loadedNode.hierarchyGain = object.children[4].children[0].children[0].children[0].children[0].content
+					loadedNode.velocityDamping = object.children[4].children[0].children[0].children[0].children[1].content
+					loadedNode.accelerationGain = object.children[4].children[0].children[0].children[0].children[2].content
+					loadedNode.velocityGain = object.children[4].children[0].children[0].children[0].children[3].content
+					loadedNode.positionGain = object.children[4].children[0].children[0].children[0].children[4].content
+					loadedNode.positionMaxLinearVelocity = object.children[4].children[0].children[0].children[0].children[5].content
+					loadedNode.positionMaxAngularVelocity = object.children[4].children[0].children[0].children[0].children[6].content
+					loadedNode.snapGain = object.children[4].children[0].children[0].children[0].children[7].content
+					loadedNode.snapMaxLinearVelocity = object.children[4].children[0].children[0].children[0].children[8].content
+					loadedNode.snapMaxAngularVelocity = object.children[4].children[0].children[0].children[0].children[9].content
+					loadedNode.snapMaxLinearDistance = object.children[4].children[0].children[0].children[0].children[10].content
+					loadedNode.snapMaxAngularDistance = object.children[4].children[0].children[0].children[0].children[11].content
+					loadedNode.durationToBlend = object.children[4].children[0].children[1].content
+					if object.children[5].content != "null": # Bones
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
+					loadedNode.animationBlendFraction = object.children[6].content
 					graphEdit.add_child(loadedNode)
 				"BSIsActiveModifier":
 					print("BSIsActiveModifier loaded.")
 					var loadedNode = globalVariable.BSIsActiveModifier.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # VariableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					if object.children[3].content == "false":
 						loadedNode.enable = false
-					#loadedNode.bIsActiveArray		= node.bIsActiveArray
+					print([
+						object.children[4].content, 
+						object.children[6].content, 
+						object.children[8].content, 
+						object.children[10].content, 
+						object.children[12].content, 
+						object.children[5].content, 
+						object.children[7].content, 
+						object.children[9].content, 
+						object.children[11].content, 
+						object.children[13].content])
+					loadedNode.bIsActiveArray	= [
+						string_to_bool(object.children[4].content), 
+						string_to_bool(object.children[6].content), 
+						string_to_bool(object.children[8].content), 
+						string_to_bool(object.children[10].content), 
+						string_to_bool(object.children[12].content), 
+						string_to_bool(object.children[5].content), 
+						string_to_bool(object.children[7].content), 
+						string_to_bool(object.children[9].content), 
+						string_to_bool(object.children[11].content), 
+						string_to_bool(object.children[13].content)]
 					graphEdit.add_child(loadedNode)
 				"hkbVariableBindingSet":
 					print("hkbVariableBindingSet loaded.")
@@ -601,3 +657,9 @@ func import_values(hkbBehaviorGraphData, hkbVariableValueSet, hkbBehaviorGraphSt
 	print(hkbBehaviorGraphStringData.children[0].attributes.name, " = ", hkbBehaviorGraphStringData.children[0].attributes.numelements)
 	for event in hkbBehaviorGraphStringData.children[0].children:
 		print(event.content)
+
+func string_to_bool(string):
+	if string == "true":
+		return true
+	else:
+		return false

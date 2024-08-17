@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://r60popcpc74t"]
 
-[ext_resource type="Script" path="res://Nodes/Children/RangeScene.gd" id="1_levkt"]
+[ext_resource type="Script" path="res://Nodes/Children/Scripts/RangeScene.gd" id="1_levkt"]
 [ext_resource type="Script" path="res://Nodes/Children/Scripts/eventsOptionButton.gd" id="2_0vuxh"]
 [ext_resource type="Script" path="res://Nodes/Children/Scripts/payloadOptionButton.gd" id="3_5x7kd"]
 

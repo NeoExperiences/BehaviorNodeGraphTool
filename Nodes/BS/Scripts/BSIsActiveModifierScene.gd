@@ -124,7 +124,7 @@ func _on_b_is_active_1_button_item_selected(index):
 
 func _on_b_is_active_2_button_item_selected(index):
 	if index == 1:
-		bIsActiveArray[1] = true
+		bIsActiveArray[2] = true
 	else:
 		bIsActiveArray[2] = false
 
