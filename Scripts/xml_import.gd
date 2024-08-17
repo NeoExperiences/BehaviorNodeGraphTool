@@ -5,10 +5,10 @@ func _load_XML(path, graphEdit):
 	var rootNode = parsedFile.root
 	var connections = []
 	print("Root Node: ", rootNode.attributes)
-	import_transitions(rootNode.children[0].children)
-	import_payload(rootNode.children[0].children)
-	import_values(rootNode.children[0].children[-3], rootNode.children[0].children[-2], rootNode.children[0].children[-1])
-	graphEdit.get_parent()._instantiate_global_values()
+	#import_transitions(rootNode.children[0].children)
+	#import_payload(rootNode.children[0].children)
+	#import_values(rootNode.children[0].children[-3], rootNode.children[0].children[-2], rootNode.children[0].children[-1])
+	#graphEdit.get_parent()._instantiate_global_values()
 	for object in rootNode.children[0].children:
 		if object.attributes.class != "hkbBehaviorGraphData" and object.attributes.class != "hkbVariableValueSet" and object.attributes.class != "hkbBehaviorGraphStringData":
 			print(object.attributes.name, " - ", object.attributes.class)
@@ -462,6 +462,8 @@ func _object_processing(object, graphEdit, connections):
 					print("BSGetTimeStepModifier loaded.")
 					var loadedNode = globalVariable.BSGetTimeStepModifier.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					loadedNode.enable = string_to_bool(object.children[3].content)

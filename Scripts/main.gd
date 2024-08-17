@@ -519,6 +519,7 @@ func _on_import_file_dialog_file_selected(path):
 	_clean_up_graph()
 	xmlImportScript._load_XML(path, $GraphEdit)
 	$GraphEdit.arrange_nodes()
+	$AlphaImportingDialog.show()
 
 # Behavior Info Menus
 func _on_variables_button_toggled(toggled_on):

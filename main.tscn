@@ -20,7 +20,7 @@ grow_vertical = 2
 script = ExtResource("1_0j202")
 
 [node name="AcceptDialog" type="AcceptDialog" parent="."]
-title = "Behavior Graphing Tool Ver. 0.1.1 Open Alpha"
+title = "Behavior Graphing Tool Ver. 0.1.3 Open Alpha"
 initial_position = 1
 size = Vector2i(500, 300)
 unresizable = true
@@ -29,6 +29,15 @@ dialog_text = "This is an Alpha Release of the Behavior Node Graph Tool.
 Please send proper feedback and bug reports to @NeoExperiences or to my personal email at dantebumer@gmail.com.
 Been working on this tool for the past year, but been doing most of the heavy lifting during winter vacations. Development will slow down on the coming weeks due to college taking most of my time once again.
 Close this window to continue working."
+dialog_autowrap = true
+
+[node name="AlphaImportingDialog" type="AcceptDialog" parent="."]
+title = "Importing Feature"
+initial_position = 1
+size = Vector2i(500, 106)
+unresizable = true
+ok_button_text = "Accept"
+dialog_text = "This feature is still incomplete and won't import all graph data and connections yet."
 dialog_autowrap = true
 
 [node name="NewFileConfirmationDialog" type="ConfirmationDialog" parent="."]
