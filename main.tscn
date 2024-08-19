@@ -37,7 +37,8 @@ initial_position = 1
 size = Vector2i(500, 106)
 unresizable = true
 ok_button_text = "Accept"
-dialog_text = "This feature is still incomplete and won't import all graph data and connections yet."
+dialog_text = "This feature is still incomplete and won't import all graph data and connections yet.
+"
 dialog_autowrap = true
 
 [node name="NewFileConfirmationDialog" type="ConfirmationDialog" parent="."]

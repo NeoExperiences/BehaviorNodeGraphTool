@@ -1057,7 +1057,8 @@ func _parse_hkbClipTriggerArray(file, node, nodeExportIndex, transitionArrayLeng
 func _parse_hkbBlendingTransitionEffect(file, transition, nodeExportIndex): # Done
 	file.store_string('        <hkobject class="hkbBlendingTransitionEffect" name="#' + str(nodeExportIndex) + '" signature="0x14e54c5c">\r\n')
 	file.store_string('            <!-- memSizeAndRefCount SERIALIZE_IGNORED -->\r\n')
-	if transition.transitionVariableBindingSet != null && transition.transitionVariableBindingSet != 0:
+	
+	if int(transition.transitionVariableBindingSet) != null && int(transition.transitionVariableBindingSet) != 0:
 		file.store_string('            <hkparam name="variableBindingSet">#' + str(transition.transitionVariableBindingSet) + '</hkparam>\r\n')
 	else:
 		file.store_string('            <hkparam name="variableBindingSet">null</hkparam>\r\n')

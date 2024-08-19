@@ -16,7 +16,12 @@ var initiateInterval = [-1, -1, 0.0, 0.0]
 
 
 func _ready():
-	$transitionContainer/dataContainer/eventId/eventIdSpinBox.value = eventId
+	#$transitionContainer/dataContainer/eventId/eventIdSpinBox.value = eventId
+	$transitionContainer/dataContainer/eventId/eventIdOptionButton._updateEvents()
+	if eventId == -1:
+		$transitionContainer/dataContainer/eventId/eventIdOptionButton.selected = 0
+	else:
+		$transitionContainer/dataContainer/eventId/eventIdOptionButton.selected = eventId + 1
 	$transitionContainer/dataContainer/toStateId/toStateIdSpinBox.value = toStateId
 	$transitionContainer/dataContainer/fromNestedStateID/fromNestedStateIDSpinBox.value = fromNestedStateId
 	$transitionContainer/dataContainer/toNestedStateId/toNestedStateIdSpinBox.value = toNestedStateId
@@ -28,8 +33,15 @@ func _ready():
 func _update_name():
 	$transitionContainer/PanelContainer/TransitionNameLabel.text = "Transition #" + str(transitionIndex)
 
-func _on_event_id_spin_box_value_changed(value):
-	eventId = value
+#func _on_event_id_spin_box_value_changed(value):
+	#eventId = value
+	#_updated_values()
+
+func _on_event_id_option_button_item_selected(index):
+	if index == 0:
+		eventId = -1
+	else:
+		eventId = index - 1
 	_updated_values()
 
 func _on_to_state_id_spin_box_value_changed(value):
@@ -55,6 +67,7 @@ func _on_priority_spin_box_value_changed(value):
 func _update_transitions():
 	get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()._acquire_global_values()
 	$transitionContainer/dataContainer/transition/transitionButton.updateTransitions()
+	$transitionContainer/dataContainer/eventId/eventIdOptionButton._updateEvents()
 
 func _on_transition_button_item_selected(index):
 	transition = index

@@ -2,7 +2,7 @@ extends Panel
 
 var transitionID = 0
 var transitionName = ""
-var transitionVariableBindingSet = 0
+var transitionVariableBindingSet = ""
 var transitionSelfTransitionMode = 0
 var transitionEventMode = 0
 var transitionDuration = "0.0"

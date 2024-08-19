@@ -517,7 +517,18 @@ func _on_import_button_pressed():
 
 func _on_import_file_dialog_file_selected(path):
 	_clean_up_graph()
-	xmlImportScript._load_XML(path, $GraphEdit)
+	var unhandledNodes = []
+	var unhandledNodeDialog = ""
+	unhandledNodes = xmlImportScript._load_XML(path, $GraphEdit)
+	$AlphaImportingDialog.dialog_text = "This feature is still incomplete and won't import all graph data and connections yet."
+	for node in unhandledNodes:
+		if node != null:
+			if !unhandledNodeDialog:
+				unhandledNodeDialog = "\r\n\r\nThe following nodes weren't loaded: \r\n"
+			unhandledNodeDialog += node + "\r\n"
+	if unhandledNodeDialog:
+		$AlphaImportingDialog.dialog_text += unhandledNodeDialog
+		$AlphaImportingDialog.dialog_text += "Send the developer a message about it."
 	$GraphEdit.arrange_nodes()
 	$AlphaImportingDialog.show()
 

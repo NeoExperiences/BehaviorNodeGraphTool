@@ -4,22 +4,22 @@ func _load_XML(path, graphEdit):
 	var parsedFile = XML.parse_file(path)
 	var rootNode = parsedFile.root
 	var connections = []
+	var unhandledNodes = []
 	print("Root Node: ", rootNode.attributes)
-	#import_transitions(rootNode.children[0].children)
-	#import_payload(rootNode.children[0].children)
-	#import_values(rootNode.children[0].children[-3], rootNode.children[0].children[-2], rootNode.children[0].children[-1])
-	#graphEdit.get_parent()._instantiate_global_values()
+	import_transitions(rootNode.children[0].children)
+	import_payload(rootNode.children[0].children)
+	import_values(rootNode.children[0].children[-3], rootNode.children[0].children[-2], rootNode.children[0].children[-1])
+	graphEdit.get_parent()._instantiate_global_values()
+	print(globalVariable.globalEventList)
 	for object in rootNode.children[0].children:
 		if object.attributes.class != "hkbBehaviorGraphData" and object.attributes.class != "hkbVariableValueSet" and object.attributes.class != "hkbBehaviorGraphStringData":
-			print(object.attributes.name, " - ", object.attributes.class)
-			_object_processing(object, graphEdit, connections)
-			print("[")
+			#print(object.attributes.name, " - ", object.attributes.class)
+			unhandledNodes.append(_object_processing(object, graphEdit, connections))
+			#print("[")
 			var child_count = 0
 			for parameter in object.children:
-				
-				print("	", " #", child_count," - " , parameter.attributes.name, " = ", parameter.content)
+				#print("	", " #", child_count," - " , parameter.attributes.name, " = ", parameter.content)
 				child_count += 1
-				
 				if parameter.attributes.name == "transitions":
 					var transition_count = 1
 					for transition in parameter.children:
@@ -47,7 +47,7 @@ func _load_XML(path, graphEdit):
 													#print("		", subparameter2.attributes.name, " = ", subparameter2.content)
 											#else:
 												#print("		",subparameter.content)
-			print("]")
+			#print("]")
 	print("Connections: ", connections)
 	for connection in connections:
 		for from_node in graphEdit.get_children():
@@ -55,6 +55,7 @@ func _load_XML(path, graphEdit):
 				for to_node in graphEdit.get_children():
 					if to_node.get("nodeID") == connection[2]:
 						graphEdit.connect_node(str(from_node.name), connection[0], str(to_node.name), 0)
+	return unhandledNodes
 
 func _object_processing(object, graphEdit, connections):
 			match object.attributes.class:
@@ -378,6 +379,8 @@ func _object_processing(object, graphEdit, connections):
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					loadedNode.animationName				 = object.children[4].content
+					if object.children[5].content != "null": # triggers
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
 					loadedNode.cropStartAmountLocalTime		 = object.children[7].content
 					loadedNode.cropEndAmountLocalTime		 = object.children[8].content
 					loadedNode.startTime					 = object.children[9].content
@@ -456,7 +459,7 @@ func _object_processing(object, graphEdit, connections):
 					#loadedNode.eventId 				= node.eventId
 					#loadedNode.payload					= node.payload
 					graphEdit.add_child(loadedNode)
-				31:
+				"BSLookAtModifier":
 					print("BSLookAtModifier loaded.")
 				"BSGetTimeStepModifier":
 					print("BSGetTimeStepModifier loaded.")
@@ -598,6 +601,8 @@ func _object_processing(object, graphEdit, connections):
 					#loadedNode.blendOutDuration			= node.blendOutDuration
 					#loadedNode.syncToGeneratorStartTime	= node.syncToGeneratorStartTime
 					graphEdit.add_child(loadedNode)
+				"hkbStringEventPayload":
+					print("hkbStringEventPayload loaded.")
 				"hkbReferencePoseGenerator":
 					print("hkbReferencePoseGenerator loaded.")
 					var loadedNode = globalVariable.hkbReferencePoseGenerator.instantiate()
@@ -605,6 +610,8 @@ func _object_processing(object, graphEdit, connections):
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					graphEdit.add_child(loadedNode)
+				_:
+					return object.attributes.name + " - " + object.attributes.class
 
 func base_node_values(loadedNode, object):
 	loadedNode.title += ' - ' + str(object.attributes.name)
@@ -673,13 +680,28 @@ func import_payload(objectList):
 			globalVariable.globalPayloadList.append(payloadData)
 
 func import_values(hkbBehaviorGraphData, hkbVariableValueSet, hkbBehaviorGraphStringData):
+	globalVariable.globalEventList = []
+	for eventNum in range(int(hkbBehaviorGraphData.children[3].attributes.numelements)):
+		var eventData = {
+				"eventID": eventNum,
+				"eventName": hkbBehaviorGraphStringData.children[0].children[eventNum].content,
+				"eventFlags": 0,
+			}
+		if hkbBehaviorGraphData.children[3].children[eventNum].children[0].content == "FLAG_SYNC_POINT":
+			eventData.eventFlags = 1
+		globalVariable.globalEventList.append(eventData)
+		#print(hkbBehaviorGraphStringData.children[0].children[eventNum].content + " - " + hkbBehaviorGraphData.children[3].children[eventNum].children[0].content)
+	
 	
 	print(hkbBehaviorGraphData.attributes.name, " - ", hkbBehaviorGraphData.attributes.class)
+	#print(hkbBehaviorGraphData.children[3].attributes.name, " = ", hkbBehaviorGraphData.children[3].attributes.numelements)
+	#for eventInfo in hkbBehaviorGraphData.children[3].children:
+		#print(eventInfo.children[0].content)
 	print(hkbVariableValueSet.attributes.name, " - ", hkbVariableValueSet.attributes.class)
 	print(hkbBehaviorGraphStringData.attributes.name, " - ", hkbBehaviorGraphStringData.attributes.class)
-	print(hkbBehaviorGraphStringData.children[0].attributes.name, " = ", hkbBehaviorGraphStringData.children[0].attributes.numelements)
-	for event in hkbBehaviorGraphStringData.children[0].children:
-		print(event.content)
+	#print(hkbBehaviorGraphStringData.children[0].attributes.name, " = ", hkbBehaviorGraphStringData.children[0].attributes.numelements)
+	#for event in hkbBehaviorGraphStringData.children[0].children:
+		#print(event.content)
 
 func string_to_bool(string):
 	if string == "true":

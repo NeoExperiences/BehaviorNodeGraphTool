@@ -42,6 +42,7 @@ layout_mode = 2
 [node name="VariableBindingSetLine" type="LineEdit" parent="ValuesRowContainer/VariableBindingSetContainer"]
 layout_mode = 2
 placeholder_text = "null"
+virtual_keyboard_type = 2
 
 [node name="SelfTransitionContainer" type="PanelContainer" parent="ValuesRowContainer"]
 layout_mode = 2
