@@ -26,13 +26,22 @@ func _ready():
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/blendParameter/blendParameterLine.text = blendParameter
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/blendSpeed/blendSpeedLine.text = blendSpeed
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/minSpeedToSwitch/minSpeedToSwitchLine.text = minSpeedToSwitch
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId/startPlayingEventIdSpinBox.value = startPlayingEventId
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId/startMatchingEventIdSpinBox.value = startMatchingEventId
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId/startPlayingEventIdOptionButton._updateEvents()
+	if startPlayingEventId == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId/startPlayingEventIdOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId/startPlayingEventIdOptionButton.selected = startPlayingEventId + 1
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId/startMatchingEventIdOptionButton._updateEvents()
+	if startMatchingEventId == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId/startMatchingEventIdOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId/startMatchingEventIdOptionButton.selected = startMatchingEventId + 1
+	#$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId/startPlayingEventIdSpinBox.value = startPlayingEventId
+	#$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId/startMatchingEventIdSpinBox.value = startMatchingEventId
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/rootBoneIndex/rootBoneIndexSpinBox.value = rootBoneIndex
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/otherBoneIndex/otherBoneIndexSpinBox.value = otherBoneIndex
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/anotherBoneIndex/anotherBoneIndexSpinBox.value = anotherBoneIndex
 	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/pelvisIndex/pelvisIndexSpinBox.value = pelvisIndex
-	
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.double_click:
@@ -108,3 +117,16 @@ func _on_another_bone_index_spin_box_value_changed(value):
 
 func _on_pelvis_index_spin_box_value_changed(value):
 	pelvisIndex = value
+
+
+func _on_start_playing_event_id_option_button_item_selected(index):
+	pass # Replace with function body.
+
+
+func _on_start_matching_event_id_option_button_item_selected(index):
+	pass # Replace with function body.
+
+
+func _on_update_events_button_pressed():
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId/startPlayingEventIdOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId/startMatchingEventIdOptionButton._updateEvents()

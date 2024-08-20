@@ -84,12 +84,12 @@ func _object_processing(object, graphEdit, connections):
 					if object.children[4].content != "null":
 						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[4].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
-				#"hkbBehaviorGraphData":
-					#print("hkbBehaviorGraphData loaded.")
-				#"hkbVariableValueSet":
-					#print("hkbVariableValueSet loaded.")
-				#"hkbBehaviorGraphStringData":
-					#print("hkbBehaviorGraphStringData loaded.")
+				"hkbBehaviorGraphData":
+					print("hkbBehaviorGraphData loaded.")
+				"hkbVariableValueSet":
+					print("hkbVariableValueSet loaded.")
+				"hkbBehaviorGraphStringData":
+					print("hkbBehaviorGraphStringData loaded.")
 				"hkbStateMachine":
 					print("hkbStateMachine loaded.")
 					var loadedNode = globalVariable.hkbStateMachine.instantiate()

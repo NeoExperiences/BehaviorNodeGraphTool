@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c27c8pmv0xl2u"]
+[gd_scene load_steps=8 format=3 uid="uid://c27c8pmv0xl2u"]
 
 [ext_resource type="Script" path="res://Nodes/hkbP/Scripts/hkbPoseMatchingGeneratorScene.gd" id="1_266p2"]
 [ext_resource type="Texture2D" uid="uid://dtc4ja5slmyqt" path="res://Resources/ConfirmDeleteButton.png" id="2_pij0a"]
 [ext_resource type="Texture2D" uid="uid://dtrsj56jbquo8" path="res://Resources/PinButton.png" id="3_olm7o"]
 [ext_resource type="Texture2D" uid="uid://csb3wjekhlmy1" path="res://Resources/UnpinButton.png" id="4_5qgcn"]
 [ext_resource type="Texture2D" uid="uid://jrafqhji2unw" path="res://Resources/DeleteButton.png" id="5_tpwiq"]
+[ext_resource type="Script" path="res://Nodes/hkbS/Scripts/eventToSendidOptionButton.gd" id="6_ipjhu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y45yo"]
 content_margin_left = 5.0
@@ -96,15 +97,15 @@ placeholder_text = "Name"
 [node name="DataPopupPanel" type="PopupPanel" parent="."]
 transparent_bg = true
 initial_position = 1
-size = Vector2i(489, 391)
+size = Vector2i(506, 427)
 borderless = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_y45yo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DataPopupPanel"]
 offset_left = 5.0
 offset_top = 5.0
-offset_right = 484.0
-offset_bottom = 386.0
+offset_right = 501.0
+offset_bottom = 422.0
 
 [node name="BaseNode" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer"]
 layout_mode = 2
@@ -158,6 +159,22 @@ layout_mode = 2
 
 [node name="FoldingPanel" type="VBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer"]
 layout_mode = 2
+
+[node name="UpdateEvents" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Space2" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/UpdateEvents"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="updateEventsButton" type="Button" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/UpdateEvents"]
+custom_minimum_size = Vector2(420, 32)
+layout_mode = 2
+text = "Update Event Data"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/UpdateEvents"]
+layout_mode = 2
+size_flags_horizontal = 6
 
 [node name="userData" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 layout_mode = 2
@@ -248,32 +265,76 @@ max_length = 20
 [node name="startPlayingEventId" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId"]
+[node name="idLabel" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId"]
+layout_mode = 2
+text = "   startPlayingEventId
+"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="startPlayingEventIdOptionButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("6_ipjhu")
+
+[node name="startPlayingEventIdOld" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventIdOld"]
 layout_mode = 2
 text = "   startPlayingEventId"
 
-[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId"]
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventIdOld"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="startPlayingEventIdSpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId"]
+[node name="startPlayingEventIdSpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventIdOld"]
 layout_mode = 2
 rounded = true
 
 [node name="startMatchingEventId" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId"]
+[node name="idLabel" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId"]
+layout_mode = 2
+text = "   startPlayingEventId
+"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="startMatchingEventIdOptionButton" type="OptionButton" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("6_ipjhu")
+
+[node name="startMatchingEventIdOld" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventIdOld"]
 layout_mode = 2
 text = "   startMatchingEventId"
 
-[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId"]
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventIdOld"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="startMatchingEventIdSpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId"]
+[node name="startMatchingEventIdSpinBox" type="SpinBox" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventIdOld"]
 layout_mode = 2
 rounded = true
 
@@ -349,12 +410,15 @@ rounded = true
 [connection signal="value_changed" from="DataPopupPanel/VBoxContainer/BaseNode/nodeIDSpinBox" to="." method="_on_node_id_spin_box_value_changed"]
 [connection signal="toggled" from="DataPopupPanel/VBoxContainer/BaseNode/PinButton" to="." method="_on_pin_button_toggled"]
 [connection signal="pressed" from="DataPopupPanel/VBoxContainer/BaseNode/DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="pressed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/UpdateEvents/updateEventsButton" to="." method="_on_update_events_button_pressed"]
 [connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData/userDataButton" to="." method="_on_user_data_button_item_selected"]
 [connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/blendParameter/blendParameterLine" to="." method="_on_blend_parameter_line_text_changed"]
 [connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/blendSpeed/blendSpeedLine" to="." method="_on_blend_speed_line_text_changed"]
 [connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/minSpeedToSwitch/minSpeedToSwitchLine" to="." method="_on_min_speed_to_switch_line_text_changed"]
-[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId/startPlayingEventIdSpinBox" to="." method="_on_start_playing_event_id_spin_box_value_changed"]
-[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId/startMatchingEventIdSpinBox" to="." method="_on_start_matching_event_id_spin_box_value_changed"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventId/startPlayingEventIdOptionButton" to="." method="_on_start_playing_event_id_option_button_item_selected"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startPlayingEventIdOld/startPlayingEventIdSpinBox" to="." method="_on_start_playing_event_id_spin_box_value_changed"]
+[connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventId/startMatchingEventIdOptionButton" to="." method="_on_start_matching_event_id_option_button_item_selected"]
+[connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/startMatchingEventIdOld/startMatchingEventIdSpinBox" to="." method="_on_start_matching_event_id_spin_box_value_changed"]
 [connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/rootBoneIndex/rootBoneIndexSpinBox" to="." method="_on_root_bone_index_spin_box_value_changed"]
 [connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/otherBoneIndex/otherBoneIndexSpinBox" to="." method="_on_other_bone_index_spin_box_value_changed"]
 [connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/anotherBoneIndex/anotherBoneIndexSpinBox" to="." method="_on_another_bone_index_spin_box_value_changed"]
