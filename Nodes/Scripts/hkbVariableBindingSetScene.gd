@@ -95,3 +95,6 @@ func _load_bindings(memberPath, variableIndex, bindingType):
 	newBinding._update_name()
 	bindingContainer.add_child(newBinding)
 
+func _on_update_variables_button_pressed():
+	for child in bindingContainer.get_children():
+		child._update_variable_button()

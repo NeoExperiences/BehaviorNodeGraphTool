@@ -12,13 +12,14 @@ func _load_XML(path, graphEdit):
 	graphEdit.get_parent()._instantiate_global_values()
 	print(globalVariable.globalEventList)
 	for object in rootNode.children[0].children:
-		if object.attributes.class != "hkbBehaviorGraphData" and object.attributes.class != "hkbVariableValueSet" and object.attributes.class != "hkbBehaviorGraphStringData":
-			#print(object.attributes.name, " - ", object.attributes.class)
+		if true:
+		#if object.attributes.class != "hkbBehaviorGraphData" and object.attributes.class != "hkbVariableValueSet" and object.attributes.class != "hkbBehaviorGraphStringData":
+			print(object.attributes.name, " - ", object.attributes.class)
 			unhandledNodes.append(_object_processing(object, graphEdit, connections))
-			#print("[")
+			print("[")
 			var child_count = 0
 			for parameter in object.children:
-				#print("	", " #", child_count," - " , parameter.attributes.name, " = ", parameter.content)
+				print("	", " #", child_count," - " , parameter.attributes.name, " = ", parameter.content)
 				child_count += 1
 				if parameter.attributes.name == "transitions":
 					var transition_count = 1
@@ -28,6 +29,13 @@ func _load_XML(path, graphEdit):
 							#print("		", transition.content)
 							child_count += 1
 							print("				", value.attributes.name, " = ", value.content)
+				if parameter.attributes.has("numelements"):
+					for subparameter in parameter.children:
+						if subparameter.content == "":
+							for subparameter2 in subparameter.children:
+								print("		", subparameter2.attributes.name, " = ", subparameter2.content)
+						else:
+							print("		",subparameter.content)
 				#if parameter.attributes.name == "eventToSendWhenStateOrTransitionChanges":
 					#print("		", parameter.children[0].children[0].attributes.name, " = ", parameter.children[0].children[0].content)
 					#print("		", parameter.children[0].children[1].attributes.name, " = ", parameter.children[0].children[1].content)
@@ -47,7 +55,7 @@ func _load_XML(path, graphEdit):
 													#print("		", subparameter2.attributes.name, " = ", subparameter2.content)
 											#else:
 												#print("		",subparameter.content)
-			#print("]")
+			print("]")
 	print("Connections: ", connections)
 	for connection in connections:
 		for from_node in graphEdit.get_children():
@@ -681,17 +689,38 @@ func import_payload(objectList):
 
 func import_values(hkbBehaviorGraphData, hkbVariableValueSet, hkbBehaviorGraphStringData):
 	globalVariable.globalEventList = []
-	for eventNum in range(int(hkbBehaviorGraphData.children[3].attributes.numelements)):
-		var eventData = {
-				"eventID": eventNum,
-				"eventName": hkbBehaviorGraphStringData.children[0].children[eventNum].content,
-				"eventFlags": 0,
-			}
-		if hkbBehaviorGraphData.children[3].children[eventNum].children[0].content == "FLAG_SYNC_POINT":
-			eventData.eventFlags = 1
-		globalVariable.globalEventList.append(eventData)
-		#print(hkbBehaviorGraphStringData.children[0].children[eventNum].content + " - " + hkbBehaviorGraphData.children[3].children[eventNum].children[0].content)
-	
+	#print(hkbBehaviorGraphData.children[3].attributes.numelements)
+	#if hkbBehaviorGraphData.children[3].attributes.numelements
+	if hkbBehaviorGraphData.children[3].attributes.has("numelements"):
+		print("Event Number: ",hkbBehaviorGraphData.children[3].attributes.numelements)
+		for eventNum in range(int(hkbBehaviorGraphData.children[3].attributes.numelements)):
+			var eventData = {
+					"eventID": eventNum,
+					"eventName": hkbBehaviorGraphStringData.children[0].children[eventNum].content,
+					"eventFlags": 0,
+				}
+			if hkbBehaviorGraphData.children[3].children[eventNum].children[0].content == "FLAG_SYNC_POINT":
+				eventData.eventFlags = 1
+			globalVariable.globalEventList.append(eventData)
+			#print(hkbBehaviorGraphStringData.children[0].children[eventNum].content + " - " + hkbBehaviorGraphData.children[3].children[eventNum].children[0].content)
+	globalVariable.globalVariableList = []
+	print(hkbBehaviorGraphData.children[1].content)
+	if hkbBehaviorGraphData.children[1].attributes.has("numelements"):
+		print("Variable Number: ",hkbBehaviorGraphData.children[1].attributes.numelements)
+		for variableNum in range(int(hkbBehaviorGraphData.children[1].attributes.numelements)):
+			var variableData = {
+					"variableID": variableNum,
+					"variableName": hkbBehaviorGraphStringData.children[2].children[variableNum].content,
+					"variableType": 0,
+					"variableValue": "0",
+					"variableMinValue": "0",
+					"variableMaxValue": "0",
+					"variableQuadValues": "(0.0 0.0 0.0 0.0)"
+				}
+			#if hkbBehaviorGraphData.children[1].children[variableNum].children[0].content == "FLAG_SYNC_POINT":
+				#variableData.eventFlags = 1
+			print(variableData.variableID + " - " + variableData.variableName)
+			globalVariable.globalVariableList.append(variableData)
 	
 	print(hkbBehaviorGraphData.attributes.name, " - ", hkbBehaviorGraphData.attributes.class)
 	#print(hkbBehaviorGraphData.children[3].attributes.name, " = ", hkbBehaviorGraphData.children[3].attributes.numelements)

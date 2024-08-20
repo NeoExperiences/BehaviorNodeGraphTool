@@ -8,8 +8,13 @@ var bindingType = "BINDING_TYPE_VARIABLE"
 
 func _ready():
 	_update_name()
+	$bindingContainer/dataContainer/variableIndex/variableIndexOptionButton._updateVariables()
+	if variableIndex == -1:
+		$bindingContainer/dataContainer/variableIndex/variableIndexOptionButton.selected = variableIndex + 1
+	else:
+		$bindingContainer/dataContainer/variableIndex/variableIndexOptionButton.selected = variableIndex + 0
 	$bindingContainer/dataContainer/memberPath/memberPathLineEdit.text = memberPath
-	$bindingContainer/dataContainer/variableIndex/variableIndexSpinBox.value = variableIndex
+	#$bindingContainer/dataContainer/variableIndex/variableIndexSpinBox.value = variableIndex
 	if bindingType == "BINDING_TYPE_VARIABLE":
 		$bindingContainer/dataContainer/bindingType/bindingTypeButton.selected = 0
 	else:
@@ -25,9 +30,9 @@ func _on_member_path_line_edit_text_changed(new_text):
 	memberPath = new_text
 	update_values()
 
-func _on_variable_index_spin_box_value_changed(value):
-	variableIndex = value
-	update_values()
+#func _on_variable_index_spin_box_value_changed(value):
+	#variableIndex = value
+	#update_values()
 
 func _on_binding_type_button_item_selected(index):
 	if index == 0:
@@ -44,3 +49,13 @@ func _on_show_button_pressed():
 		$bindingContainer/dataContainer.visible = 0
 		$bindingContainer/ShowButton.text = "Show Data"
 	get_parent().get_parent().reset_size()
+
+func _on_variable_index_option_button_item_selected(index):
+	if index == 0:
+		variableIndex = -1
+	else:
+		variableIndex = index - 1
+	update_values()
+
+func _update_variable_button():
+	$bindingContainer/dataContainer/variableIndex/variableIndexOptionButton._updateVariables()

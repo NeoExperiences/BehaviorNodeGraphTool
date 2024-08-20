@@ -53,15 +53,15 @@ text = "Edit"
 [node name="DataPopupPanel" type="PopupPanel" parent="."]
 transparent_bg = true
 initial_position = 1
-size = Vector2i(509, 540)
+size = Vector2i(518, 576)
 borderless = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_y45yo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DataPopupPanel"]
 offset_left = 5.0
 offset_top = 5.0
-offset_right = 504.0
-offset_bottom = 535.0
+offset_right = 513.0
+offset_bottom = 571.0
 
 [node name="BaseNode" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer"]
 layout_mode = 2
@@ -149,6 +149,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Remove Binding"
 
+[node name="UpdateVariables" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Space2" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/UpdateVariables"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="updateVariablesButton" type="Button" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/UpdateVariables"]
+custom_minimum_size = Vector2(500, 32)
+layout_mode = 2
+text = "Update Graph Data"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/UpdateVariables"]
+layout_mode = 2
+size_flags_horizontal = 6
+
 [node name="ScrollContainer" type="ScrollContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
 custom_minimum_size = Vector2(0, 425)
 layout_mode = 2
@@ -172,3 +188,4 @@ size_flags_horizontal = 3
 [connection signal="value_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/indexOfBindingToEnable/indexOfBindingToEnableSpinBox" to="." method="_on_index_of_binding_to_enable_spin_box_value_changed"]
 [connection signal="pressed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ButtonContainer/AddBinding" to="." method="_on_add_binding_pressed"]
 [connection signal="pressed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/ButtonContainer/RemoveBinding" to="." method="_on_remove_binding_pressed"]
+[connection signal="pressed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/UpdateVariables/updateVariablesButton" to="." method="_on_update_variables_button_pressed"]
