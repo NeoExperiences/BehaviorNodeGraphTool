@@ -21,13 +21,10 @@ func _process_node(file, node, nodeExportIndex, transitionArrayLength, payloadAr
 			_parse_hkbBehaviorGraph(file, node, nodeExportIndex, transitionArrayLength, payloadArrayLength)
 		2:
 			print("Type of Node: hkbBehaviorGraphData")
-			file.store_string('        <hkbBehaviorGraphData/>\r\n')
 		3:
 			print("Type of Node: hkbVariableValueSet")
-			file.store_string('        <hkbVariableValueSet/>\r\n')
 		4:
 			print("Type of Node: hkbBehaviorGraphStringData")
-			file.store_string('        <hkbBehaviorGraphStringData/>\r\n')
 		5:
 			print("Type of Node: hkbStateMachine")
 			_parse_hkbStateMachine(file, node, nodeExportIndex, transitionArrayLength)
@@ -1549,6 +1546,7 @@ func _parse_hkbVariableValueSet(file, variableArray, nodeExportIndex): # Done
 			file.store_string('                <hkobject>\r\n')
 			file.store_string('                    <hkparam name="value">' + str(variable.variableValue) + '</hkparam>\r\n')
 			file.store_string('                </hkobject>\r\n')
+		file.store_string('            </hkparam>\r\n')
 	else:
 		file.store_string('            <hkparam name="wordVariableValues" numelements="0"/>\r\n')
 	if quadValuesArray.size():

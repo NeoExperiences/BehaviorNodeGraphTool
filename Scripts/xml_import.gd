@@ -5,17 +5,22 @@ func _load_XML(path, graphEdit):
 	var rootNode = parsedFile.root
 	var connections = []
 	var unhandledNodes = []
+	var transitionValues = []
+	var payloadValues = []
 	print("Root Node: ", rootNode.attributes)
-	import_transitions(rootNode.children[0].children)
-	import_payload(rootNode.children[0].children)
-	import_values(rootNode.children[0].children[-3], rootNode.children[0].children[-2], rootNode.children[0].children[-1])
+	transitionValues = import_transitions(rootNode.children[0].children)
+	print(transitionValues)
+	payloadValues = import_payload(rootNode.children[0].children)
+	print(payloadValues)
+	
+	import_values(rootNode)
 	graphEdit.get_parent()._instantiate_global_values()
 	print(globalVariable.globalEventList)
 	for object in rootNode.children[0].children:
 		if true:
 		#if object.attributes.class != "hkbBehaviorGraphData" and object.attributes.class != "hkbVariableValueSet" and object.attributes.class != "hkbBehaviorGraphStringData":
 			print(object.attributes.name, " - ", object.attributes.class)
-			unhandledNodes.append(_object_processing(object, graphEdit, connections))
+			unhandledNodes.append(_object_processing(object, graphEdit, connections, transitionValues, payloadValues))
 			print("[")
 			var child_count = 0
 			for parameter in object.children:
@@ -65,7 +70,7 @@ func _load_XML(path, graphEdit):
 						graphEdit.connect_node(str(from_node.name), connection[0], str(to_node.name), 0)
 	return unhandledNodes
 
-func _object_processing(object, graphEdit, connections):
+func _object_processing(object, graphEdit, connections, transitionValues, payloadValues):
 			match object.attributes.class:
 				"hkRootLevelContainer":
 					print("hkRootLevelContainer loaded.")
@@ -100,7 +105,9 @@ func _object_processing(object, graphEdit, connections):
 					loadedNode.nodeName = object.children[2].content
 					loadedNode.eventId = int(object.children[3].children[0].children[0].content)
 					if object.children[3].children[0].children[1].content != "null":
-						loadedNode.payload = object.children[3].children[0].children[1].content
+						for payload in payloadValues:
+							if payload[0] == object.children[3].children[0].children[1].content:
+								loadedNode.payload = payload[1]
 					else:
 						loadedNode.payload = -1
 					loadedNode.startStateId = int(object.children[5].content)
@@ -627,6 +634,8 @@ func base_node_values(loadedNode, object):
 
 func import_transitions(objectList):
 	var transitionIndex = 0
+	var transitionConversion = []
+	globalVariable.globalTransitionList = []
 	for object in objectList:
 		if object.attributes.class == "hkbBlendingTransitionEffect":
 			transitionIndex += 1
@@ -674,10 +683,14 @@ func import_transitions(objectList):
 				transitionData.transitionEndMode = 0
 			else:
 				transitionData.transitionEndMode = 1
+			transitionConversion.append([object.attributes.name, transitionIndex])
 			globalVariable.globalTransitionList.append(transitionData)
+	return transitionConversion
 
 func import_payload(objectList):
 	var payloadIndex = 0
+	var payloadConversion = []
+	globalVariable.globalPayloadList = []
 	for object in objectList:
 		if object.attributes.class == "hkbStringEventPayload":
 			payloadIndex += 1
@@ -686,11 +699,33 @@ func import_payload(objectList):
 				"payloadName": object.children[0].content,
 			}
 			globalVariable.globalPayloadList.append(payloadData)
+			payloadConversion.append([object.attributes.name, payloadIndex])
+	return payloadConversion
 
-func import_values(hkbBehaviorGraphData, hkbVariableValueSet, hkbBehaviorGraphStringData):
+func import_values(rootNode):
+	var hkbBehaviorGraphData = null
+	var hkbVariableValueSet = null
+	var hkbBehaviorGraphStringData = null
+	for node in rootNode.children[0].children:
+		print("Searching for Graph Data: ", node.attributes.name, " - ", node.attributes.class)
+		if node.attributes.class == "hkbBehaviorGraphData":
+			print("Found hkbBehaviorGraphData: ", node.attributes.name)
+			hkbBehaviorGraphData = node
+		elif node.attributes.class == "hkbVariableValueSet":
+			print("Found hkbVariableValueSet: ", node.attributes.name)
+			hkbVariableValueSet = node
+		elif node.attributes.class == "hkbBehaviorGraphStringData":
+			print("Found hkbBehaviorGraphStringData: ", node.attributes.name)
+			hkbBehaviorGraphStringData = node
+	if hkbBehaviorGraphData == null || hkbVariableValueSet == null || hkbBehaviorGraphStringData == null:
+		print("Failed to acquire graph data.")
+		return
 	globalVariable.globalEventList = []
 	#print(hkbBehaviorGraphData.children[3].attributes.numelements)
 	#if hkbBehaviorGraphData.children[3].attributes.numelements
+	print("GraphData: ", hkbBehaviorGraphData.attributes.class)
+	for child in hkbBehaviorGraphData.children:
+		print("GraphData Attributes", child.attributes)
 	if hkbBehaviorGraphData.children[3].attributes.has("numelements"):
 		print("Event Number: ",hkbBehaviorGraphData.children[3].attributes.numelements)
 		for eventNum in range(int(hkbBehaviorGraphData.children[3].attributes.numelements)):
@@ -719,7 +754,7 @@ func import_values(hkbBehaviorGraphData, hkbVariableValueSet, hkbBehaviorGraphSt
 				}
 			#if hkbBehaviorGraphData.children[1].children[variableNum].children[0].content == "FLAG_SYNC_POINT":
 				#variableData.eventFlags = 1
-			print(variableData.variableID + " - " + variableData.variableName)
+			print(variableData.variableID, " - ", variableData.variableName)
 			globalVariable.globalVariableList.append(variableData)
 	
 	print(hkbBehaviorGraphData.attributes.name, " - ", hkbBehaviorGraphData.attributes.class)
