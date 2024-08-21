@@ -707,19 +707,20 @@ func import_values(rootNode):
 	var hkbVariableValueSet = null
 	var hkbBehaviorGraphStringData = null
 	for node in rootNode.children[0].children:
-		print("Searching for Graph Data: ", node.attributes.name, " - ", node.attributes.class)
+		#print("Searching for Graph Data: ", node.attributes.name, " - ", node.attributes.class)
 		if node.attributes.class == "hkbBehaviorGraphData":
-			print("Found hkbBehaviorGraphData: ", node.attributes.name)
+			#print("Found hkbBehaviorGraphData: ", node.attributes.name)
 			hkbBehaviorGraphData = node
 		elif node.attributes.class == "hkbVariableValueSet":
-			print("Found hkbVariableValueSet: ", node.attributes.name)
+			#print("Found hkbVariableValueSet: ", node.attributes.name)
 			hkbVariableValueSet = node
 		elif node.attributes.class == "hkbBehaviorGraphStringData":
-			print("Found hkbBehaviorGraphStringData: ", node.attributes.name)
+			#print("Found hkbBehaviorGraphStringData: ", node.attributes.name)
 			hkbBehaviorGraphStringData = node
 	if hkbBehaviorGraphData == null || hkbVariableValueSet == null || hkbBehaviorGraphStringData == null:
 		print("Failed to acquire graph data.")
 		return
+	#return
 	globalVariable.globalEventList = []
 	#print(hkbBehaviorGraphData.children[3].attributes.numelements)
 	#if hkbBehaviorGraphData.children[3].attributes.numelements
@@ -747,13 +748,30 @@ func import_values(rootNode):
 					"variableID": variableNum,
 					"variableName": hkbBehaviorGraphStringData.children[2].children[variableNum].content,
 					"variableType": 0,
-					"variableValue": "0",
+					"variableValue": hkbVariableValueSet.children[0].children[variableNum].children[0].content,
 					"variableMinValue": "0",
 					"variableMaxValue": "0",
 					"variableQuadValues": "(0.0 0.0 0.0 0.0)"
 				}
+			print(hkbBehaviorGraphData.children[1].children[variableNum].children[1].content)
 			#if hkbBehaviorGraphData.children[1].children[variableNum].children[0].content == "FLAG_SYNC_POINT":
 				#variableData.eventFlags = 1
+			if hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_BOOL":
+				variableData.variableType = 0
+			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_INT8":
+				variableData.variableType = 1
+			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_INT16":
+				variableData.variableType = 2
+			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_INT32":
+				variableData.variableType = 3
+			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_REAL":
+				variableData.variableType = 4
+			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_POINTER":
+				variableData.variableType = 5
+			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_VECTOR4":
+				variableData.variableType = 6
+			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_QUATERNION":
+				variableData.variableType = 7
 			print(variableData.variableID, " - ", variableData.variableName)
 			globalVariable.globalVariableList.append(variableData)
 	
