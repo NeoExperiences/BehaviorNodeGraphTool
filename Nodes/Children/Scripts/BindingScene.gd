@@ -9,10 +9,10 @@ var bindingType = "BINDING_TYPE_VARIABLE"
 func _ready():
 	_update_name()
 	$bindingContainer/dataContainer/variableIndex/variableIndexOptionButton._updateVariables()
-	if variableIndex == -1:
+	if variableIndex != -1:
 		$bindingContainer/dataContainer/variableIndex/variableIndexOptionButton.selected = variableIndex + 1
 	else:
-		$bindingContainer/dataContainer/variableIndex/variableIndexOptionButton.selected = variableIndex + 0
+		$bindingContainer/dataContainer/variableIndex/variableIndexOptionButton.selected = 0
 	$bindingContainer/dataContainer/memberPath/memberPathLineEdit.text = memberPath
 	#$bindingContainer/dataContainer/variableIndex/variableIndexSpinBox.value = variableIndex
 	if bindingType == "BINDING_TYPE_VARIABLE":

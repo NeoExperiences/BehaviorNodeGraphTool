@@ -145,7 +145,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					loadedNode.probability = object.children[8].content
 					loadedNode.enable = string_to_bool(object.children[9].content)
 					graphEdit.add_child(loadedNode)
-				"hkbStateMachineTransitionInfoArray":
+				"hkbStateMachineTransitionInfoArray": # Done
 					print("hkbStateMachineTransitionInfoArray loaded.")
 					var loadedNode = globalVariable.hkbStateMachineTransitionInfoArray.instantiate()
 					base_node_values(loadedNode, object)
@@ -159,14 +159,12 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 							"priority": int(object.children[0].children[transition].children[8].content),
 							"flags": [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 							"transition": 0,
-							"triggerInterval": 0,
-							"initiateInterval": 0
+							"triggerInterval": 0, # TODO: Finish Implementation
+							"initiateInterval": 0 # TODO: Finish Implementation
 						}
 						if object.children[0].children[transition].children[2].content != "null": # transition
 							for transitionObject in transitionValues:
-								print(transitionObject, " - ", object.children[0].children[transition].children[2].content)
 								if transitionObject[0] == object.children[0].children[transition].children[2].content:
-									print("Equivalent Transition: ",transitionObject[1])
 									transitionData.transition = transitionObject[1] - 1
 						for flagsValue in object.children[0].children[transition].children[9].content.split("|"):
 							match flagsValue:
@@ -201,13 +199,24 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 								"FLAG_ABUT_AT_END_OF_FROM_GENERATOR":
 									transitionData.flags[14] = true
 						loadedNode.transitionArray.append(transitionData)
-					#loadedNode.transitionArray = node.transitionArray
 					graphEdit.add_child(loadedNode)
-				"hkbStateMachineEventPropertyArray":
+				"hkbStateMachineEventPropertyArray": # Done
 					print("hkbStateMachineEventPropertyArray loaded.")
 					var loadedNode = globalVariable.hkbStateMachineEventPropertyArray.instantiate()
 					base_node_values(loadedNode, object)
-					#loadedNode.eventsArray = node.eventsArray
+					loadedNode.eventsArray = []
+					for event in range(int(object.children[0].attributes.numelements)):
+						var eventData = {
+							"eventID": int(object.children[0].children[event].children[0].content),
+							"payloadID": 0
+						}
+						if object.children[0].children[event].children[1].content != "null": # payload object
+							for payload in payloadValues:
+								if payload[0] == object.children[0].children[event].children[1].content:
+									eventData.payloadID = payload[1]
+						else:
+							eventData.payloadID = -1
+						loadedNode.eventsArray.append(eventData)
 					graphEdit.add_child(loadedNode)
 				"hkbModifierGenerator": # Done
 					print("hkbModifierGenerator loaded.")
@@ -329,12 +338,20 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 						string_to_bool(object.children[11].content), 
 						string_to_bool(object.children[13].content)]
 					graphEdit.add_child(loadedNode)
-				"hkbVariableBindingSet":
+				"hkbVariableBindingSet": # Done
 					print("hkbVariableBindingSet loaded.")
 					var loadedNode = globalVariable.hkbVariableBindingSet.instantiate()
 					base_node_values(loadedNode, object)
-					#loadedNode.bindingArray				= node.bindingArray
-					#loadedNode.indexOfBindingToEnable	= node.indexOfBindingToEnable
+					loadedNode.bindingArray = []
+					for binding in range(int(object.children[0].attributes.numelements)):
+						var bindingData = {
+							"memberPath": object.children[0].children[binding].children[0].content,
+							"variableIndex": int(object.children[0].children[binding].children[1].content),
+							"bindingType": object.children[0].children[binding].children[3].content
+						}
+						loadedNode.bindingArray.append(bindingData)
+					print(loadedNode.bindingArray)
+					loadedNode.indexOfBindingToEnable	= int(object.children[1].content)
 					graphEdit.add_child(loadedNode)
 				"hkbManualSelectorGenerator": # Done
 					print("hkbManualSelectorGenerator loaded.")

@@ -93,18 +93,16 @@ layout_mode = 2
 text = "   bindingType"
 
 [node name="Space" type="Control" parent="bindingContainer/dataContainer/bindingType"]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
 [node name="bindingTypeButton" type="OptionButton" parent="bindingContainer/dataContainer/bindingType"]
 clip_contents = true
-custom_minimum_size = Vector2(150, 30)
+custom_minimum_size = Vector2(240, 30)
 layout_mode = 2
-clip_text = true
 item_count = 2
 selected = 0
-fit_to_longest_item = false
 popup/item_0/text = "VARIABLE"
 popup/item_0/id = 0
 popup/item_1/text = "CHARACTER_PROPERTY"
