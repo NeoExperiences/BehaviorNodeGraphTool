@@ -350,7 +350,6 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 							"bindingType": object.children[0].children[binding].children[3].content
 						}
 						loadedNode.bindingArray.append(bindingData)
-					print(loadedNode.bindingArray)
 					loadedNode.indexOfBindingToEnable	= int(object.children[1].content)
 					graphEdit.add_child(loadedNode)
 				"hkbManualSelectorGenerator": # Done
@@ -402,11 +401,18 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					if object.children[4].content != "null": # expressions
 						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[4].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
-				"hkbExpressionDataArray":
+				"hkbExpressionDataArray": # Done
 					print("hkbExpressionDataArray loaded.")
 					var loadedNode = globalVariable.hkbExpressionDataArray.instantiate()
 					base_node_values(loadedNode, object)
-					#loadedNode.expressionArray							= node.expressionArray
+					loadedNode.expressionArray = []
+					for expression in range(int(object.children[0].attributes.numelements)):
+						var expressionData = {
+							"expression": object.children[0].children[expression].children[0].content,
+							"assignmentVariableIndex": int(object.children[0].children[expression].children[1].content),
+							"assignmentEventIndex": int(object.children[0].children[expression].children[2].content)
+						}
+						loadedNode.expressionArray.append(expressionData)
 					graphEdit.add_child(loadedNode)
 				"hkbPoseMatchingGenerator": # Done
 					print("hkbPoseMatchingGenerator loaded.")
@@ -490,6 +496,21 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					print("hkbClipTriggerArray loaded.")
 					var loadedNode = globalVariable.hkbClipTriggerArray.instantiate()
 					base_node_values(loadedNode, object)
+					loadedNode.triggersArray = []
+					for trigger in range(int(object.children[0].attributes.numelements)):
+						var bindingData = {
+							"localTime": object.children[0].children[trigger].children[0].content,
+							"eventID": int(object.children[0].children[trigger].children[1].children[0].children[0].content),
+							"payloadID": 0,
+							"relativeToEndOfClip": string_to_bool(object.children[0].children[trigger].children[2].content),
+							"acyclic": string_to_bool(object.children[0].children[trigger].children[3].content),
+							"isAnnotation": string_to_bool(object.children[0].children[trigger].children[4].content)
+						}
+						if object.children[0].children[trigger].children[1].children[0].children[1].content != "null": # payload object
+							for payload in payloadValues:
+								if payload[0] == object.children[0].children[trigger].children[1].children[0].children[1].content:
+									bindingData.payloadID = payload[1]
+						loadedNode.triggersArray.append(bindingData)
 					#loadedNode.triggersArray = node.triggersArray
 					graphEdit.add_child(loadedNode)
 				"hkbBlendingTransitionEffect": # Done

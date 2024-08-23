@@ -18,19 +18,26 @@ layout_mode = 2
 text = "Trigger #1"
 horizontal_alignment = 1
 
-[node name="localTime" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ShowButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Hide Data"
+
+[node name="dataContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/localTime"]
+[node name="localTime" type="HBoxContainer" parent="VBoxContainer/dataContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/dataContainer/localTime"]
 layout_mode = 2
 text = "   localTime"
 
-[node name="Space" type="Control" parent="VBoxContainer/localTime"]
+[node name="Space" type="Control" parent="VBoxContainer/dataContainer/localTime"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="localTimeLine" type="LineEdit" parent="VBoxContainer/localTime"]
+[node name="localTimeLine" type="LineEdit" parent="VBoxContainer/dataContainer/localTime"]
 custom_minimum_size = Vector2(180, 30)
 layout_mode = 2
 text = "0.0"
@@ -38,19 +45,19 @@ placeholder_text = "0.0"
 alignment = 2
 max_length = 20
 
-[node name="id" type="HBoxContainer" parent="VBoxContainer"]
+[node name="id" type="HBoxContainer" parent="VBoxContainer/dataContainer"]
 layout_mode = 2
 
-[node name="idLabel" type="Label" parent="VBoxContainer/id"]
+[node name="idLabel" type="Label" parent="VBoxContainer/dataContainer/id"]
 layout_mode = 2
 text = "   id
 "
 
-[node name="Space" type="Control" parent="VBoxContainer/id"]
+[node name="Space" type="Control" parent="VBoxContainer/dataContainer/id"]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="idOptionButton" type="OptionButton" parent="VBoxContainer/id"]
+[node name="idOptionButton" type="OptionButton" parent="VBoxContainer/dataContainer/id"]
 custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
 item_count = 1
@@ -59,19 +66,19 @@ popup/item_0/text = "null"
 popup/item_0/id = 0
 script = ExtResource("2_ay6g7")
 
-[node name="payload" type="HBoxContainer" parent="VBoxContainer"]
+[node name="payload" type="HBoxContainer" parent="VBoxContainer/dataContainer"]
 layout_mode = 2
 
-[node name="payloadLabel" type="Label" parent="VBoxContainer/payload"]
+[node name="payloadLabel" type="Label" parent="VBoxContainer/dataContainer/payload"]
 layout_mode = 2
 text = "   payload"
 
-[node name="Space" type="Control" parent="VBoxContainer/payload"]
+[node name="Space" type="Control" parent="VBoxContainer/dataContainer/payload"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="payloadOptionButton" type="OptionButton" parent="VBoxContainer/payload"]
+[node name="payloadOptionButton" type="OptionButton" parent="VBoxContainer/dataContainer/payload"]
 custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
 item_count = 1
@@ -80,19 +87,19 @@ popup/item_0/text = "null"
 popup/item_0/id = 0
 script = ExtResource("3_biudp")
 
-[node name="relativeToEndOfClip" type="HBoxContainer" parent="VBoxContainer"]
+[node name="relativeToEndOfClip" type="HBoxContainer" parent="VBoxContainer/dataContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/relativeToEndOfClip"]
+[node name="Label" type="Label" parent="VBoxContainer/dataContainer/relativeToEndOfClip"]
 layout_mode = 2
 text = "   relativeToEndOfClip"
 
-[node name="Space" type="Control" parent="VBoxContainer/relativeToEndOfClip"]
+[node name="Space" type="Control" parent="VBoxContainer/dataContainer/relativeToEndOfClip"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="relativeToEndOfClipButton" type="OptionButton" parent="VBoxContainer/relativeToEndOfClip"]
+[node name="relativeToEndOfClipButton" type="OptionButton" parent="VBoxContainer/dataContainer/relativeToEndOfClip"]
 custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
 item_count = 2
@@ -102,19 +109,19 @@ popup/item_0/id = 0
 popup/item_1/text = "True"
 popup/item_1/id = 1
 
-[node name="acyclic" type="HBoxContainer" parent="VBoxContainer"]
+[node name="acyclic" type="HBoxContainer" parent="VBoxContainer/dataContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/acyclic"]
+[node name="Label" type="Label" parent="VBoxContainer/dataContainer/acyclic"]
 layout_mode = 2
 text = "   acyclic"
 
-[node name="Space" type="Control" parent="VBoxContainer/acyclic"]
+[node name="Space" type="Control" parent="VBoxContainer/dataContainer/acyclic"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="acyclicButton" type="OptionButton" parent="VBoxContainer/acyclic"]
+[node name="acyclicButton" type="OptionButton" parent="VBoxContainer/dataContainer/acyclic"]
 custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
 item_count = 2
@@ -124,19 +131,19 @@ popup/item_0/id = 0
 popup/item_1/text = "True"
 popup/item_1/id = 1
 
-[node name="isAnnotation" type="HBoxContainer" parent="VBoxContainer"]
+[node name="isAnnotation" type="HBoxContainer" parent="VBoxContainer/dataContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/isAnnotation"]
+[node name="Label" type="Label" parent="VBoxContainer/dataContainer/isAnnotation"]
 layout_mode = 2
 text = "   isAnnotation"
 
-[node name="Space" type="Control" parent="VBoxContainer/isAnnotation"]
+[node name="Space" type="Control" parent="VBoxContainer/dataContainer/isAnnotation"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="isAnnotationButton" type="OptionButton" parent="VBoxContainer/isAnnotation"]
+[node name="isAnnotationButton" type="OptionButton" parent="VBoxContainer/dataContainer/isAnnotation"]
 custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
 item_count = 2
@@ -146,9 +153,10 @@ popup/item_0/id = 0
 popup/item_1/text = "True"
 popup/item_1/id = 1
 
-[connection signal="text_changed" from="VBoxContainer/localTime/localTimeLine" to="." method="_on_local_time_line_text_changed"]
-[connection signal="item_selected" from="VBoxContainer/id/idOptionButton" to="." method="_on_id_option_button_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/payload/payloadOptionButton" to="." method="_on_payload_option_button_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/relativeToEndOfClip/relativeToEndOfClipButton" to="." method="_on_relative_to_end_of_clip_button_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/acyclic/acyclicButton" to="." method="_on_acyclic_button_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/isAnnotation/isAnnotationButton" to="." method="_on_is_annotation_button_item_selected"]
+[connection signal="pressed" from="VBoxContainer/ShowButton" to="." method="_on_show_button_pressed"]
+[connection signal="text_changed" from="VBoxContainer/dataContainer/localTime/localTimeLine" to="." method="_on_local_time_line_text_changed"]
+[connection signal="item_selected" from="VBoxContainer/dataContainer/id/idOptionButton" to="." method="_on_id_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/dataContainer/payload/payloadOptionButton" to="." method="_on_payload_option_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/dataContainer/relativeToEndOfClip/relativeToEndOfClipButton" to="." method="_on_relative_to_end_of_clip_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/dataContainer/acyclic/acyclicButton" to="." method="_on_acyclic_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/dataContainer/isAnnotation/isAnnotationButton" to="." method="_on_is_annotation_button_item_selected"]
