@@ -397,8 +397,6 @@ size_flags_horizontal = 6
 clip_contents = true
 custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
-clip_text = true
-fit_to_longest_item = false
 script = ExtResource("2_wnn72")
 
 [connection signal="pressed" from="transitionContainer/ShowButton" to="." method="_on_show_button_pressed"]

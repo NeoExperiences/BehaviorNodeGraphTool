@@ -30,6 +30,7 @@ func _load_XML(path, graphEdit):
 					var transition_count = 1
 					for transition in parameter.children:
 						print("			Transition #", transition_count)
+						transition_count += 1
 						for value in transition.children:
 							#print("		", transition.content)
 							child_count += 1
@@ -148,6 +149,58 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					print("hkbStateMachineTransitionInfoArray loaded.")
 					var loadedNode = globalVariable.hkbStateMachineTransitionInfoArray.instantiate()
 					base_node_values(loadedNode, object)
+					loadedNode.transitionArray = []
+					for transition in range(int(object.children[0].attributes.numelements)):
+						var transitionData = {
+							"eventId": int(object.children[0].children[transition].children[4].content),
+							"toStateId": int(object.children[0].children[transition].children[5].content),
+							"fromNestedStateId": int(object.children[0].children[transition].children[6].content),
+							"toNestedStateId": int(object.children[0].children[transition].children[7].content),
+							"priority": int(object.children[0].children[transition].children[8].content),
+							"flags": [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+							"transition": 0,
+							"triggerInterval": 0,
+							"initiateInterval": 0
+						}
+						if object.children[0].children[transition].children[2].content != "null": # transition
+							for transitionObject in transitionValues:
+								print(transitionObject, " - ", object.children[0].children[transition].children[2].content)
+								if transitionObject[0] == object.children[0].children[transition].children[2].content:
+									print("Equivalent Transition: ",transitionObject[1])
+									transitionData.transition = transitionObject[1] - 1
+						for flagsValue in object.children[0].children[transition].children[9].content.split("|"):
+							match flagsValue:
+								"FLAG_USE_TRIGGER_INTERVAL":
+									transitionData.flags[0] = true
+								"FLAG_USE_INITIATE_INTERVAL":
+									transitionData.flags[1] = true
+								"FLAG_UNINTERRUPTIBLE_WHILE_PLAYING":
+									transitionData.flags[2] = true
+								"FLAG_UNINTERRUPTIBLE_WHILE_DELAYED":
+									transitionData.flags[3] = true
+								"FLAG_DELAY_STATE_CHANGE":
+									transitionData.flags[4] = true
+								"FLAG_DISABLED":
+									transitionData.flags[5] = true
+								"FLAG_DISALLOW_RETURN_TO_PREVIOUS_STATE":
+									transitionData.flags[6] = true
+								"FLAG_DISALLOW_RANDOM_TRANSITION":
+									transitionData.flags[7] = true
+								"FLAG_DISABLE_CONDITION":
+									transitionData.flags[8] = true
+								"FLAG_ALLOW_SELF_TRANSITION_BY_TRANSITION_FROM_ANY_STATE":
+									transitionData.flags[9] = true
+								"FLAG_IS_GLOBAL_WILDCARD":
+									transitionData.flags[10] = true
+								"FLAG_IS_LOCAL_WILDCARD":
+									transitionData.flags[11] = true
+								"FLAG_FROM_NESTED_STATE_ID_IS_VALID":
+									transitionData.flags[12] = true
+								"FLAG_TO_NESTED_STATE_ID_IS_VALID":
+									transitionData.flags[13] = true
+								"FLAG_ABUT_AT_END_OF_FROM_GENERATOR":
+									transitionData.flags[14] = true
+						loadedNode.transitionArray.append(transitionData)
 					#loadedNode.transitionArray = node.transitionArray
 					graphEdit.add_child(loadedNode)
 				"hkbStateMachineEventPropertyArray":

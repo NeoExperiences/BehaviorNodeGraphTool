@@ -97,7 +97,6 @@ placeholder_text = "Name"
 transparent_bg = true
 initial_position = 1
 size = Vector2i(504, 251)
-visible = true
 borderless = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_y45yo")
 
