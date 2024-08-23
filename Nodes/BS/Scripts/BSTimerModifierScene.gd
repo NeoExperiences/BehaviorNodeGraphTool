@@ -24,13 +24,16 @@ func _ready():
 		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable/enableButton.selected = 1
 	else:
 		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable/enableButton.selected = 0
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/VBoxContainer/payload/eventToSendPayloadOptionButton._updatePayloads()
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/VBoxContainer/id/idSpinBox.value = eventId
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/alarmTimeSeconds/alarmTimeSecondsLine.text = alarmTimeSeconds
-	if payload == -1:
-		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/VBoxContainer/payload/eventToSendPayloadOptionButton.selected = 0
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/id/idOptionButton._updateEvents()
+	if eventId == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/id/idOptionButton.selected = 0
 	else:
-		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/VBoxContainer/payload/eventToSendPayloadOptionButton.selected = payload
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/id/idOptionButton.selected = eventId + 1
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/payload/eventToSendPayloadOptionButton._updatePayloads()
+	if payload == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/payload/eventToSendPayloadOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/payload/eventToSendPayloadOptionButton.selected = payload
 	if resetAlarm:
 		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/resetAlarm/resetAlarmButton.selected = 1
 	else:
@@ -78,18 +81,21 @@ func _on_user_data_button_item_selected(index):
 func _on_name_text_changed(new_text):
 	nodeName = new_text
 
-func _on_update_payload_button_pressed():
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/VBoxContainer/payload/eventToSendPayloadOptionButton._updatePayloads()
+func _on_update_graph_button_pressed():
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/id/idOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/EventToSend/VBoxContainer/payload/eventToSendPayloadOptionButton._updatePayloads()
 
-func _on_id_spin_box_value_changed(value):
-	eventId = value
+func _on_id_option_button_item_selected(index):
+	if index == 0:
+		eventId = -1
+	else:
+		eventId = index - 1
 
 func _on_event_to_send_payload_option_button_item_selected(index):
 	if index == 0:
 		payload = -1
 	else:
 		payload = index
-
 
 func _on_reset_alarm_button_item_selected(index):
 	if index == 0:
@@ -104,6 +110,11 @@ func _on_enable_button_item_selected(index):
 	else:
 		enable = true
 
-
 func _on_alarm_time_seconds_line_text_changed(new_text):
 	alarmTimeSeconds = new_text
+
+
+
+
+
+

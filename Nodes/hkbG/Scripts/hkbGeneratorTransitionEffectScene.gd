@@ -5,7 +5,7 @@ extends GraphNode
 @export var nodeTypeID = 47
 var buttonToggled = false
 
-#hkbModifierGenerator Values
+#hkbGeneratorTransitionEffect Values
 @export var nodeName = "GeneratorTransitionEffect"
 @export var userData = 0
 @export var selfTransitionMode = 3

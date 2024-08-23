@@ -148,6 +148,7 @@ func _process_node(file, node, nodeExportIndex, transitionArrayLength, payloadAr
 			print("Type of Node: BSiStateTaggingGenerator")
 		47:
 			print("Type of Node: hkbGeneratorTransitionEffect")
+			_parse_hkbGeneratorTransitionEffect(file, node)
 		48: # hkbReferencePoseGenerator
 			print("Type of Node: hkbReferencePoseGenerator")
 			_parse_hkbReferencePoseGenerator(file, node)
@@ -1883,4 +1884,66 @@ func _parse_BSCyclicBlendTransitionGenerator(file, node, nodeExportIndex, transi
 	file.store_string('            <!-- sortedChildren SERIALIZE_IGNORED -->\r\n')
 	file.store_string('            <!-- pTempOutput SERIALIZE_IGNORED -->\r\n')
 	file.store_string('            <!-- currentMode SERIALIZE_IGNORED -->\r\n')
+	file.store_string('        </hkobject>\r\n')
+
+func _parse_hkbGeneratorTransitionEffect(file, node):
+	file.store_string('        <hkobject class="hkbGeneratorTransitionEffect" name="#' + str(node.nodeID) + '" signature="0x44208f07">\r\n')
+	file.store_string('            <!-- memSizeAndRefCount SERIALIZE_IGNORED -->\r\n')
+	if node.nodeConnection0.size() != 0:
+		file.store_string('            <hkparam name="variableBindingSet">#' + str(node.nodeConnection0[0][2]) + '</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="variableBindingSet">null</hkparam>\r\n')
+	file.store_string('            <!-- cachedBindables SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- areBindablesCached SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- hasEnableChanged SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <hkparam name="userData">' + str(node.userData) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="name">' + str(node.nodeName) + '</hkparam>\r\n')
+	file.store_string('            <!-- id SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- cloneState SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- type SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- nodeInfo SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- partitionInfo SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- syncInfo SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- pad1 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- pad2 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- pad3 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- pad4 SERIALIZE_IGNORED -->\r\n')
+	if node.selfTransitionMode == 1:
+		file.store_string('            <hkparam name="selfTransitionMode">SELF_TRANSITION_MODE_CONTINUE</hkparam>\r\n')
+	elif node.selfTransitionMode == 2:
+		file.store_string('            <hkparam name="selfTransitionMode">SELF_TRANSITION_MODE_RESET</hkparam>\r\n')
+	elif node.selfTransitionMode == 3:
+		file.store_string('            <hkparam name="selfTransitionMode">SELF_TRANSITION_MODE_BLEND</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="selfTransitionMode">SELF_TRANSITION_MODE_CONTINUE_IF_CYCLIC_BLEND_IF_ACYCLIC</hkparam>\r\n')
+	if node.eventMode == 1:
+		file.store_string('            <hkparam name="eventMode">EVENT_MODE_PROCESS_ALL</hkparam>\r\n')
+	elif node.eventMode == 2:
+		file.store_string('            <hkparam name="eventMode">EVENT_MODE_IGNORE_FROM_GENERATOR</hkparam>\r\n')
+	elif node.eventMode == 3:
+		file.store_string('            <hkparam name="eventMode">EVENT_MODE_IGNORE_TO_GENERATOR</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="eventMode">EVENT_MODE_DEFAULT</hkparam>\r\n')
+	file.store_string('            <!-- defaultEventMode SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- patchedBindingInfo SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- fromGenerator SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- toGenerator SERIALIZE_IGNORED -->\r\n')
+	if node.nodeConnection1.size() != 0:
+		file.store_string('            <hkparam name="transitionGenerator">#' + str(node.nodeConnection1[0][2]) + '</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="transitionGenerator">null</hkparam>\r\n')
+	file.store_string('            <hkparam name="blendInDuration">' + str(node.blendInDuration) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="blendOutDuration">' + str(node.blendOutDuration) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="syncToGeneratorStartTime">' + str(node.syncToGeneratorStartTime) + '</hkparam>\r\n')
+	file.store_string('            <!-- childState SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- timeInTransition SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- duration SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- effectiveBlendInDuration SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- effectiveBlendOutDuration SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- toGeneratorState SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- echoTransitionGenerator SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- toGeneratorSelfTransitionMode SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- justActivated SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- updateActiveNodes SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- stage SERIALIZE_IGNORED -->\r\n')
 	file.store_string('        </hkobject>\r\n')
