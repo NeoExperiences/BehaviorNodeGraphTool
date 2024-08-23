@@ -72,16 +72,14 @@ func _load_XML(path, graphEdit):
 
 func _object_processing(object, graphEdit, connections, transitionValues, payloadValues):
 			match object.attributes.class:
-				"hkRootLevelContainer":
+				"hkRootLevelContainer": # Done
 					print("hkRootLevelContainer loaded.")
 					var loadedNode = globalVariable.hkRootLevelContainer.instantiate()
 					base_node_values(loadedNode, object)
-					#if object.children[0].children[0].children[2].content != "null":
-						#connections.append(0, [int(object.attributes.name.replace("#","")), int(object.children[0].children[0].children[2].content.replace("#",""))])
 					if object.children[0].children[0].children[2].content != "null":
 						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].children[0].children[2].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
-				"hkbBehaviorGraph":
+				"hkbBehaviorGraph": # Done
 					print("hkbBehaviorGraph loaded.")
 					var loadedNode = globalVariable.hkbBehaviorGraph.instantiate()
 					base_node_values(loadedNode, object)
@@ -89,13 +87,13 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					if object.children[4].content != "null":
 						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[4].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
-				"hkbBehaviorGraphData":
+				"hkbBehaviorGraphData": # Done
 					print("hkbBehaviorGraphData loaded.")
-				"hkbVariableValueSet":
+				"hkbVariableValueSet": # Done
 					print("hkbVariableValueSet loaded.")
-				"hkbBehaviorGraphStringData":
+				"hkbBehaviorGraphStringData": # Done
 					print("hkbBehaviorGraphStringData loaded.")
-				"hkbStateMachine":
+				"hkbStateMachine": # Done
 					print("hkbStateMachine loaded.")
 					var loadedNode = globalVariable.hkbStateMachine.instantiate()
 					base_node_values(loadedNode, object)
@@ -104,7 +102,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					loadedNode.eventId = int(object.children[3].children[0].children[0].content)
-					if object.children[3].children[0].children[1].content != "null":
+					if object.children[3].children[0].children[1].content != "null": # payload object
 						for payload in payloadValues:
 							if payload[0] == object.children[3].children[0].children[1].content:
 								loadedNode.payload = payload[1]
@@ -125,7 +123,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					if object.children[16].content != "null": # wildcardTransitions
 						connections.append([2, int(object.attributes.name.replace("#","")), int(object.children[16].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
-				"hkbStateMachineStateInfo":
+				"hkbStateMachineStateInfo": # Done
 					print("hkbStateMachineStateInfo loaded.")
 					var loadedNode = globalVariable.hkbStateMachineStateInfo.instantiate()
 					base_node_values(loadedNode, object)
@@ -158,7 +156,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					base_node_values(loadedNode, object)
 					#loadedNode.eventsArray = node.eventsArray
 					graphEdit.add_child(loadedNode)
-				"hkbModifierGenerator":
+				"hkbModifierGenerator": # Done
 					print("hkbModifierGenerator loaded.")
 					var loadedNode = globalVariable.hkbModifierGenerator.instantiate()
 					base_node_values(loadedNode, object)
@@ -171,7 +169,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					if object.children[4].content != "null": # generator
 						connections.append([2, int(object.attributes.name.replace("#","")), int(object.children[4].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
-				"hkbModifierList":
+				"hkbModifierList": # Done
 					print("hkbModifierList loaded.")
 					var loadedNode = globalVariable.hkbModifierList.instantiate()
 					base_node_values(loadedNode, object)
@@ -185,7 +183,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 							if modifier:
 								connections.append([1, int(object.attributes.name.replace("#","")), int(modifier)])
 					graphEdit.add_child(loadedNode)
-				"hkbGetUpModifier":
+				"hkbGetUpModifier": # Done
 					print("hkbGetUpModifier loaded.")
 					var loadedNode = globalVariable.hkbGetUpModifier.instantiate()
 					base_node_values(loadedNode, object)
@@ -201,7 +199,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					loadedNode.otherBoneIndex			= int(object.children[8].content)
 					loadedNode.anotherBoneIndex		= int(object.children[9].content)
 					graphEdit.add_child(loadedNode)
-				"hkbKeyframeBonesModifier":
+				"hkbKeyframeBonesModifier": # Done
 					print("hkbKeyframeBonesModifier loaded.")
 					var loadedNode = globalVariable.hkbKeyframeBonesModifier.instantiate()
 					base_node_values(loadedNode, object)
@@ -213,7 +211,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					if object.children[5].content != "null": # keyframedBonesList
 						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
-				"hkbBoneIndexArray":
+				"hkbBoneIndexArray": # Done
 					print("hkbBoneIndexArray loaded.")
 					var loadedNode = globalVariable.hkbBoneIndexArray.instantiate()
 					base_node_values(loadedNode, object)
@@ -222,7 +220,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 							if bone:
 								loadedNode.boneIndices.append(int(bone))
 					graphEdit.add_child(loadedNode)
-				"hkbBoneWeightArray":
+				"hkbBoneWeightArray": # Done
 					print("hkbBoneWeightArray loaded.")
 					var loadedNode = globalVariable.hkbBoneWeightArray.instantiate()
 					base_node_values(loadedNode, object)
@@ -231,7 +229,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 							if bone:
 								loadedNode.boneWeights.append(bone)
 					graphEdit.add_child(loadedNode)
-				"hkbRigidBodyRagdollControlsModifier":
+				"hkbRigidBodyRagdollControlsModifier": # Done
 					print("hkbRigidBodyRagdollControlsModifier loaded.")
 					var loadedNode = globalVariable.hkbRigidBodyRagdollControlsModifier.instantiate()
 					base_node_values(loadedNode, object)
@@ -257,7 +255,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
 					loadedNode.animationBlendFraction = object.children[6].content
 					graphEdit.add_child(loadedNode)
-				"BSIsActiveModifier":
+				"BSIsActiveModifier": # Done
 					print("BSIsActiveModifier loaded.")
 					var loadedNode = globalVariable.BSIsActiveModifier.instantiate()
 					base_node_values(loadedNode, object)
@@ -285,7 +283,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					#loadedNode.bindingArray				= node.bindingArray
 					#loadedNode.indexOfBindingToEnable	= node.indexOfBindingToEnable
 					graphEdit.add_child(loadedNode)
-				"hkbManualSelectorGenerator":
+				"hkbManualSelectorGenerator": # Done
 					print("hkbManualSelectorGenerator loaded.")
 					var loadedNode = globalVariable.hkbManualSelectorGenerator.instantiate()
 					base_node_values(loadedNode, object)
@@ -301,11 +299,14 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					if object.children[5].content != "null": # indexSelector
 						connections.append([2, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
 					loadedNode.selectedIndexCanChangeAfterActivate 		= string_to_bool(object.children[6].content)
-					# TODO: Take into account the transition list.
-					#if object.children[7].content != "null": # generatorChangedTransitionEffect
-						#loadedNode.generatorChangedTransitionEffect 		= int(object.children[7].content.replace("#",""))
+					if object.children[7].content != "null": # transition effect object
+						for transition in transitionValues:
+							if transition[0] == object.children[7].content:
+								loadedNode.generatorChangedTransitionEffect = transition[1]
+					else:
+						loadedNode.generatorChangedTransitionEffect = -1
 					graphEdit.add_child(loadedNode)
-				"BSModifyOnceModifier":
+				"BSModifyOnceModifier": # Done
 					print("BSModifyOnceModifier loaded.")
 					var loadedNode = globalVariable.BSModifyOnceModifier.instantiate()
 					base_node_values(loadedNode, object)
@@ -319,7 +320,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					if object.children[5].content != "null": # pOnDeactivateModifier
 						connections.append([2, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
-				"hkbEvaluateExpressionModifier":
+				"hkbEvaluateExpressionModifier": # Done
 					print("hkbEvaluateExpressionModifier loaded.")
 					var loadedNode = globalVariable.hkbEvaluateExpressionModifier.instantiate()
 					base_node_values(loadedNode, object)
@@ -337,25 +338,25 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					base_node_values(loadedNode, object)
 					#loadedNode.expressionArray							= node.expressionArray
 					graphEdit.add_child(loadedNode)
-				"hkbPoseMatchingGenerator":
+				"hkbPoseMatchingGenerator": # Done
 					print("hkbPoseMatchingGenerator loaded.")
 					var loadedNode = globalVariable.hkbPoseMatchingGenerator.instantiate()
 					base_node_values(loadedNode, object)
 					if object.children[0].content != "null": # variableBindingSet
 						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
-					loadedNode.userData = int(object.children[1].content)
-					loadedNode.nodeName = object.children[2].content
-					loadedNode.blendParameter = object.children[4].content
-					loadedNode.blendSpeed = object.children[12].content
-					loadedNode.minSpeedToSwitch = object.children[13].content
-					loadedNode.startPlayingEventId = int(object.children[16].content)
-					loadedNode.startMatchingEventId = int(object.children[17].content)
-					loadedNode.rootBoneIndex = int(object.children[18].content)
-					loadedNode.otherBoneIndex = int(object.children[19].content)
-					loadedNode.anotherBoneIndex = int(object.children[20].content)
-					loadedNode.pelvisIndex = int(object.children[21].content)
+					loadedNode.userData				 = int(object.children[1].content)
+					loadedNode.nodeName				 = object.children[2].content
+					loadedNode.blendParameter		 = object.children[4].content
+					loadedNode.blendSpeed			 = object.children[12].content
+					loadedNode.minSpeedToSwitch		 = object.children[13].content
+					loadedNode.startPlayingEventId	 = int(object.children[16].content)
+					loadedNode.startMatchingEventId	 = int(object.children[17].content)
+					loadedNode.rootBoneIndex		 = int(object.children[18].content)
+					loadedNode.otherBoneIndex		 = int(object.children[19].content)
+					loadedNode.anotherBoneIndex		 = int(object.children[20].content)
+					loadedNode.pelvisIndex			 = int(object.children[21].content)
 					graphEdit.add_child(loadedNode)
-				"hkbBlenderGenerator":
+				"hkbBlenderGenerator": # Done
 					print("hkbBlenderGenerator loaded.")
 					var loadedNode = globalVariable.hkbBlenderGenerator.instantiate()
 					base_node_values(loadedNode, object)
@@ -372,7 +373,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 							if child:
 								connections.append([1, int(object.attributes.name.replace("#","")), int(child)])
 					graphEdit.add_child(loadedNode)
-				"hkbBlenderGeneratorChild":
+				"hkbBlenderGeneratorChild": # Done
 					print("hkbBlenderGeneratorChild loaded.")
 					var loadedNode = globalVariable.hkbBlenderGeneratorChild.instantiate()
 					base_node_values(loadedNode, object)
@@ -385,7 +386,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					loadedNode.weight				 = object.children[3].content
 					loadedNode.worldFromModelWeight	 = object.children[4].content
 					graphEdit.add_child(loadedNode)
-				"hkbClipGenerator":
+				"hkbClipGenerator": # Done
 					print("hkbClipGenerator loaded.")
 					var loadedNode = globalVariable.hkbClipGenerator.instantiate()
 					base_node_values(loadedNode, object)
@@ -417,9 +418,9 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					base_node_values(loadedNode, object)
 					#loadedNode.triggersArray = node.triggersArray
 					graphEdit.add_child(loadedNode)
-				"hkbBlendingTransitionEffect":
+				"hkbBlendingTransitionEffect": # Done
 					print("hkbBlendingTransitionEffect loaded.")
-				"hkbEventDrivenModifier":
+				"hkbEventDrivenModifier": # Done
 					print("hkbEventDrivenModifier loaded.")
 					var loadedNode = globalVariable.hkbEventDrivenModifier.instantiate()
 					base_node_values(loadedNode, object)
@@ -434,7 +435,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					loadedNode.deactivateEventId = int(object.children[6].content)
 					loadedNode.activeByDefault	 = string_to_bool(object.children[7].content)
 					graphEdit.add_child(loadedNode)
-				"hkbPoweredRagdollControlsModifier":
+				"hkbPoweredRagdollControlsModifier": # Done
 					print("hkbPoweredRagdollControlsModifier loaded.")
 					var loadedNode = globalVariable.hkbPoweredRagdollControlsModifier.instantiate()
 					base_node_values(loadedNode, object)
@@ -463,20 +464,27 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[7].content.replace("#",""))])
 					loadedNode.animationBlendFraction		= object.children[8].content
 					graphEdit.add_child(loadedNode)
-				"hkbTimerModifier":
+				"hkbTimerModifier": # Done
 					print("hkbTimerModifier loaded.")
 					var loadedNode = globalVariable.hkbTimerModifier.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					loadedNode.enable = string_to_bool(object.children[3].content)
 					loadedNode.alarmTimeSeconds		= object.children[4].content
-					#loadedNode.eventId 				= node.eventId
-					#loadedNode.payload					= node.payload
+					loadedNode.eventId = int(object.children[5].children[0].children[0].content)
+					if object.children[5].children[0].children[1].content != "null": # payload object
+						for payload in payloadValues:
+							if payload[0] == object.children[5].children[0].children[1].content:
+								loadedNode.payload = payload[1]
+					else:
+						loadedNode.payload = -1
 					graphEdit.add_child(loadedNode)
-				"BSLookAtModifier":
-					print("BSLookAtModifier loaded.")
-				"BSGetTimeStepModifier":
+				#"BSLookAtModifier":
+					#print("BSLookAtModifier loaded.")
+				"BSGetTimeStepModifier": # Done
 					print("BSGetTimeStepModifier loaded.")
 					var loadedNode = globalVariable.BSGetTimeStepModifier.instantiate()
 					base_node_values(loadedNode, object)
@@ -485,24 +493,34 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					loadedNode.enable = string_to_bool(object.children[3].content)
-					#loadedNode.timeStep				= node.timeStep
+					loadedNode.timeStep = object.children[4].content
 					graphEdit.add_child(loadedNode)
-				"hkbTwistModifier":
+				"hkbTwistModifier": # Done
 					print("hkbTwistModifier loaded.")
 					var loadedNode = globalVariable.hkbTwistModifier.instantiate()
 					base_node_values(loadedNode, object)
-					loadedNode.userData = int(object.children[1].content)
-					loadedNode.nodeName = object.children[2].content
-					loadedNode.enable = string_to_bool(object.children[3].content)
-					#loadedNode.axisOfRotation			 = node.axisOfRotation
-					#loadedNode.twistAngle				 = node.twistAngle
-					#loadedNode.startBoneIndex			 = node.startBoneIndex
-					#loadedNode.endBoneIndex				 = node.endBoneIndex
-					#loadedNode.setAngleMethod			 = node.setAngleMethod
-					#loadedNode.rotationAxisCoordinates	 = node.rotationAxisCoordinates
-					#loadedNode.isAdditive				 = node.isAdditive
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
+					loadedNode.userData 				 = int(object.children[1].content)
+					loadedNode.nodeName 				 = object.children[2].content
+					loadedNode.enable 					 = string_to_bool(object.children[3].content)
+					loadedNode.axisOfRotation			 = object.children[4].content
+					loadedNode.twistAngle				 = object.children[5].content
+					loadedNode.startBoneIndex			 = int(object.children[6].content)
+					loadedNode.endBoneIndex				 = int(object.children[7].content)
+					if object.children[8].content == "RAMPED":
+						loadedNode.setAngleMethod = 1
+					else:
+						loadedNode.setAngleMethod = 0
+					if object.children[9].content == "ROTATION_AXIS_IN_MODEL_COORDINATES":
+						loadedNode.rotationAxisCoordinates = 1
+					elif object.children[9].content == "ROTATION_AXIS_IN_PARENT_COORDINATES":
+						loadedNode.rotationAxisCoordinates = 2
+					else:
+						loadedNode.rotationAxisCoordinates = 0
+					loadedNode.isAdditive				 = string_to_bool(object.children[10].content)
 					graphEdit.add_child(loadedNode)
-				"BSInterpValueModifier":
+				"BSInterpValueModifier": # Done
 					print("BSInterpValueModifier loaded.")
 					var loadedNode = globalVariable.BSInterpValueModifier.instantiate()
 					base_node_values(loadedNode, object)
@@ -514,7 +532,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					loadedNode.result					 = object.children[6].content
 					loadedNode.gain						 = object.children[7].content
 					graphEdit.add_child(loadedNode)
-				"hkbEventsFromRangeModifier":
+				"hkbEventsFromRangeModifier": # Done
 					print("hkbEventsFromRangeModifier loaded.")
 					var loadedNode = globalVariable.hkbEventsFromRangeModifier.instantiate()
 					base_node_values(loadedNode, object)
@@ -530,72 +548,116 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					base_node_values(loadedNode, object)
 					#loadedNode.rangeArray				 = node.rangeArray
 					graphEdit.add_child(loadedNode)
-				"BSBehaviorGraphSwapGenerator":
+				"BSBehaviorGraphSwapGenerator": # Done
 					print("BSBehaviorGraphSwapGenerator loaded.")
 					var loadedNode = globalVariable.BSBehaviorGraphSwapGenerator.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
+					if object.children[3].content != "null": # pDefaultGenerator
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[3].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
-				"BSCyclicBlendTransitionGenerator":
+				"BSCyclicBlendTransitionGenerator": # Done
 					print("BSCyclicBlendTransitionGenerator loaded.")
 					var loadedNode = globalVariable.BSCyclicBlendTransitionGenerator.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
-					#loadedNode.EventToFreezeBlendValueID	 	= node.EventToFreezeBlendValueID
-					#loadedNode.EventToFreezeBlendValuePayload	= node.EventToFreezeBlendValuePayload
-					#loadedNode.EventToCrossBlendID				 = node.EventToCrossBlendID
-					#loadedNode.EventToCrossBlendPayload			 = node.EventToCrossBlendPayload
-					#loadedNode.TransitionOutEventID				 = node.TransitionOutEventID
-					#loadedNode.TransitionOutEventPayload		 = node.TransitionOutEventPayload
-					#loadedNode.TransitionInEventID				 = node.TransitionInEventID
-					#loadedNode.TransitionInEventPayload			 = node.TransitionInEventPayload
-					#loadedNode.fTransitionDuration				 = node.fTransitionDuration
+					if object.children[3].content != "null": # pBlenderGenerator
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[3].content.replace("#",""))])
+					
+					loadedNode.EventToFreezeBlendValueID = int(object.children[4].children[0].children[0].content)
+					if object.children[4].children[0].children[1].content != "null": # EventToFreezeBlend
+						for payload in payloadValues:
+							if payload[0] == object.children[4].children[0].children[1].content:
+								loadedNode.EventToFreezeBlendValuePayload = payload[1]
+					else:
+						loadedNode.EventToFreezeBlendValuePayload = -1
+					
+					loadedNode.EventToCrossBlendID = int(object.children[5].children[0].children[0].content)
+					if object.children[5].children[0].children[1].content != "null": # EventToCrossBlend
+						for payload in payloadValues:
+							if payload[0] == object.children[5].children[0].children[1].content:
+								loadedNode.EventToCrossBlendPayload = payload[1]
+					else:
+						loadedNode.EventToCrossBlendPayload = -1
+					
+					loadedNode.TransitionOutEventID = int(object.children[6].children[0].children[0].content)
+					if object.children[6].children[0].children[1].content != "null": # TransitionOut
+						for payload in payloadValues:
+							if payload[0] == object.children[6].children[0].children[1].content:
+								loadedNode.TransitionOutEventPayload = payload[1]
+					else:
+						loadedNode.TransitionOutEventPayload = -1
+					
+					loadedNode.TransitionInEventID = int(object.children[7].children[0].children[0].content)
+					if object.children[7].children[0].children[1].content != "null": # TransitionIn
+						for payload in payloadValues:
+							if payload[0] == object.children[7].children[0].children[1].content:
+								loadedNode.TransitionInEventPayload = payload[1]
+					else:
+						loadedNode.TransitionInEventPayload = -1
+					loadedNode.fTransitionDuration				 = object.children[9].content
 					graphEdit.add_child(loadedNode)
-				"BGSGamebryoSequenceGenerator":
+				"BGSGamebryoSequenceGenerator": # Done
 					print("BGSGamebryoSequenceGenerator loaded.")
 					var loadedNode = globalVariable.BGSGamebryoSequenceGenerator.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData 			= int(object.children[1].content)
 					loadedNode.nodeName 			= object.children[2].content
 					loadedNode.pSequence			= object.children[3].content
-					#loadedNode.eBlendModeFunction	= node.eBlendModeFunction
-					#loadedNode.fPercent				= node.fPercent
-					#loadedNode.eUseTimePercentage	= node.eUseTimePercentage
-					#loadedNode.fTimePercent			= node.fTimePercent
+					loadedNode.eBlendModeFunction	= object.children[4].content
+					loadedNode.fPercent				= object.children[5].content
+					loadedNode.eUseTimePercentage	= object.children[6].content
+					loadedNode.fTimePercent			= object.children[7].content
 					graphEdit.add_child(loadedNode)
-				"hkbBehaviorReferenceGenerator":
+				"hkbBehaviorReferenceGenerator": # Done
 					print("hkbBehaviorReferenceGenerator loaded.")
 					var loadedNode = globalVariable.hkbBehaviorReferenceGenerator.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData 				= int(object.children[1].content)
 					loadedNode.nodeName 				= object.children[2].content
 					loadedNode.behaviorName				= object.children[3].content
 					graphEdit.add_child(loadedNode)
-				"BSAssignVariablesModifier":
+				"BSAssignVariablesModifier": # Done
 					print("BSAssignVariablesModifier loaded.")
 					var loadedNode = globalVariable.BSAssignVariablesModifier.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					loadedNode.enable = string_to_bool(object.children[3].content)
-					#loadedNode.floatVariable		= node.floatVariable
-					#loadedNode.floatValue			= node.floatValue
-					#loadedNode.intVariable			= node.intVariable
-					#loadedNode.intValue				= node.intValue
+					loadedNode.floatVariable		= [object.children[4].content, object.children[6].content, object.children[8].content, object.children[10].content, object.children[12].content, object.children[14].content, object.children[16].content, object.children[18].content, object.children[20].content, object.children[22].content, object.children[24].content, object.children[26].content, object.children[28].content, object.children[30].content, object.children[32].content, object.children[34].content, object.children[36].content, object.children[38].content, object.children[40].content, object.children[42].content]
+					loadedNode.floatValue			= [object.children[5].content, object.children[7].content, object.children[9].content, object.children[11].content, object.children[13].content, object.children[15].content, object.children[17].content, object.children[19].content, object.children[21].content, object.children[23].content, object.children[25].content, object.children[27].content, object.children[29].content, object.children[31].content, object.children[33].content, object.children[35].content, object.children[37].content, object.children[39].content, object.children[41].content, object.children[43].content]
+					loadedNode.intVariable			= [int(object.children[44].content), int(object.children[46].content), int(object.children[48].content), int(object.children[50].content)]
+					loadedNode.intValue				= [int(object.children[45].content), int(object.children[47].content), int(object.children[49].content), int(object.children[51].content)]
 					graphEdit.add_child(loadedNode)
 				"DynamicAnimationTaggingGenerator":
 					print("DynamicAnimationTaggingGenerator loaded.")
 					var loadedNode = globalVariable.DynamicAnimationTaggingGenerator.instantiate()
 					base_node_values(loadedNode, object)
-					#loadedNode.nodeName				= node.nodeName
-					#loadedNode.userData				= node.userData
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
+					loadedNode.userData = int(object.children[1].content)
+					loadedNode.nodeName = object.children[2].content
+					if object.children[3].content != "null": # pDefaultGenerator
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[3].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
 				"BSTimerModifier":
 					print("BSTimerModifier loaded.")
 					var loadedNode = globalVariable.BSTimerModifier.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					loadedNode.enable = string_to_bool(object.children[3].content)
