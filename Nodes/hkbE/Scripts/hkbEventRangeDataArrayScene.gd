@@ -92,7 +92,6 @@ func _on_update_range_array():
 				"eventID": child.get("eventID"),
 				"payloadID": child.get("payloadID"),
 				"eventMode": child.get("eventMode"),
-				
 			}
 			rangeArray.append(rangeData)
 

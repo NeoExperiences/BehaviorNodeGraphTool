@@ -492,13 +492,13 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 						loadedNode.mode = 0
 					loadedNode.flagsIndex					 = int(object.children[15].content)
 					graphEdit.add_child(loadedNode)
-				"hkbClipTriggerArray":
+				"hkbClipTriggerArray": # Done
 					print("hkbClipTriggerArray loaded.")
 					var loadedNode = globalVariable.hkbClipTriggerArray.instantiate()
 					base_node_values(loadedNode, object)
 					loadedNode.triggersArray = []
 					for trigger in range(int(object.children[0].attributes.numelements)):
-						var bindingData = {
+						var triggerData = {
 							"localTime": object.children[0].children[trigger].children[0].content,
 							"eventID": int(object.children[0].children[trigger].children[1].children[0].children[0].content),
 							"payloadID": 0,
@@ -509,9 +509,8 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 						if object.children[0].children[trigger].children[1].children[0].children[1].content != "null": # payload object
 							for payload in payloadValues:
 								if payload[0] == object.children[0].children[trigger].children[1].children[0].children[1].content:
-									bindingData.payloadID = payload[1]
-						loadedNode.triggersArray.append(bindingData)
-					#loadedNode.triggersArray = node.triggersArray
+									triggerData.payloadID = payload[1]
+						loadedNode.triggersArray.append(triggerData)
 					graphEdit.add_child(loadedNode)
 				"hkbBlendingTransitionEffect": # Done
 					print("hkbBlendingTransitionEffect loaded.")
@@ -643,10 +642,27 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					if object.children[6].content != "null": # eventRanges
 						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[6].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
-				"hkbEventRangeDataArray":
+				"hkbEventRangeDataArray": # Done
 					print("hkbEventRangeDataArray loaded.")
 					var loadedNode = globalVariable.hkbEventRangeDataArray.instantiate()
 					base_node_values(loadedNode, object)
+					loadedNode.rangeArray = []
+					for range in range(int(object.children[0].attributes.numelements)):
+						var rangeData = {
+							"upperBound": object.children[0].children[range].children[0].content,
+							"eventID": int(object.children[0].children[range].children[1].children[0].children[0].content),
+							"payloadID": 0,
+							"eventMode": 0,
+						}
+						if object.children[0].children[range].children[1].children[0].children[1].content != "null": # payload object
+							for payload in payloadValues:
+								if payload[0] == object.children[0].children[range].children[1].children[0].children[1].content:
+									rangeData.payloadID = payload[1]
+						if object.children[0].children[range].children[2].content == "EVENT_MODE_SEND_WHEN_IN_RANGE":
+							rangeData.eventMode = 1
+						loadedNode.rangeArray.append(rangeData)
+
+
 					#loadedNode.rangeArray				 = node.rangeArray
 					graphEdit.add_child(loadedNode)
 				"BSBehaviorGraphSwapGenerator": # Done
