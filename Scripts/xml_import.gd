@@ -349,6 +349,10 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					loadedNode.blendParameter		 = object.children[4].content
 					loadedNode.blendSpeed			 = object.children[12].content
 					loadedNode.minSpeedToSwitch		 = object.children[13].content
+					if object.children[10].content != "null": # children
+						for child in object.children[10].content.split("#"):
+							if child:
+								connections.append([1, int(object.attributes.name.replace("#","")), int(child)])
 					loadedNode.startPlayingEventId	 = int(object.children[16].content)
 					loadedNode.startMatchingEventId	 = int(object.children[17].content)
 					loadedNode.rootBoneIndex		 = int(object.children[18].content)
@@ -524,6 +528,8 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					print("BSInterpValueModifier loaded.")
 					var loadedNode = globalVariable.BSInterpValueModifier.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					loadedNode.enable = string_to_bool(object.children[3].content)
@@ -536,11 +542,15 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					print("hkbEventsFromRangeModifier loaded.")
 					var loadedNode = globalVariable.hkbEventsFromRangeModifier.instantiate()
 					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					loadedNode.enable = string_to_bool(object.children[3].content)
 					loadedNode.inputValue				 = object.children[4].content
 					loadedNode.lowerBound				 = object.children[5].content
+					if object.children[6].content != "null": # eventRanges
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[6].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
 				"hkbEventRangeDataArray":
 					print("hkbEventRangeDataArray loaded.")
