@@ -22,8 +22,18 @@ func _ready():
 		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable/enableButton.selected = 1
 	else:
 		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/enable/enableButton.selected = 0
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/activateEventId/activateEventIdSpinBox.value = activateEventId
-	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/deactivateEventId/deactivateEventIdSpinBox.value = deactivateEventId
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/activateEventId/activateEventIdOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/deactivateEventId/deactivateEventIdOptionButton._updateEvents()
+	if activateEventId == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/activateEventId/activateEventIdOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/activateEventId/activateEventIdOptionButton.selected = activateEventId + 1
+	if deactivateEventId == -1:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/deactivateEventId/deactivateEventIdOptionButton.selected = 0
+	else:
+		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/deactivateEventId/deactivateEventIdOptionButton.selected = deactivateEventId + 1
+	#$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/activateEventId/activateEventIdSpinBox.value = activateEventId
+	#$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/deactivateEventId/deactivateEventIdSpinBox.value = deactivateEventId
 	if activeByDefault:
 		$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/activeByDefault/activeByDefaultButton.selected = 1
 	else:
@@ -86,3 +96,19 @@ func _on_active_by_default_button_item_selected(index):
 		activeByDefault = true
 	else:
 		activeByDefault = false
+
+func _on_update_events_button_pressed():
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/activateEventId/activateEventIdOptionButton._updateEvents()
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/deactivateEventId/deactivateEventIdOptionButton._updateEvents()
+
+func _on_activate_event_id_option_button_item_selected(index):
+	if index == 0:
+		activateEventId = -1
+	else:
+		activateEventId = index - 1
+
+func _on_deactivate_event_id_option_button_item_selected(index):
+	if index == 0:
+		deactivateEventId = -1
+	else:
+		deactivateEventId = index - 1
