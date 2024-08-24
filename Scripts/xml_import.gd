@@ -969,18 +969,32 @@ func import_values(rootNode):
 				#variableData.eventFlags = 1
 			if hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_BOOL":
 				variableData.variableType = 0
+				#variableData.variableMinValue = 0
+				#variableData.variableMaxValue = 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_INT8":
 				variableData.variableType = 1
+				#variableData.variableMinValue = 0
+				#variableData.variableMaxValue = 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_INT16":
 				variableData.variableType = 2
+				#variableData.variableMinValue = 0
+				#variableData.variableMaxValue = 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_INT32":
 				variableData.variableType = 3
+				#variableData.variableMinValue = 0
+				#variableData.variableMaxValue = 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_REAL":
 				variableData.variableType = 4
+				#variableData.variableMinValue = 0
+				#variableData.variableMaxValue = 1065353216
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_POINTER":
 				variableData.variableType = 5
+				#variableData.variableMinValue = 0
+				#variableData.variableMaxValue = 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_VECTOR4":
 				variableData.variableType = 6
+				#variableData.variableMinValue = 0
+				#variableData.variableMaxValue = 1
 				variableData.variableQuadValues = ""
 				variableData.variableQuadValues += quadValues[quadCounter] + " "
 				quadCounter += 1
@@ -992,6 +1006,8 @@ func import_values(rootNode):
 				quadCounter += 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_QUATERNION":
 				variableData.variableType = 7
+				#variableData.variableMinValue = 0
+				#variableData.variableMaxValue = 1
 				variableData.variableQuadValues = ""
 				variableData.variableQuadValues += quadValues[quadCounter] + " "
 				quadCounter += 1

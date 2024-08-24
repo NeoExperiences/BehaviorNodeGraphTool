@@ -1508,25 +1508,26 @@ func _parse_hkbBehaviorGraphData(file, variableArray, eventArray, propertiesArra
 					file.store_string('                    <hkparam name="flags">FLAG_SYNC_POINT</hkparam>\r\n')
 				file.store_string('                </hkobject>\r\n')
 		file.store_string('            </hkparam>\r\n')
-	
-	if variableArray.size() == 0:
-		file.store_string('            <hkparam name="variableBounds" numelements="0"/>\r\n')
-	else:
-		file.store_string('            <hkparam name="variableBounds" numelements="' + str(variableArray.size()) + '">\r\n')
-		for variable in variableArray:
-				file.store_string('                <hkobject>\r\n')
-				file.store_string('                    <hkparam name="min">\r\n')
-				file.store_string('                        <hkobject class="hkbVariableValue" name="min" signature="0xb99bd6a">\r\n')
-				file.store_string('                            <hkparam name="value">' + str(variable.variableMinValue) + '</hkparam>\r\n')
-				file.store_string('                        </hkobject>\r\n')
-				file.store_string('                    </hkparam>\r\n')
-				file.store_string('                    <hkparam name="max">\r\n')
-				file.store_string('                        <hkobject class="hkbVariableValue" name="max" signature="0xb99bd6a">\r\n')
-				file.store_string('                            <hkparam name="value">' + str(variable.variableMaxValue) + '</hkparam>\r\n')
-				file.store_string('                        </hkobject>\r\n')
-				file.store_string('                    </hkparam>\r\n')
-				file.store_string('                </hkobject>\r\n')
-		file.store_string('            </hkparam>\r\n')
+	file.store_string('            <hkparam name="variableBounds" numelements="0"/>\r\n')
+	# TODO: Fix Boundaries Bug
+	#if variableArray.size() == 0:
+		#file.store_string('            <hkparam name="variableBounds" numelements="0"/>\r\n')
+	#else:
+		#file.store_string('            <hkparam name="variableBounds" numelements="' + str(variableArray.size()) + '">\r\n')
+		#for variable in variableArray:
+				#file.store_string('                <hkobject>\r\n')
+				#file.store_string('                    <hkparam name="min">\r\n')
+				#file.store_string('                        <hkobject class="hkbVariableValue" name="min" signature="0xb99bd6a">\r\n')
+				#file.store_string('                            <hkparam name="value">' + str(variable.variableMinValue) + '</hkparam>\r\n')
+				#file.store_string('                        </hkobject>\r\n')
+				#file.store_string('                    </hkparam>\r\n')
+				#file.store_string('                    <hkparam name="max">\r\n')
+				#file.store_string('                        <hkobject class="hkbVariableValue" name="max" signature="0xb99bd6a">\r\n')
+				#file.store_string('                            <hkparam name="value">' + str(variable.variableMaxValue) + '</hkparam>\r\n')
+				#file.store_string('                        </hkobject>\r\n')
+				#file.store_string('                    </hkparam>\r\n')
+				#file.store_string('                </hkobject>\r\n')
+		#file.store_string('            </hkparam>\r\n')
 	
 	file.store_string('            <hkparam name="variableInitialValues">#' + str(nodeExportIndex + 1) + '</hkparam>\r\n')
 	file.store_string('            <hkparam name="stringData">#' + str(nodeExportIndex + 2) + '</hkparam>\r\n')
