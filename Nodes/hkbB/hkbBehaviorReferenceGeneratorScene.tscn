@@ -184,7 +184,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 
 [node name="behaviorNameLine" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/behaviorName"]
-custom_minimum_size = Vector2(180, 30)
+custom_minimum_size = Vector2(280, 30)
 layout_mode = 2
 placeholder_text = "name"
 alignment = 2

@@ -947,6 +947,13 @@ func import_values(rootNode):
 	print(hkbBehaviorGraphData.children[1].content)
 	if hkbBehaviorGraphData.children[1].attributes.has("numelements"):
 		print("Variable Number: ",hkbBehaviorGraphData.children[1].attributes.numelements)
+		var quadValues = []
+		for quad in hkbVariableValueSet.children[1].content.replace("\r\n"," ").split(" "):
+			if quad:
+				quadValues.append(quad)
+				print(quad)
+		var quadCounter = 0
+		print(quadValues)
 		for variableNum in range(int(hkbBehaviorGraphData.children[1].attributes.numelements)):
 			var variableData = {
 					"variableID": variableNum,
@@ -974,8 +981,26 @@ func import_values(rootNode):
 				variableData.variableType = 5
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_VECTOR4":
 				variableData.variableType = 6
+				variableData.variableQuadValues = ""
+				variableData.variableQuadValues += quadValues[quadCounter] + " "
+				quadCounter += 1
+				variableData.variableQuadValues += quadValues[quadCounter] + " "
+				quadCounter += 1
+				variableData.variableQuadValues += quadValues[quadCounter] + " "
+				quadCounter += 1
+				variableData.variableQuadValues += quadValues[quadCounter]
+				quadCounter += 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_QUATERNION":
 				variableData.variableType = 7
+				variableData.variableQuadValues = ""
+				variableData.variableQuadValues += quadValues[quadCounter] + " "
+				quadCounter += 1
+				variableData.variableQuadValues += quadValues[quadCounter] + " "
+				quadCounter += 1
+				variableData.variableQuadValues += quadValues[quadCounter] + " "
+				quadCounter += 1
+				variableData.variableQuadValues += quadValues[quadCounter]
+				quadCounter += 1
 			print(variableData.variableID, " - ", variableData.variableName)
 			globalVariable.globalVariableList.append(variableData)
 	

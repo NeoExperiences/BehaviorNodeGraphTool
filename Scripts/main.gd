@@ -520,7 +520,7 @@ func _on_import_file_dialog_file_selected(path):
 	var unhandledNodes = []
 	var unhandledNodeDialog = ""
 	unhandledNodes = xmlImportScript._load_XML(path, $GraphEdit)
-	$AlphaImportingDialog.dialog_text = "This feature is still incomplete and won't import all graph data and connections yet."
+	$AlphaImportingDialog.dialog_text = "This feature is still incomplete and won't import all graph data and connections yet.\r\nDue to a bug from HKXPack, variables don't export all of their boundaries."
 	for node in unhandledNodes:
 		if node != null:
 			if !unhandledNodeDialog:
