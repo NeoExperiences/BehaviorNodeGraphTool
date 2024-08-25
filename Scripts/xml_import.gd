@@ -852,6 +852,25 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					loadedNode.errorSum = object.children[15].content
 					loadedNode.previousError = object.children[16].content
 					graphEdit.add_child(loadedNode)
+				"BSRagdollContactListenerModifier": # Done
+					print("BSRagdollContactListenerModifier loaded.")
+					var loadedNode = globalVariable.BSRagdollContactListenerModifier.instantiate()
+					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
+					loadedNode.userData = int(object.children[1].content)
+					loadedNode.nodeName = object.children[2].content
+					loadedNode.enable = string_to_bool(object.children[3].content)
+					loadedNode.eventId = int(object.children[4].children[0].children[0].content)
+					if object.children[4].children[0].children[1].content != "null": # payload object
+						for payload in payloadValues:
+							if payload[0] == object.children[4].children[0].children[1].content:
+								loadedNode.payload = payload[1]
+					else:
+						loadedNode.payload = -1
+					if object.children[5].content != "null": # bones
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
+					graphEdit.add_child(loadedNode)
 				_:
 					return object.attributes.name + " - " + object.attributes.class
 
