@@ -829,6 +829,29 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					graphEdit.add_child(loadedNode)
+				"hkbDampingModifier":
+					print("hkbDampingModifier loaded.")
+					var loadedNode = globalVariable.hkbDampingModifier.instantiate()
+					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
+					loadedNode.userData = int(object.children[1].content)
+					loadedNode.nodeName = object.children[2].content
+					loadedNode.enable = string_to_bool(object.children[3].content)
+					loadedNode.kP = object.children[4].content
+					loadedNode.kI = object.children[5].content
+					loadedNode.kD = object.children[6].content
+					loadedNode.enableScalarDamping = string_to_bool(object.children[7].content)
+					loadedNode.enableVectorDamping = string_to_bool(object.children[8].content)
+					loadedNode.rawValue = object.children[9].content
+					loadedNode.dampedValue = object.children[10].content
+					loadedNode.rawVector = object.children[11].content
+					loadedNode.dampedVector = object.children[12].content
+					loadedNode.vecErrorSum = object.children[13].content
+					loadedNode.vecPreviousError = object.children[14].content
+					loadedNode.errorSum = object.children[15].content
+					loadedNode.previousError = object.children[16].content
+					graphEdit.add_child(loadedNode)
 				_:
 					return object.attributes.name + " - " + object.attributes.class
 

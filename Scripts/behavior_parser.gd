@@ -154,6 +154,7 @@ func _process_node(file, node, nodeExportIndex, transitionArrayLength, payloadAr
 			_parse_hkbReferencePoseGenerator(file, node)
 		49: # hkbDampingModifier
 			print("Type of Node: hkbDampingModifier")
+			_parse_hkbDampingModifier(file, node)
 
 func _parse_hkRootLevelContainer(file, node): # Done
 	file.store_string('        <hkobject class="hkRootLevelContainer" name="#' + str(node.nodeID) + '" signature="0x2772c11e">\r\n')
@@ -1947,4 +1948,39 @@ func _parse_hkbGeneratorTransitionEffect(file, node):
 	file.store_string('            <!-- justActivated SERIALIZE_IGNORED -->\r\n')
 	file.store_string('            <!-- updateActiveNodes SERIALIZE_IGNORED -->\r\n')
 	file.store_string('            <!-- stage SERIALIZE_IGNORED -->\r\n')
+	file.store_string('        </hkobject>\r\n')
+
+func _parse_hkbDampingModifier(file, node):
+	file.store_string('        <hkobject class="hkbDampingModifier" name="#' + str(node.nodeID) + '" signature="0x68a51d05">\r\n')
+	file.store_string('            <!-- memSizeAndRefCount SERIALIZE_IGNORED -->\r\n')
+	if node.nodeConnection0.size() != 0:
+		file.store_string('            <hkparam name="variableBindingSet">#' + str(node.nodeConnection0[0][2]) + '</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="variableBindingSet">null</hkparam>\r\n')
+	file.store_string('            <!-- cachedBindables SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- areBindablesCached SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- hasEnableChanged SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <hkparam name="userData">' + str(node.userData) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="name">' + str(node.nodeName) + '</hkparam>\r\n')
+	file.store_string('            <!-- id SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- cloneState SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- type SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- nodeInfo SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <hkparam name="enable">' + str(node.enable) + '</hkparam>\r\n')
+	file.store_string('            <!-- padModifier1 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- padModifier2 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- padModifier3 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <hkparam name="kP">' + str(node.kP) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="kI">' + str(node.kI) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="kD">' + str(node.kD) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="enableScalarDamping">' + str(node.enableScalarDamping) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="enableVectorDamping">' + str(node.enableVectorDamping) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="rawValue">' + str(node.rawValue) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="dampedValue">' + str(node.dampedValue) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="rawVector">' + str(node.rawVector) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="dampedVector">' + str(node.dampedVector) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="vecErrorSum">' + str(node.vecErrorSum) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="vecPreviousError">' + str(node.vecPreviousError) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="errorSum">' + str(node.errorSum) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="previousError">' + str(node.previousError) + '</hkparam>\r\n')
 	file.store_string('        </hkobject>\r\n')

@@ -521,6 +521,27 @@ func _node_processing(node, graphEdit, nodeIndex):
 					loadedNode.nodeName					= node.nodeName
 					loadedNode.userData					= node.userData
 					graphEdit.add_child(loadedNode)
+				49:
+					print("hkbDampingModifier loaded.")
+					var loadedNode = globalVariable.hkbDampingModifier.instantiate()
+					base_node_values(loadedNode, node)
+					loadedNode.nodeName					= node.nodeName
+					loadedNode.userData					= node.userData
+					loadedNode.enable					= node.enable
+					loadedNode.kP						= node.kP
+					loadedNode.kI						= node.kI
+					loadedNode.kD						= node.kD
+					loadedNode.enableScalarDamping		= node.enableScalarDamping
+					loadedNode.enableVectorDamping		= node.enableVectorDamping
+					loadedNode.rawValue					= node.rawValue
+					loadedNode.dampedValue				= node.dampedValue
+					loadedNode.rawVector				= node.rawVector
+					loadedNode.dampedVector				= node.dampedVector
+					loadedNode.vecErrorSum				= node.vecErrorSum
+					loadedNode.vecPreviousError			= node.vecPreviousError
+					loadedNode.errorSum					= node.errorSum
+					loadedNode.previousError			= node.previousError
+					graphEdit.add_child(loadedNode)
 			if node.nodeID >= nodeIndex:
 				nodeIndex = node.nodeID + 1
 

@@ -109,7 +109,6 @@ item_4/text = "hkbC..."
 item_4/id = 4
 item_5/text = "hkbDampingModifier"
 item_5/id = 5
-item_5/disabled = true
 item_6/text = "hkbE..."
 item_6/id = 6
 item_7/text = "hkbG..."

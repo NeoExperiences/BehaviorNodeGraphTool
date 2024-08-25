@@ -95,7 +95,7 @@ func _on_create_node_menu_list_id_pressed(id):
 		4: # 
 			createNodeMenuhkbC.show()
 		5: # hkbDampingModifier
-			print("hkbDampingModifier is not supported yet.")
+			instance_node(globalVariable.hkbDampingModifier)
 		6: # 
 			createNodeMenuhkbE.show()
 		7: # hkbGetUpModifier
@@ -503,6 +503,19 @@ func _create_node_diccionary(child, nodeConnection0, nodeConnection1, nodeConnec
 		"TransitionInEventPayload": child.get("TransitionInEventPayload"),
 		"fTransitionDuration": child.get("fTransitionDuration"),
 		"rangeArray": child.get("rangeArray"),
+		"kP": child.get("kP"),
+		"kI": child.get("kI"),
+		"kD": child.get("kD"),
+		"enableScalarDamping": child.get("enableScalarDamping"),
+		"enableVectorDamping": child.get("enableVectorDamping"),
+		"rawValue": child.get("rawValue"),
+		"dampedValue": child.get("dampedValue"),
+		"rawVector": child.get("rawVector"),
+		"dampedVector": child.get("dampedVector"),
+		"vecErrorSum": child.get("vecErrorSum"),
+		"vecPreviousError": child.get("vecPreviousError"),
+		"errorSum": child.get("errorSum"),
+		"previousError": child.get("previousError"),
 		"nodeConnection0": nodeConnection0,
 		"nodeConnection1": nodeConnection1,
 		"nodeConnection2": nodeConnection2,
