@@ -134,7 +134,7 @@ func _on_create_node_menu_bs_id_pressed(id):
 		7: # BSModifyOnceModifier
 			instance_node(globalVariable.BSModifyOnceModifier)
 		8: # BSRagdollContactListenerModifier
-			print("BSRagdollContactListenerModifier is not supported yet.")
+			instance_node(globalVariable.BSRagdollContactListenerModifier)
 		9: # BSTimerModifier
 			instance_node(globalVariable.BSTimerModifier)
 

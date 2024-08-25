@@ -435,6 +435,16 @@ func _node_processing(node, graphEdit, nodeIndex):
 					loadedNode.nodeName					 = node.nodeName
 					loadedNode.userData					 = node.userData
 					graphEdit.add_child(loadedNode)
+				38:
+					print("BSRagdollContactListenerModifier loaded.")
+					var loadedNode = globalVariable.BSRagdollContactListenerModifier.instantiate()
+					base_node_values(loadedNode, node)
+					loadedNode.nodeName				= node.nodeName
+					loadedNode.enable				= node.enable
+					loadedNode.userData				= node.userData
+					loadedNode.eventId 				= node.eventId
+					loadedNode.payload				= node.payload
+					graphEdit.add_child(loadedNode)
 				39:
 					print("BSCyclicBlendTransitionGenerator loaded.")
 					var loadedNode = globalVariable.BSCyclicBlendTransitionGenerator.instantiate()

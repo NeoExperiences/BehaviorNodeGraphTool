@@ -124,6 +124,7 @@ func _process_node(file, node, nodeExportIndex, transitionArrayLength, payloadAr
 			_parse_BSBehaviorGraphSwapGenerator(file, node)
 		38:
 			print("Type of Node: BSRagdollContactListenerModifier")
+			_parse_BSRagdollContactListenerModifier(file, node, nodeExportIndex, transitionArrayLength)
 		39:
 			print("Type of Node: BSCyclicBlendTransitionGenerator")
 			_parse_BSCyclicBlendTransitionGenerator(file, node, nodeExportIndex, transitionArrayLength)
@@ -1425,9 +1426,6 @@ func _parse_BSBehaviorGraphSwapGenerator(file, node):
 		file.store_string('            <hkparam name="pDefaultGenerator">null</hkparam>\r\n')
 	file.store_string('        </hkobject>\r\n')
 
-func _parse_BSRagdollContactListenerModifier(file):
-	print()
-
 func _parse_hkbBehaviorGraphData(file, variableArray, eventArray, propertiesArray, nodeExportIndex): # Done
 	file.store_string('        <hkobject class="hkbBehaviorGraphData" name="#' + str(nodeExportIndex) + '" signature="0x907a8222">\r\n')
 	file.store_string('            <!-- memSizeAndRefCount SERIALIZE_IGNORED -->\r\n')
@@ -1815,6 +1813,45 @@ func _parse_BSTimerModifier(file, node, nodeExportIndex, transitionArrayLength):
 	file.store_string('            </hkparam>\r\n')
 	file.store_string('            <hkparam name="resetAlarm">' + str(node.resetAlarm) + '</hkparam>\r\n')
 	file.store_string('            <!-- secondsElapsed SERIALIZE_IGNORED -->\r\n')
+	file.store_string('        </hkobject>\r\n')
+
+func _parse_BSRagdollContactListenerModifier(file, node, nodeExportIndex, transitionArrayLength): # Done
+	file.store_string('        <hkobject class="BSRagdollContactListenerModifier" name="#' + str(node.nodeID) + '" signature="0x7e6d66c9">\r\n')
+	file.store_string('            <!-- memSizeAndRefCount SERIALIZE_IGNORED -->\r\n')
+	if node.nodeConnection0.size() != 0:
+		file.store_string('            <hkparam name="variableBindingSet">#' + str(node.nodeConnection0[0][2]) + '</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="variableBindingSet">null</hkparam>\r\n')
+	file.store_string('            <!-- cachedBindables SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- areBindablesCached SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- hasEnableChanged SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <hkparam name="userData">' + str(node.userData) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="name">' + str(node.nodeName) + '</hkparam>\r\n')
+	file.store_string('            <!-- id SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- cloneState SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- type SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- nodeInfo SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <hkparam name="enable">' + str(node.enable) + '</hkparam>\r\n')
+	file.store_string('            <!-- padModifier1 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- padModifier2 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- padModifier3 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <hkparam name="contactEvent">\r\n')
+	file.store_string('                <hkobject class="hkbEventProperty" name="contactEvent" signature="0xdb38a15">\r\n')
+	if node.eventId != -1:
+		file.store_string('                    <hkparam name="id">' + str(node.eventId) + '</hkparam>\r\n')
+	else:
+		file.store_string('                    <hkparam name="id">-1</hkparam>\r\n')
+	if node.payload != -1:
+		file.store_string('                    <hkparam name="payload">#' + str(nodeExportIndex + node.payload + transitionArrayLength) + '</hkparam>\r\n')
+	else:
+		file.store_string('                    <hkparam name="payload">null</hkparam>\r\n')
+	file.store_string('                </hkobject>\r\n')
+	file.store_string('            </hkparam>\r\n')
+	if node.nodeConnection1.size() != 0:
+		file.store_string('            <hkparam name="bones">#' + str(node.nodeConnection1[0][2]) + '</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="bones">null</hkparam>\r\n')
+	file.store_string('            <!-- throwEvent SERIALIZE_IGNORED -->\r\n')
 	file.store_string('        </hkobject>\r\n')
 
 func _parse_BSCyclicBlendTransitionGenerator(file, node, nodeExportIndex, transitionArrayLength):

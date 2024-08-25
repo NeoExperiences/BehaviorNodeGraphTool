@@ -829,7 +829,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					loadedNode.userData = int(object.children[1].content)
 					loadedNode.nodeName = object.children[2].content
 					graphEdit.add_child(loadedNode)
-				"hkbDampingModifier":
+				"hkbDampingModifier": # Done
 					print("hkbDampingModifier loaded.")
 					var loadedNode = globalVariable.hkbDampingModifier.instantiate()
 					base_node_values(loadedNode, object)

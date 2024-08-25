@@ -51,7 +51,7 @@ var DynamicAnimationTaggingGenerator		= load("res://Nodes/DynamicAnimationTaggin
 var BSTimerModifier							= load("res://Nodes/BS/BSTimerModifierScene.tscn")
 var BSCyclicBlendTransitionGenerator		= load("res://Nodes/BS/BSCyclicBlendTransitionGeneratorScene.tscn")
 var hkbDampingModifier						= load("res://Nodes/hkbDampingModifierScene.tscn")
-
+var BSRagdollContactListenerModifier		= load("res://Nodes/BS/BSRagdollContactListenerModifierScene.tscn")
 
 
 
