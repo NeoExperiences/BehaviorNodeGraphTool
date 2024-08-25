@@ -1019,7 +1019,30 @@ func import_values(rootNode):
 				quadCounter += 1
 			print(variableData.variableID, " - ", variableData.variableName)
 			globalVariable.globalVariableList.append(variableData)
-	
+	if hkbBehaviorGraphData.children[2].attributes.has("numelements"):
+		for propertiesNum in range(int(hkbBehaviorGraphData.children[2].attributes.numelements)):
+			var propertiesData = {
+					"propertiesID": propertiesNum,
+					"propertiesName": hkbBehaviorGraphStringData.children[3].children[propertiesNum].content,
+					"propertiesType": 0
+				}
+			if hkbBehaviorGraphData.children[2].children[propertiesNum].children[1].content == "VARIABLE_TYPE_BOOL":
+				propertiesData.propertiesType = 0
+			elif hkbBehaviorGraphData.children[2].children[propertiesNum].children[1].content == "VARIABLE_TYPE_INT8":
+				propertiesData.propertiesType = 1
+			elif hkbBehaviorGraphData.children[2].children[propertiesNum].children[1].content == "VARIABLE_TYPE_INT16":
+				propertiesData.propertiesType = 2
+			elif hkbBehaviorGraphData.children[2].children[propertiesNum].children[1].content == "VARIABLE_TYPE_INT32":
+				propertiesData.propertiesType = 3
+			elif hkbBehaviorGraphData.children[2].children[propertiesNum].children[1].content == "VARIABLE_TYPE_REAL":
+				propertiesData.propertiesType = 4
+			elif hkbBehaviorGraphData.children[2].children[propertiesNum].children[1].content == "VARIABLE_TYPE_POINTER":
+				propertiesData.propertiesType = 5
+			elif hkbBehaviorGraphData.children[2].children[propertiesNum].children[1].content == "VARIABLE_TYPE_VECTOR4":
+				propertiesData.propertiesType = 6
+			elif hkbBehaviorGraphData.children[2].children[propertiesNum].children[1].content == "VARIABLE_TYPE_QUATERNION":
+				propertiesData.propertiesType = 7
+			globalVariable.globalPropertiesList.append(propertiesData)
 	print(hkbBehaviorGraphData.attributes.name, " - ", hkbBehaviorGraphData.attributes.class)
 	#print(hkbBehaviorGraphData.children[3].attributes.name, " = ", hkbBehaviorGraphData.children[3].attributes.numelements)
 	#for eventInfo in hkbBehaviorGraphData.children[3].children:
