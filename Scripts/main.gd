@@ -18,7 +18,7 @@ var variableBoundPadding = 0
 var xmlImportScript = preload("res://Scripts/xml_import.gd").new()
 
 # Node Arranging Script
-var nodeArrangeScript = preload("res://Scripts/node_arrange.gd").new()
+#var nodeArrangeScript = preload("res://Scripts/node_arrange.gd").new()
 
 # Context Menu
 @onready var contextMenu		= $ContextMenu
