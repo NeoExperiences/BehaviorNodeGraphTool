@@ -14,7 +14,11 @@ var behaviorParserScript = preload("res://Scripts/behavior_parser.gd").new()
 var fileManagementScript = preload("res://Scripts/file_management.gd").new()
 
 # XML Import Script
+var variableBoundPadding = 0
 var xmlImportScript = preload("res://Scripts/xml_import.gd").new()
+
+# Node Arranging Script
+var nodeArrangeScript = preload("res://Scripts/node_arrange.gd").new()
 
 # Context Menu
 @onready var contextMenu		= $ContextMenu
@@ -526,13 +530,19 @@ func _create_node_diccionary(child, nodeConnection0, nodeConnection1, nodeConnec
 	return data
 
 func _on_import_button_pressed():
+	$VariableBoundsDialog.show()
+
+func _on_variable_bounds_spin_box_value_changed(value):
+	variableBoundPadding = int(value)
+
+func _on_variable_bounds_dialog_confirmed():
 	$ImportFileDialog.show()
 
 func _on_import_file_dialog_file_selected(path):
 	_clean_up_graph()
 	var unhandledNodes = []
 	var unhandledNodeDialog = ""
-	unhandledNodes = xmlImportScript._load_XML(path, $GraphEdit)
+	unhandledNodes = xmlImportScript._load_XML(path, $GraphEdit, variableBoundPadding)
 	$AlphaImportingDialog.dialog_text = "This feature is still incomplete and won't import all graph data and connections yet.\r\nDue to a bug from HKXPack, variables don't export all of their boundaries."
 	for node in unhandledNodes:
 		if node != null:
@@ -631,6 +641,6 @@ func _instantiate_global_values():
 func _on_credits_button_pressed():
 	$AcceptDialog.show()
 
-
-
+#func _on_arrange_node_button_pressed():
+	#nodeArrangeScript._arrange_nodes($GraphEdit)
 

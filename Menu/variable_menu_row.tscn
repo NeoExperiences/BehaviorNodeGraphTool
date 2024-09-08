@@ -72,8 +72,9 @@ custom_minimum_size = Vector2(105, 30)
 layout_mode = 2
 text = "0"
 alignment = 2
-max_length = 11
+max_length = 20
 expand_to_text_length = true
+virtual_keyboard_type = 2
 
 [node name="MinValuesContainer" type="PanelContainer" parent="ValuesRowContainer"]
 layout_mode = 2
@@ -83,7 +84,8 @@ custom_minimum_size = Vector2(130, 30)
 layout_mode = 2
 text = "0"
 alignment = 2
-max_length = 11
+max_length = 20
+virtual_keyboard_type = 2
 
 [node name="MaxValuesContainer" type="PanelContainer" parent="ValuesRowContainer"]
 layout_mode = 2
@@ -93,7 +95,8 @@ custom_minimum_size = Vector2(130, 30)
 layout_mode = 2
 text = "0"
 alignment = 2
-max_length = 11
+max_length = 20
+virtual_keyboard_type = 2
 
 [node name="QuadValuesContainer" type="PanelContainer" parent="ValuesRowContainer"]
 layout_mode = 2

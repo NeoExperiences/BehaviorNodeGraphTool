@@ -1,47 +1,54 @@
 extends Node
 
-func _load_XML(path, graphEdit):
+func _load_XML(path, graphEdit, variableBoundPadding):
 	var parsedFile = XML.parse_file(path)
 	var rootNode = parsedFile.root
 	var connections = []
 	var unhandledNodes = []
 	var transitionValues = []
 	var payloadValues = []
-	print("Root Node: ", rootNode.attributes)
+	#print("Root Node: ", rootNode.attributes)
 	transitionValues = import_transitions(rootNode.children[0].children)
-	print(transitionValues)
+	#print(transitionValues)
 	payloadValues = import_payload(rootNode.children[0].children)
-	print(payloadValues)
+	#print(payloadValues)
 	
-	import_values(rootNode)
+	import_values(rootNode, variableBoundPadding)
 	graphEdit.get_parent()._instantiate_global_values()
-	print(globalVariable.globalEventList)
+	#print(globalVariable.globalEventList)
 	for object in rootNode.children[0].children:
 		#if true:
 		if object.attributes.class != "hkbBehaviorGraphData" and object.attributes.class != "hkbVariableValueSet" and object.attributes.class != "hkbBehaviorGraphStringData":
-			print(object.attributes.name, " - ", object.attributes.class)
+			#print(object.attributes.name, " - ", object.attributes.class)
 			unhandledNodes.append(_object_processing(object, graphEdit, connections, transitionValues, payloadValues))
-			print("[")
+			#print("[")
 			var child_count = 0
-			for parameter in object.children:
-				print("	", " #", child_count," - " , parameter.attributes.name, " = ", parameter.content)
-				child_count += 1
-				if parameter.attributes.name == "transitions":
-					var transition_count = 1
-					for transition in parameter.children:
-						print("			Transition #", transition_count)
-						transition_count += 1
-						for value in transition.children:
-							#print("		", transition.content)
-							child_count += 1
-							print("				", value.attributes.name, " = ", value.content)
-				if parameter.attributes.has("numelements"):
-					for subparameter in parameter.children:
-						if subparameter.content == "":
-							for subparameter2 in subparameter.children:
-								print("		", subparameter2.attributes.name, " = ", subparameter2.content)
-						else:
-							print("		",subparameter.content)
+			
+			
+			
+			#for parameter in object.children:
+				#print("	", " #", child_count," - " , parameter.attributes.name, " = ", parameter.content)
+				#child_count += 1
+				#if parameter.attributes.name == "transitions":
+					#var transition_count = 1
+					#for transition in parameter.children:
+						#print("			Transition #", transition_count)
+						#transition_count += 1
+						#for value in transition.children:
+							##print("		", transition.content)
+							#child_count += 1
+							#print("				", value.attributes.name, " = ", value.content)
+				#if parameter.attributes.has("numelements"):
+					#for subparameter in parameter.children:
+						#if subparameter.content == "":
+							#for subparameter2 in subparameter.children:
+								#print("		", subparameter2.attributes.name, " = ", subparameter2.content)
+						#else:
+							#print("		",subparameter.content)
+							
+							
+							
+							
 				#if parameter.attributes.name == "eventToSendWhenStateOrTransitionChanges":
 					#print("		", parameter.children[0].children[0].attributes.name, " = ", parameter.children[0].children[0].content)
 					#print("		", parameter.children[0].children[1].attributes.name, " = ", parameter.children[0].children[1].content)
@@ -61,8 +68,12 @@ func _load_XML(path, graphEdit):
 													#print("		", subparameter2.attributes.name, " = ", subparameter2.content)
 											#else:
 												#print("		",subparameter.content)
-			print("]")
-	print("Connections: ", connections)
+
+
+
+
+			#print("]")
+	#print("Connections: ", connections)
 	for connection in connections:
 		for from_node in graphEdit.get_children():
 			if from_node.get("nodeID") == connection[1]:
@@ -647,22 +658,20 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					var loadedNode = globalVariable.hkbEventRangeDataArray.instantiate()
 					base_node_values(loadedNode, object)
 					loadedNode.rangeArray = []
-					for range in range(int(object.children[0].attributes.numelements)):
+					for eventRange in range(int(object.children[0].attributes.numelements)):
 						var rangeData = {
-							"upperBound": object.children[0].children[range].children[0].content,
-							"eventID": int(object.children[0].children[range].children[1].children[0].children[0].content),
+							"upperBound": object.children[0].children[eventRange].children[0].content,
+							"eventID": int(object.children[0].children[eventRange].children[1].children[0].children[0].content),
 							"payloadID": 0,
 							"eventMode": 0,
 						}
-						if object.children[0].children[range].children[1].children[0].children[1].content != "null": # payload object
+						if object.children[0].children[eventRange].children[1].children[0].children[1].content != "null": # payload object
 							for payload in payloadValues:
-								if payload[0] == object.children[0].children[range].children[1].children[0].children[1].content:
+								if payload[0] == object.children[0].children[eventRange].children[1].children[0].children[1].content:
 									rangeData.payloadID = payload[1]
-						if object.children[0].children[range].children[2].content == "EVENT_MODE_SEND_WHEN_IN_RANGE":
+						if object.children[0].children[eventRange].children[2].content == "EVENT_MODE_SEND_WHEN_IN_RANGE":
 							rangeData.eventMode = 1
 						loadedNode.rangeArray.append(rangeData)
-
-
 					#loadedNode.rangeArray				 = node.rangeArray
 					graphEdit.add_child(loadedNode)
 				"BSBehaviorGraphSwapGenerator": # Done
@@ -948,7 +957,7 @@ func import_payload(objectList):
 			payloadConversion.append([object.attributes.name, payloadIndex])
 	return payloadConversion
 
-func import_values(rootNode):
+func import_values(rootNode, variableBoundPadding):
 	var hkbBehaviorGraphData = null
 	var hkbVariableValueSet = null
 	var hkbBehaviorGraphStringData = null
@@ -986,16 +995,22 @@ func import_values(rootNode):
 			globalVariable.globalEventList.append(eventData)
 			#print(hkbBehaviorGraphStringData.children[0].children[eventNum].content + " - " + hkbBehaviorGraphData.children[3].children[eventNum].children[0].content)
 	globalVariable.globalVariableList = []
-	print(hkbBehaviorGraphData.children[1].content)
+	#print(hkbBehaviorGraphData.children[1].content)
 	if hkbBehaviorGraphData.children[1].attributes.has("numelements"):
-		print("Variable Number: ",hkbBehaviorGraphData.children[1].attributes.numelements)
+		#print("Variable Number: ",hkbBehaviorGraphData.children[1].attributes.numelements)
 		var quadValues = []
 		for quad in hkbVariableValueSet.children[1].content.replace("\r\n"," ").split(" "):
 			if quad:
 				quadValues.append(quad)
-				print(quad)
+				#print(quad)
 		var quadCounter = 0
-		print(quadValues)
+		var boundsTotal = int(hkbBehaviorGraphData.children[4].attributes.numelements)
+		var boundsPaddingIterative = 0
+		var boundsCounterIterative = 0
+		var boundsCounter = boundsTotal - 1
+		print("Bounds Padding: ", variableBoundPadding)
+		print("Quad Values: ", quadValues)
+		print("Bounds Counter: ", boundsCounter)
 		for variableNum in range(int(hkbBehaviorGraphData.children[1].attributes.numelements)):
 			var variableData = {
 					"variableID": variableNum,
@@ -1007,36 +1022,21 @@ func import_values(rootNode):
 					"variableQuadValues": "(0.0 0.0 0.0 0.0)"
 				}
 			print(hkbBehaviorGraphData.children[1].children[variableNum].children[1].content)
-			#if hkbBehaviorGraphData.children[1].children[variableNum].children[0].content == "FLAG_SYNC_POINT":
-				#variableData.eventFlags = 1
 			if hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_BOOL":
 				variableData.variableType = 0
-				#variableData.variableMinValue = 0
-				#variableData.variableMaxValue = 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_INT8":
 				variableData.variableType = 1
-				#variableData.variableMinValue = 0
-				#variableData.variableMaxValue = 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_INT16":
 				variableData.variableType = 2
-				#variableData.variableMinValue = 0
-				#variableData.variableMaxValue = 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_INT32":
 				variableData.variableType = 3
-				#variableData.variableMinValue = 0
-				#variableData.variableMaxValue = 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_REAL":
 				variableData.variableType = 4
-				#variableData.variableMinValue = 0
-				#variableData.variableMaxValue = 1065353216
+				variableData.variableValue = str(u32_to_float(int(hkbVariableValueSet.children[0].children[variableNum].children[0].content)))
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_POINTER":
 				variableData.variableType = 5
-				#variableData.variableMinValue = 0
-				#variableData.variableMaxValue = 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_VECTOR4":
 				variableData.variableType = 6
-				#variableData.variableMinValue = 0
-				#variableData.variableMaxValue = 1
 				variableData.variableQuadValues = ""
 				variableData.variableQuadValues += quadValues[quadCounter] + " "
 				quadCounter += 1
@@ -1048,8 +1048,6 @@ func import_values(rootNode):
 				quadCounter += 1
 			elif hkbBehaviorGraphData.children[1].children[variableNum].children[1].content == "VARIABLE_TYPE_QUATERNION":
 				variableData.variableType = 7
-				#variableData.variableMinValue = 0
-				#variableData.variableMaxValue = 1
 				variableData.variableQuadValues = ""
 				variableData.variableQuadValues += quadValues[quadCounter] + " "
 				quadCounter += 1
@@ -1060,6 +1058,17 @@ func import_values(rootNode):
 				variableData.variableQuadValues += quadValues[quadCounter]
 				quadCounter += 1
 			print(variableData.variableID, " - ", variableData.variableName)
+			if boundsPaddingIterative == variableBoundPadding or boundsPaddingIterative > variableBoundPadding:
+				if boundsTotal != 0 && boundsCounterIterative != boundsCounter:
+					print("Bounds left: ", boundsCounter - boundsCounterIterative, "Padding Left: ", boundsPaddingIterative)
+					variableData.variableMinValue = str(u32_to_float(int(hkbBehaviorGraphData.children[4].children[boundsCounterIterative].children[0].children[0].children[0].content)))
+					variableData.variableMaxValue = str(u32_to_float(int(hkbBehaviorGraphData.children[4].children[boundsCounterIterative].children[1].children[0].children[0].content)))
+					boundsCounterIterative += 1
+				else:
+					print("No bounds left.")
+			else:
+				boundsPaddingIterative += 1
+				print("Padding Bound. Bounds left: ", boundsCounter - boundsCounterIterative)
 			globalVariable.globalVariableList.append(variableData)
 	if hkbBehaviorGraphData.children[2].attributes.has("numelements"):
 		for propertiesNum in range(int(hkbBehaviorGraphData.children[2].attributes.numelements)):
@@ -1100,3 +1109,10 @@ func string_to_bool(string):
 		return true
 	else:
 		return false
+
+func u32_to_float(value: int):
+	var byte_array = PackedByteArray()
+	byte_array.resize(4)
+	byte_array.encode_u32(0, value)
+	var float_value = byte_array.decode_float(0)
+	return 	float_value

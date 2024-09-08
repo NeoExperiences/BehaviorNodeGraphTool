@@ -81,6 +81,36 @@ access = 2
 root_subfolder = "Export"
 filters = PackedStringArray("*.xml")
 
+[node name="VariableBoundsDialog" type="ConfirmationDialog" parent="."]
+title = "Specify the Variable Bound Padding"
+initial_position = 1
+size = Vector2i(320, 88)
+
+[node name="PanelContainer" type="PanelContainer" parent="VariableBoundsDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 312.0
+offset_bottom = 39.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VariableBoundsDialog/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VariableBoundsDialog/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VariableBoundsDialog/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "(If unknown, leave at 0.)"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="VariableBoundsDialog/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VariableBoundsSpinBox" type="SpinBox" parent="VariableBoundsDialog/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 2
+
 [node name="ContextMenu" type="PopupMenu" parent="."]
 size = Vector2i(237, 35)
 item_count = 1
@@ -360,6 +390,16 @@ offset_right = 115.0
 offset_bottom = 85.0
 text = "Create Node"
 
+[node name="ArrangeNodeButton" type="Button" parent="Buttons"]
+visible = false
+top_level = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 90.0
+offset_right = 115.0
+offset_bottom = 125.0
+text = "Arrange"
+
 [node name="EventPayloadsButton" type="Button" parent="Buttons"]
 top_level = true
 layout_mode = 1
@@ -445,12 +485,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 right_disconnects = true
+show_grid_buttons = false
 
 [connection signal="confirmed" from="NewFileConfirmationDialog" to="." method="_on_new_file_confirmation_dialog_confirmed"]
 [connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
 [connection signal="file_selected" from="LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
 [connection signal="file_selected" from="ExportFileDialog" to="." method="_on_export_file_dialog_file_selected"]
 [connection signal="file_selected" from="ImportFileDialog" to="." method="_on_import_file_dialog_file_selected"]
+[connection signal="confirmed" from="VariableBoundsDialog" to="." method="_on_variable_bounds_dialog_confirmed"]
+[connection signal="value_changed" from="VariableBoundsDialog/PanelContainer/VBoxContainer/HBoxContainer/VariableBoundsSpinBox" to="." method="_on_variable_bounds_spin_box_value_changed"]
 [connection signal="id_pressed" from="ContextMenu" to="." method="_on_context_menu_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuList" to="." method="_on_create_node_menu_list_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuBS" to="." method="_on_create_node_menu_bs_id_pressed"]
@@ -470,6 +513,7 @@ right_disconnects = true
 [connection signal="pressed" from="Buttons/ImportButton" to="." method="_on_import_button_pressed"]
 [connection signal="pressed" from="Buttons/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="Buttons/CreateNodeButton" to="." method="_on_create_node_button_pressed"]
+[connection signal="pressed" from="Buttons/ArrangeNodeButton" to="." method="_on_arrange_node_button_pressed"]
 [connection signal="toggled" from="Buttons/EventPayloadsButton" to="." method="_on_event_payloads_button_toggled"]
 [connection signal="toggled" from="Buttons/TransitionsButton" to="." method="_on_transitions_button_toggled"]
 [connection signal="toggled" from="Buttons/EventsButton" to="." method="_on_events_button_toggled"]

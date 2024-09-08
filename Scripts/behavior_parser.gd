@@ -1507,26 +1507,38 @@ func _parse_hkbBehaviorGraphData(file, variableArray, eventArray, propertiesArra
 					file.store_string('                    <hkparam name="flags">FLAG_SYNC_POINT</hkparam>\r\n')
 				file.store_string('                </hkobject>\r\n')
 		file.store_string('            </hkparam>\r\n')
-	file.store_string('            <hkparam name="variableBounds" numelements="0"/>\r\n')
-	# TODO: Fix Boundaries Bug
-	#if variableArray.size() == 0:
-		#file.store_string('            <hkparam name="variableBounds" numelements="0"/>\r\n')
-	#else:
-		#file.store_string('            <hkparam name="variableBounds" numelements="' + str(variableArray.size()) + '">\r\n')
-		#for variable in variableArray:
-				#file.store_string('                <hkobject>\r\n')
-				#file.store_string('                    <hkparam name="min">\r\n')
-				#file.store_string('                        <hkobject class="hkbVariableValue" name="min" signature="0xb99bd6a">\r\n')
-				#file.store_string('                            <hkparam name="value">' + str(variable.variableMinValue) + '</hkparam>\r\n')
-				#file.store_string('                        </hkobject>\r\n')
-				#file.store_string('                    </hkparam>\r\n')
-				#file.store_string('                    <hkparam name="max">\r\n')
-				#file.store_string('                        <hkobject class="hkbVariableValue" name="max" signature="0xb99bd6a">\r\n')
-				#file.store_string('                            <hkparam name="value">' + str(variable.variableMaxValue) + '</hkparam>\r\n')
-				#file.store_string('                        </hkobject>\r\n')
-				#file.store_string('                    </hkparam>\r\n')
-				#file.store_string('                </hkobject>\r\n')
-		#file.store_string('            </hkparam>\r\n')
+	if variableArray.size() == 0:
+		file.store_string('            <hkparam name="variableBounds" numelements="0"/>\r\n')
+	else:
+		file.store_string('            <hkparam name="variableBounds" numelements="' + str(variableArray.size()) + '">\r\n')
+		for variable in variableArray:
+			if variable.variableType == 4:
+				file.store_string('                <hkobject>\r\n')
+				file.store_string('                    <hkparam name="min">\r\n')
+				file.store_string('                        <hkobject class="hkbVariableValue" name="min" signature="0xb99bd6a">\r\n')
+				file.store_string('                            <hkparam name="value">' + str(float_to_u32(float(variable.variableMinValue))) + '</hkparam>\r\n')
+				file.store_string('                        </hkobject>\r\n')
+				file.store_string('                    </hkparam>\r\n')
+				file.store_string('                    <hkparam name="max">\r\n')
+				file.store_string('                        <hkobject class="hkbVariableValue" name="max" signature="0xb99bd6a">\r\n')
+				file.store_string('                            <hkparam name="value">' + str(float_to_u32(float(variable.variableMaxValue))) + '</hkparam>\r\n')
+				file.store_string('                        </hkobject>\r\n')
+				file.store_string('                    </hkparam>\r\n')
+				file.store_string('                </hkobject>\r\n')
+			else:
+				file.store_string('                <hkobject>\r\n')
+				file.store_string('                    <hkparam name="min">\r\n')
+				file.store_string('                        <hkobject class="hkbVariableValue" name="min" signature="0xb99bd6a">\r\n')
+				file.store_string('                            <hkparam name="value">' + str(variable.variableMinValue) + '</hkparam>\r\n')
+				file.store_string('                        </hkobject>\r\n')
+				file.store_string('                    </hkparam>\r\n')
+				file.store_string('                    <hkparam name="max">\r\n')
+				file.store_string('                        <hkobject class="hkbVariableValue" name="max" signature="0xb99bd6a">\r\n')
+				file.store_string('                            <hkparam name="value">' + str(variable.variableMaxValue) + '</hkparam>\r\n')
+				file.store_string('                        </hkobject>\r\n')
+				file.store_string('                    </hkparam>\r\n')
+				file.store_string('                </hkobject>\r\n')
+		file.store_string('            </hkparam>\r\n')
 	
 	file.store_string('            <hkparam name="variableInitialValues">#' + str(nodeExportIndex + 1) + '</hkparam>\r\n')
 	file.store_string('            <hkparam name="stringData">#' + str(nodeExportIndex + 2) + '</hkparam>\r\n')
@@ -1540,13 +1552,18 @@ func _parse_hkbVariableValueSet(file, variableArray, nodeExportIndex): # Done
 	if variableArray.size():
 		file.store_string('            <hkparam name="wordVariableValues" numelements="' + str(variableArray.size()) + '">\r\n')
 		for variable in variableArray:
+			if variable.variableType == 4:
+				file.store_string('                <hkobject>\r\n')
+				file.store_string('                    <hkparam name="value">' + str(float_to_u32(float(variable.variableValue))) + '</hkparam>\r\n')
+				file.store_string('                </hkobject>\r\n')
+			else:
+				file.store_string('                <hkobject>\r\n')
+				file.store_string('                    <hkparam name="value">' + str(variable.variableValue) + '</hkparam>\r\n')
+				file.store_string('                </hkobject>\r\n')
 			if variable.variableType == 5:
 				pointerCounter += 1
 			if variable.variableType == 6 || variable.variableType == 7:
 				quadValuesArray.append(variable.variableQuadValues)
-			file.store_string('                <hkobject>\r\n')
-			file.store_string('                    <hkparam name="value">' + str(variable.variableValue) + '</hkparam>\r\n')
-			file.store_string('                </hkobject>\r\n')
 		file.store_string('            </hkparam>\r\n')
 	else:
 		file.store_string('            <hkparam name="wordVariableValues" numelements="0"/>\r\n')
@@ -1562,6 +1579,13 @@ func _parse_hkbVariableValueSet(file, variableArray, nodeExportIndex): # Done
 			file.store_string('            null\r\n')
 	file.store_string('            </hkparam>\r\n')
 	file.store_string('        </hkobject>\r\n')
+	
+func float_to_u32(value: float):
+	var byte_array = PackedByteArray()
+	byte_array.resize(4)
+	byte_array.encode_float(0, value)
+	var u32_value = byte_array.decode_u32(0)
+	return u32_value
 	
 func _parse_hkbBehaviorGraphStringData(file, variableArray, eventArray, propertiesArray, nodeExportIndex): # Done
 	file.store_string('        <hkobject class="hkbBehaviorGraphStringData" name="#' + str(nodeExportIndex) + '" signature="0x1bd27f38">\r\n')
@@ -2021,3 +2045,4 @@ func _parse_hkbDampingModifier(file, node):
 	file.store_string('            <hkparam name="errorSum">' + str(node.errorSum) + '</hkparam>\r\n')
 	file.store_string('            <hkparam name="previousError">' + str(node.previousError) + '</hkparam>\r\n')
 	file.store_string('        </hkobject>\r\n')
+
