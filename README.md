@@ -1,4 +1,4 @@
-# Behavior NodeGraph Tool v.0.1.1 Open Alpha
+# Behavior NodeGraph Tool v.0.1.5.1 Open Alpha
 
 The Behavior NodeGraph Tool is a Godot program capable of creating and exporting hk_2014.1.0-r1 XML files through a Node graph interface, designed primarily to create Behaviors for Fallout 4.
 
