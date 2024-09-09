@@ -880,6 +880,43 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					if object.children[5].content != "null": # bones
 						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[5].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)
+				"hkbLayer": # Done
+					print("hkbLayer loaded.")
+					var loadedNode = globalVariable.hkbLayer.instantiate()
+					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
+					if object.children[1].content != "null": # generator
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[1].content.replace("#",""))])
+					loadedNode.weight = object.children[2].content
+					if object.children[3].content != "null": # boneWeights
+						connections.append([2, int(object.attributes.name.replace("#","")), int(object.children[3].content.replace("#",""))])
+					loadedNode.fadeInDuration = object.children[4].content
+					loadedNode.fadeOutDuration = object.children[5].content
+					loadedNode.onEventId = int(object.children[6].content)
+					loadedNode.offEventId = int(object.children[7].content)
+					loadedNode.onByDefault = string_to_bool(object.children[8].content)
+					loadedNode.useMotion = string_to_bool(object.children[9].content)
+					loadedNode.forceFullFadeDurations = string_to_bool(object.children[10].content)
+					graphEdit.add_child(loadedNode)
+				"hkbLayerGenerator": # Done
+					print("hkbLayerGenerator loaded.")
+					var loadedNode = globalVariable.hkbLayerGenerator.instantiate()
+					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
+					loadedNode.userData									= int(object.children[1].content)
+					loadedNode.nodeName									= object.children[2].content
+					if object.children[3].content != "null": # layers
+						for child in object.children[3].content.split("#"):
+							if child:
+								connections.append([1, int(object.attributes.name.replace("#","")), int(child)])
+					loadedNode.indexOfSyncMasterChild					= int(object.children[4].content)
+					if object.children[5].content == "FLAG_SYNC":
+						loadedNode.flagsIndex = 1
+					else:
+						loadedNode.flagsIndex = 0
+					graphEdit.add_child(loadedNode)
 				_:
 					return object.attributes.name + " - " + object.attributes.class
 

@@ -552,6 +552,29 @@ func _node_processing(node, graphEdit, nodeIndex):
 					loadedNode.errorSum					= node.errorSum
 					loadedNode.previousError			= node.previousError
 					graphEdit.add_child(loadedNode)
+				50:
+					print("hkbLayer loaded.")
+					var loadedNode = globalVariable.hkbLayer.instantiate()
+					base_node_values(loadedNode, node)
+					loadedNode.weight = node.weight
+					loadedNode.worldFromModelWeight = node.worldFromModelWeight
+					loadedNode.fadeInDuration = node.fadeInDuration
+					loadedNode.fadeOutDuration = node.fadeOutDuration
+					loadedNode.onEventId =node.onEventId
+					loadedNode.offEventId =node.offEventId
+					loadedNode.onByDefault =node.onByDefault
+					loadedNode.useMotion = node.useMotion
+					loadedNode.forceFullFadeDurations = node.forceFullFadeDurations
+					graphEdit.add_child(loadedNode)
+				51:
+					print("hkbLayerGenerator loaded.")
+					var loadedNode = globalVariable.hkbLayerGenerator.instantiate()
+					base_node_values(loadedNode, node)
+					loadedNode.nodeName									= node.nodeName
+					loadedNode.userData									= node.userData
+					loadedNode.indexOfSyncMasterChild					= node.indexOfSyncMasterChild
+					loadedNode.flagsIndex								= node.flagsIndex
+					graphEdit.add_child(loadedNode)
 			if node.nodeID >= nodeIndex:
 				nodeIndex = node.nodeID + 1
 

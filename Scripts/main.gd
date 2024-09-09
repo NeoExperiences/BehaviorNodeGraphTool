@@ -28,6 +28,7 @@ var xmlImportScript = preload("res://Scripts/xml_import.gd").new()
 @onready var createNodeMenuhkbC = $CreateNodeMenu/CreateNodeMenuhkbC
 @onready var createNodeMenuhkbE = $CreateNodeMenu/CreateNodeMenuhkbE
 @onready var createNodeMenuhkbG = $CreateNodeMenu/CreateNodeMenuhkbG
+@onready var createNodeMenuhkbL = $CreateNodeMenu/CreateNodeMenuhkbL
 @onready var createNodeMenuhkbM = $CreateNodeMenu/CreateNodeMenuhkbM
 @onready var createNodeMenuhkbP = $CreateNodeMenu/CreateNodeMenuhkbP
 @onready var createNodeMenuhkbS = $CreateNodeMenu/CreateNodeMenuhkbS
@@ -107,16 +108,18 @@ func _on_create_node_menu_list_id_pressed(id):
 		8: # hkbKeyframeBonesModifier
 			instance_node(globalVariable.hkbKeyframeBonesModifier)
 		9: # 
-			createNodeMenuhkbM.show()
+			createNodeMenuhkbL.show()
 		10: # 
-			createNodeMenuhkbP.show()
+			createNodeMenuhkbM.show()
 		11: # 
-			createNodeMenuhkbR.show()
+			createNodeMenuhkbP.show()
 		12: # 
-			createNodeMenuhkbS.show()
+			createNodeMenuhkbR.show()
 		13: # 
+			createNodeMenuhkbS.show()
+		14: # 
 			createNodeMenuhkbT.show()
-		14: # hkbVariableBindingSet
+		15: # hkbVariableBindingSet
 			instance_node(globalVariable.hkbVariableBindingSet)
 
 func _on_create_node_menu_bs_id_pressed(id):
@@ -181,6 +184,13 @@ func _on_create_node_menuhkb_g_id_pressed(id):
 			instance_node(globalVariable.hkbGeneratorTransitionEffect)
 		1: # hkbGetUpModifier
 			instance_node(globalVariable.hkbGetUpModifier)
+
+func _on_create_node_menuhkb_l_id_pressed(id):
+	match id:
+		0: # hkbLayer
+			instance_node(globalVariable.hkbLayer)
+		1: # hkbLayerGenerator
+			instance_node(globalVariable.hkbLayerGenerator)
 
 func _on_create_node_menuhkb_m_id_pressed(id):
 	match id:
@@ -520,6 +530,13 @@ func _create_node_diccionary(child, nodeConnection0, nodeConnection1, nodeConnec
 		"vecPreviousError": child.get("vecPreviousError"),
 		"errorSum": child.get("errorSum"),
 		"previousError": child.get("previousError"),
+		"fadeInDuration": child.get("fadeInDuration"),
+		"fadeOutDuration": child.get("fadeOutDuration"),
+		"onEventId": child.get("onEventId"),
+		"offEventId": child.get("offEventId"),
+		"onByDefault": child.get("onByDefault"),
+		"useMotion": child.get("useMotion"),
+		"forceFullFadeDurations": child.get("forceFullFadeDurations"),
 		"nodeConnection0": nodeConnection0,
 		"nodeConnection1": nodeConnection1,
 		"nodeConnection2": nodeConnection2,

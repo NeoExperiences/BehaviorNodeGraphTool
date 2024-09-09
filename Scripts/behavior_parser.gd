@@ -156,6 +156,12 @@ func _process_node(file, node, nodeExportIndex, transitionArrayLength, payloadAr
 		49: # hkbDampingModifier
 			print("Type of Node: hkbDampingModifier")
 			_parse_hkbDampingModifier(file, node)
+		50: # hkbLayer
+			print("Type of Node: hkbLayer")
+			_parse_hkbLayer(file, node)
+		51: # hkbLayerGenerator
+			print("Type of Node: hkbLayerGenerator")
+			_parse_hkbLayerGenerator(file, node)
 
 func _parse_hkRootLevelContainer(file, node): # Done
 	file.store_string('        <hkobject class="hkRootLevelContainer" name="#' + str(node.nodeID) + '" signature="0x2772c11e">\r\n')
@@ -969,6 +975,34 @@ func _parse_hkbBlenderGeneratorChild(file, node): # Done
 		file.store_string('            <hkparam name="boneWeights">null</hkparam>\r\n')
 	file.store_string('            <hkparam name="weight">' + str(node.weight) + '</hkparam>\r\n')
 	file.store_string('            <hkparam name="worldFromModelWeight">' + str(node.worldFromModelWeight) + '</hkparam>\r\n')
+	file.store_string('        </hkobject>\r\n')
+
+func _parse_hkbLayer(file, node):
+	file.store_string('        <hkobject class="hkbLayer" name="#' + str(node.nodeID) + '" signature="0x2916a243">\r\n')
+	file.store_string('            <!-- memSizeAndRefCount SERIALIZE_IGNORED -->\r\n')
+	if node.nodeConnection0.size() != 0:
+		file.store_string('            <hkparam name="variableBindingSet">#' + str(node.nodeConnection0[0][2]) + '</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="variableBindingSet">null</hkparam>\r\n')
+	file.store_string('            <!-- cachedBindables SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- areBindablesCached SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- hasEnableChanged SERIALIZE_IGNORED -->\r\n')
+	if node.nodeConnection1.size() != 0:
+		file.store_string('            <hkparam name="generator">#' + str(node.nodeConnection1[0][2]) + '</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="generator">null</hkparam>\r\n')
+	file.store_string('            <hkparam name="weight">' + str(node.weight) + '</hkparam>\r\n')
+	if node.nodeConnection2.size() != 0:
+		file.store_string('            <hkparam name="boneWeights">#' + str(node.nodeConnection2[0][2]) + '</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="boneWeights">null</hkparam>\r\n')
+	file.store_string('            <hkparam name="fadeInDuration">' + str(node.fadeInDuration) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="fadeOutDuration">' + str(node.fadeOutDuration) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="onEventId">' + str(node.onEventId) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="offEventId">' + str(node.offEventId) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="onByDefault">' + str(node.onByDefault) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="useMotion">' + str(node.useMotion) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="forceFullFadeDurations">' + str(node.forceFullFadeDurations) + '</hkparam>\r\n')
 	file.store_string('        </hkobject>\r\n')
 
 func _parse_hkbClipGenerator(file, node): # Done
@@ -2046,3 +2080,38 @@ func _parse_hkbDampingModifier(file, node):
 	file.store_string('            <hkparam name="previousError">' + str(node.previousError) + '</hkparam>\r\n')
 	file.store_string('        </hkobject>\r\n')
 
+func _parse_hkbLayerGenerator(file, node):
+	file.store_string('        <hkobject class="hkbLayerGenerator" name="#' + str(node.nodeID) + '" signature="0xb4e0c52f">\r\n')
+	file.store_string('            <!-- memSizeAndRefCount SERIALIZE_IGNORED -->\r\n')
+	if node.nodeConnection0.size() != 0:
+		file.store_string('            <hkparam name="variableBindingSet">#' + str(node.nodeConnection0[0][2]) + '</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="variableBindingSet">null</hkparam>\r\n')
+	file.store_string('            <!-- cachedBindables SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- areBindablesCached SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- hasEnableChanged SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <hkparam name="userData">' + str(node.userData) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="name">' + str(node.nodeName) + '</hkparam>\r\n')
+	file.store_string('            <!-- id SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- cloneState SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- type SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- nodeInfo SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- partitionInfo SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- syncInfo SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- pad1 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- pad2 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- pad3 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- pad4 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <hkparam name="layers" numelements="'+ str(node.nodeConnection1.size()) +'">\r\n')
+	for child in node.nodeConnection1:
+		file.store_string('            #' + str(child[2]) + '\r\n')
+	file.store_string('            </hkparam>\r\n')
+	file.store_string('            <hkparam name="indexOfSyncMasterChild">' + str(node.indexOfSyncMasterChild) + '</hkparam>\r\n')
+	if node.flagsIndex == 1:
+		file.store_string('            <hkparam name="flags">FLAG_SYNC</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="flags">0</hkparam>\r\n')
+	file.store_string('            <!-- numActiveLayers SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- layerInternalStates SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- initSync SERIALIZE_IGNORED -->\r\n')
+	file.store_string('        </hkobject>\r\n')

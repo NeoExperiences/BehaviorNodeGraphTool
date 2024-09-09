@@ -73,7 +73,6 @@ layout_mode = 2
 text = "0"
 alignment = 2
 max_length = 20
-expand_to_text_length = true
 virtual_keyboard_type = 2
 
 [node name="MinValuesContainer" type="PanelContainer" parent="ValuesRowContainer"]

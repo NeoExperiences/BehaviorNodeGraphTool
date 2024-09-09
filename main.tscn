@@ -126,7 +126,7 @@ offset_bottom = 40.0
 [node name="CreateNodeMenuList" type="PopupMenu" parent="CreateNodeMenu"]
 position = Vector2i(10, 50)
 size = Vector2i(323, 412)
-item_count = 15
+item_count = 16
 item_0/text = "BGSGamebryoSequenceGenerator"
 item_0/id = 0
 item_1/text = "BS..."
@@ -145,18 +145,20 @@ item_7/text = "hkbG..."
 item_7/id = 7
 item_8/text = "hkbKeyframeBonesModifier"
 item_8/id = 8
-item_9/text = "hkbM..."
+item_9/text = "hkbL..."
 item_9/id = 9
-item_10/text = "hkbP..."
+item_10/text = "hkbM..."
 item_10/id = 10
-item_11/text = "hkbR..."
+item_11/text = "hkbP..."
 item_11/id = 11
-item_12/text = "hkbS..."
+item_12/text = "hkbR..."
 item_12/id = 12
-item_13/text = "hkbT..."
+item_13/text = "hkbS..."
 item_13/id = 13
-item_14/text = "hkbVariableBindingSet"
+item_14/text = "hkbT..."
 item_14/id = 14
+item_15/text = "hkbVariableBindingSet"
+item_15/id = 15
 
 [node name="CreateNodeMenuBS" type="PopupMenu" parent="CreateNodeMenu"]
 position = Vector2i(10, 50)
@@ -235,6 +237,16 @@ item_count = 2
 item_0/text = "hkbGeneratorTransitionEffect"
 item_0/id = 0
 item_1/text = "hkbGetUpModifier"
+item_1/id = 1
+
+[node name="CreateNodeMenuhkbL" type="PopupMenu" parent="CreateNodeMenu"]
+position = Vector2i(10, 50)
+size = Vector2i(323, 62)
+hide_on_item_selection = false
+item_count = 2
+item_0/text = "hkbLayer"
+item_0/id = 0
+item_1/text = "hkbLayerGenerator"
 item_1/id = 1
 
 [node name="CreateNodeMenuhkbM" type="PopupMenu" parent="CreateNodeMenu"]
@@ -501,6 +513,7 @@ show_grid_buttons = false
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbC" to="." method="_on_create_node_menuhkb_c_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbE" to="." method="_on_create_node_menuhkb_e_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbG" to="." method="_on_create_node_menuhkb_g_id_pressed"]
+[connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbL" to="." method="_on_create_node_menuhkb_l_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbM" to="." method="_on_create_node_menuhkb_m_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbP" to="." method="_on_create_node_menuhkb_p_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbS" to="." method="_on_create_node_menuhkb_s_id_pressed"]
