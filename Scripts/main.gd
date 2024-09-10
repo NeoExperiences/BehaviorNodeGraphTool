@@ -22,6 +22,8 @@ var xmlImportScript = preload("res://Scripts/xml_import.gd").new()
 
 # Context Menu
 @onready var contextMenu		= $ContextMenu
+
+# Node Creation Menus
 @onready var createNodeMenuList = $CreateNodeMenu/CreateNodeMenuList
 @onready var createNodeMenuBS	= $CreateNodeMenu/CreateNodeMenuBS
 @onready var createNodeMenuhkbB = $CreateNodeMenu/CreateNodeMenuhkbB
@@ -82,6 +84,49 @@ func initial_instance():
 	nodeIndex += 1
 	$GraphEdit.connect_node(str(NodeGraph.name), 0, str(StateMachine.name), 0)
 	_process_connections()
+
+# Context Menu Handling
+func _input(event):
+	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 2:
+		if selected_nodes != []:
+			$ContextMenu.set_item_disabled(0, false)
+			$ContextMenu.set_item_disabled(1, false)
+			$ContextMenu.set_item_disabled(2, false)
+			$ContextMenu.set_item_disabled(3, false)
+		else:
+			$ContextMenu.set_item_disabled(0, true)
+			$ContextMenu.set_item_disabled(1, true)
+			$ContextMenu.set_item_disabled(2, true)
+			$ContextMenu.set_item_disabled(3, true)
+		contextMenu.popup(Rect2i(get_global_mouse_position().x, get_global_mouse_position().y, 100, 30))
+		get_viewport().set_input_as_handled()
+
+func _on_context_menu_id_pressed(id):
+	match id:
+		0:
+			_on_graph_edit_copy_nodes_request()
+		1:
+			_on_graph_edit_paste_nodes_request()
+		2:
+			_context_menu_change_color()
+		3:
+			$NodeDeletionConfirmationDialog.show()
+
+func _context_menu_change_color():
+	for node in selected_nodes:
+		for child in $GraphEdit.get_children():
+			if is_instance_valid(node) && is_instance_valid(child):
+				if node.name == child.name:
+					child._on_paint_button_pressed()
+
+func _on_node_deletion_confirmation_dialog_confirmed():
+	for node in selected_nodes:
+				for child in $GraphEdit.get_children():
+					if is_instance_valid(node) && is_instance_valid(child):
+						if node.name == child.name:
+							child._on_confirm_delete_button_pressed()
+							selected_nodes = []
+
 
 # Node Creation Menus
 func _on_create_node_button_pressed():
@@ -250,9 +295,7 @@ func _process_connections():
 		var connectionData = [(connection["from_port"]),$GraphEdit.get_node(from_path).get("nodeID"),$GraphEdit.get_node(to_path).get("nodeID")]
 		connectionInfo.append(connectionData)
 
-
 # Graph Node Operations
-
 func _on_graph_edit_node_selected(node):
 	if node not in selected_nodes:
 		selected_nodes.append(node)
@@ -281,11 +324,10 @@ func _on_graph_edit_paste_nodes_request():
 			for child in $GraphEdit.get_children():
 				if child.get("nodeID") > nodeIndexLast:
 					nodeIndexLast = child.get("nodeID")
-			if node.nodeTypeID != 0 and node.nodeTypeID != 1:
-				nodeIndexLast += 1
-				node.nodeID = nodeIndexLast
-				node.nodePosition = (node.nodePosition - relativePositions) + ((get_local_mouse_position() + $GraphEdit.scroll_offset) / $GraphEdit.zoom)
-				fileManagementScript._node_processing(node, $GraphEdit, nodeIndex)
+			nodeIndexLast += 1
+			node.nodeID = nodeIndexLast
+			node.nodePosition = (node.nodePosition - relativePositions) + ((get_local_mouse_position() + $GraphEdit.scroll_offset) / $GraphEdit.zoom)
+			fileManagementScript._node_processing(node, $GraphEdit, nodeIndex)
 
 # New Button Pressed
 func _on_new_button_pressed():
@@ -301,9 +343,8 @@ func _clean_up_graph():
 	$GraphEdit.clear_connections()
 	connectionInfo = []
 	for child in $GraphEdit.get_children():
-		if child.get_name() != "ContextMenu" and child.get_name() != "BehaviorMenu":
-			$GraphEdit.remove_child(child)
-			child.queue_free()
+		$GraphEdit.remove_child(child)
+		child.queue_free()
 	variableMenu._clean_list()
 	eventMenu._clean_list()
 	transitionMenu._clean_list()
@@ -366,25 +407,24 @@ func parse_node_info():
 		var nodeConnection3 = []
 		var nodeConnection4 = []
 		var nodeConnection5 = []
-		if child.get_name() != "ContextMenu" and child.get_name() != "BehaviorMenu":
-			if child.get("nodeID") > nodeIndexLast:
-				nodeIndexLast = child.get("nodeID")
-			for connection in connectionInfo:
-				if child.get("nodeID") == connection[1]:
-					match connection[0]:
-						0:
-							nodeConnection0.append(connection)
-						1:
-							nodeConnection1.append(connection)
-						2:
-							nodeConnection2.append(connection)
-						3:
-							nodeConnection3.append(connection)
-						4:
-							nodeConnection4.append(connection)
-						5:
-							nodeConnection5.append(connection)
-			nodeInfo.append(_create_node_diccionary(child, nodeConnection0, nodeConnection1, nodeConnection2, nodeConnection3, nodeConnection4, nodeConnection5))
+		if child.get("nodeID") > nodeIndexLast:
+			nodeIndexLast = child.get("nodeID")
+		for connection in connectionInfo:
+			if child.get("nodeID") == connection[1]:
+				match connection[0]:
+					0:
+						nodeConnection0.append(connection)
+					1:
+						nodeConnection1.append(connection)
+					2:
+						nodeConnection2.append(connection)
+					3:
+						nodeConnection3.append(connection)
+					4:
+						nodeConnection4.append(connection)
+					5:
+						nodeConnection5.append(connection)
+		nodeInfo.append(_create_node_diccionary(child, nodeConnection0, nodeConnection1, nodeConnection2, nodeConnection3, nodeConnection4, nodeConnection5))
 	nodeInfo.sort_custom(customSort)
 	return nodeIndexLast
 
@@ -661,4 +701,7 @@ func _on_credits_button_pressed():
 
 #func _on_arrange_node_button_pressed():
 	#nodeArrangeScript._arrange_nodes($GraphEdit)
+
+
+
 
