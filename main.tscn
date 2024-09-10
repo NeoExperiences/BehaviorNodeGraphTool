@@ -203,7 +203,7 @@ item_15/id = 15
 position = Vector2i(10, 50)
 size = Vector2i(293, 278)
 hide_on_item_selection = false
-item_count = 10
+item_count = 11
 item_0/text = "BSAssignVariablesModifier"
 item_0/id = 0
 item_1/text = "BSBehaviorGraphSwapGenerator"
@@ -225,6 +225,8 @@ item_8/text = "BSRagdollContactListenerModifier"
 item_8/id = 8
 item_9/text = "BSTimerModifier"
 item_9/id = 9
+item_10/text = "BSiStateTaggingGenerator"
+item_10/id = 10
 
 [node name="CreateNodeMenuhkbB" type="PopupMenu" parent="CreateNodeMenu"]
 position = Vector2i(10, 50)

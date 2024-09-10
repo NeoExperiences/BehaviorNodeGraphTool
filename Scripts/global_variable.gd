@@ -69,4 +69,4 @@ var hkbDampingModifier						= load("res://Nodes/hkbDampingModifierScene.tscn")
 var BSRagdollContactListenerModifier		= load("res://Nodes/BS/BSRagdollContactListenerModifierScene.tscn")
 var hkbLayer								= load("res://Nodes/hkbL/hkbLayerScene.tscn")
 var hkbLayerGenerator						= load("res://Nodes/hkbL/hkbLayerGeneratorScene.tscn")
-
+var BSiStateTaggingGenerator				= load("res://Nodes/BS/BSiStateTaggingGeneratorScene.tscn")

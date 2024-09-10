@@ -512,6 +512,15 @@ func _node_processing(node, graphEdit, nodeIndex):
 					loadedNode.eventId				= node.eventId
 					loadedNode.payload				= node.payload
 					graphEdit.add_child(loadedNode)
+				46:
+					print("BSiStateTaggingGenerator loaded.")
+					var loadedNode = globalVariable.BSiStateTaggingGenerator.instantiate()
+					base_node_values(loadedNode, node)
+					loadedNode.nodeName				= node.nodeName
+					loadedNode.userData				= node.userData
+					loadedNode.iStateToSetAs		= node.iStateToSetAs
+					loadedNode.iPriority			= node.iPriority
+					graphEdit.add_child(loadedNode)
 				47:
 					print("hkbGeneratorTransitionEffect loaded.")
 					var loadedNode = globalVariable.hkbGeneratorTransitionEffect.instantiate()

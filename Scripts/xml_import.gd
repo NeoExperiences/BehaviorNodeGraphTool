@@ -899,6 +899,19 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					loadedNode.useMotion = string_to_bool(object.children[9].content)
 					loadedNode.forceFullFadeDurations = string_to_bool(object.children[10].content)
 					graphEdit.add_child(loadedNode)
+				"BSiStateTaggingGenerator": # Done
+					print("BSiStateTaggingGenerator loaded.")
+					var loadedNode = globalVariable.BSiStateTaggingGenerator.instantiate()
+					base_node_values(loadedNode, object)
+					if object.children[0].content != "null": # variableBindingSet
+						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].content.replace("#",""))])
+					loadedNode.userData = int(object.children[1].content)
+					loadedNode.nodeName = object.children[2].content
+					if object.children[3].content != "null": # pDefaultGenerator
+						connections.append([1, int(object.attributes.name.replace("#","")), int(object.children[3].content.replace("#",""))])
+					loadedNode.iStateToSetAs = int(object.children[4].content)
+					loadedNode.iPriority = int(object.children[5].content)
+					graphEdit.add_child(loadedNode)
 				"hkbLayerGenerator": # Done
 					print("hkbLayerGenerator loaded.")
 					var loadedNode = globalVariable.hkbLayerGenerator.instantiate()

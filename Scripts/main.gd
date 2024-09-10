@@ -195,6 +195,8 @@ func _on_create_node_menu_bs_id_pressed(id):
 			instance_node(globalVariable.BSRagdollContactListenerModifier)
 		9: # BSTimerModifier
 			instance_node(globalVariable.BSTimerModifier)
+		10: # BSiStateTaggingGenerator
+			instance_node(globalVariable.BSiStateTaggingGenerator)
 
 func _on_create_node_menuhkb_b_id_pressed(id):
 	match id:
@@ -584,6 +586,8 @@ func _create_node_diccionary(child, nodeConnection0, nodeConnection1, nodeConnec
 		"onByDefault": child.get("onByDefault"),
 		"useMotion": child.get("useMotion"),
 		"forceFullFadeDurations": child.get("forceFullFadeDurations"),
+		"iStateToSetAs": child.get("iStateToSetAs"),
+		"iPriority": child.get("iPriority"),
 		"nodeConnection0": nodeConnection0,
 		"nodeConnection1": nodeConnection1,
 		"nodeConnection2": nodeConnection2,

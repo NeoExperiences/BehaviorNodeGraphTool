@@ -147,6 +147,7 @@ func _process_node(file, node, nodeExportIndex, transitionArrayLength, payloadAr
 			_parse_BSTimerModifier(file, node, nodeExportIndex, transitionArrayLength)
 		46:
 			print("Type of Node: BSiStateTaggingGenerator")
+			_parse_BSiStateTaggingGenerator(file, node)
 		47:
 			print("Type of Node: hkbGeneratorTransitionEffect")
 			_parse_hkbGeneratorTransitionEffect(file, node)
@@ -1871,6 +1872,36 @@ func _parse_BSTimerModifier(file, node, nodeExportIndex, transitionArrayLength):
 	file.store_string('            </hkparam>\r\n')
 	file.store_string('            <hkparam name="resetAlarm">' + str(node.resetAlarm) + '</hkparam>\r\n')
 	file.store_string('            <!-- secondsElapsed SERIALIZE_IGNORED -->\r\n')
+	file.store_string('        </hkobject>\r\n')
+
+func _parse_BSiStateTaggingGenerator(file, node): # Done
+	file.store_string('        <hkobject class="BSiStateTaggingGenerator" name="#' + str(node.nodeID) + '" signature="0xc932a82a">\r\n')
+	file.store_string('            <!-- memSizeAndRefCount SERIALIZE_IGNORED -->\r\n')
+	if node.nodeConnection0.size() != 0:
+		file.store_string('            <hkparam name="variableBindingSet">#' + str(node.nodeConnection0[0][2]) + '</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="variableBindingSet">null</hkparam>\r\n')
+	file.store_string('            <!-- cachedBindables SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- areBindablesCached SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- hasEnableChanged SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <hkparam name="userData">' + str(node.userData) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="name">' + str(node.nodeName) + '</hkparam>\r\n')
+	file.store_string('            <!-- id SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- cloneState SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- type SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- nodeInfo SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- partitionInfo SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- syncInfo SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- pad1 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- pad2 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- pad3 SERIALIZE_IGNORED -->\r\n')
+	file.store_string('            <!-- pad4 SERIALIZE_IGNORED -->\r\n')
+	if node.nodeConnection1.size() != 0:
+		file.store_string('            <hkparam name="pDefaultGenerator">#' + str(node.nodeConnection1[0][2]) + '</hkparam>\r\n')
+	else:
+		file.store_string('            <hkparam name="pDefaultGenerator">null</hkparam>\r\n')
+	file.store_string('            <hkparam name="iStateToSetAs">' + str(node.iStateToSetAs) + '</hkparam>\r\n')
+	file.store_string('            <hkparam name="iPriority">' + str(node.iPriority) + '</hkparam>\r\n')
 	file.store_string('        </hkobject>\r\n')
 
 func _parse_BSRagdollContactListenerModifier(file, node, nodeExportIndex, transitionArrayLength): # Done
