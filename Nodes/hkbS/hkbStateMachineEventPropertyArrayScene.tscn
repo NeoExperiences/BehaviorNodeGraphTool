@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://cu7ifu8bjkk6b"]
 
 [ext_resource type="Script" path="res://Nodes/hkbS/Scripts/hkbStateMachineEventPropertyArrayScene.gd" id="1_6hwr5"]
-[ext_resource type="Texture2D" uid="uid://dtc4ja5slmyqt" path="res://Resources/ConfirmDeleteButton.png" id="2_kxrau"]
-[ext_resource type="Texture2D" uid="uid://dtrsj56jbquo8" path="res://Resources/PinButton.png" id="3_25rof"]
-[ext_resource type="Texture2D" uid="uid://csb3wjekhlmy1" path="res://Resources/UnpinButton.png" id="4_6oipr"]
-[ext_resource type="Texture2D" uid="uid://jrafqhji2unw" path="res://Resources/DeleteButton.png" id="5_fdkc6"]
+[ext_resource type="Texture2D" uid="uid://dtc4ja5slmyqt" path="res://Resources/Icons/ConfirmDeleteButton.png" id="2_kxrau"]
+[ext_resource type="Texture2D" uid="uid://dtrsj56jbquo8" path="res://Resources/Icons/PinButton.png" id="3_25rof"]
+[ext_resource type="Texture2D" uid="uid://csb3wjekhlmy1" path="res://Resources/Icons/UnpinButton.png" id="4_6oipr"]
+[ext_resource type="Texture2D" uid="uid://jrafqhji2unw" path="res://Resources/Icons/DeleteButton.png" id="5_fdkc6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y45yo"]
 content_margin_left = 5.0

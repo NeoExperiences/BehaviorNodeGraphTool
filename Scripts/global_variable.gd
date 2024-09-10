@@ -8,6 +8,21 @@ extends Node
 @export var globalPropertiesList: Array = []
 @export var globalVariableList: Array = []
 
+# Theme Colors
+var defaultTheme = load("res://Resources/Themes/Default_Theme.tres")
+var blueTheme = load("res://Resources/Themes/Blue_Theme.tres")
+var deepBlueTheme = load("res://Resources/Themes/DeepBlue_Theme.tres")
+var redTheme = load("res://Resources/Themes/Red_Theme.tres")
+var purpleTheme = load("res://Resources/Themes/Purple_Theme.tres")
+var eggplantTheme = load("res://Resources/Themes/Eggplant_Theme.tres")
+var emeraldTheme = load("res://Resources/Themes/Emerald_Theme.tres")
+var greenTheme = load("res://Resources/Themes/Green_Theme.tres")
+var brownTheme = load("res://Resources/Themes/Brown_Theme.tres")
+var orangeTheme = load("res://Resources/Themes/Orange_Theme.tres")
+var yellowTheme = load("res://Resources/Themes/Yellow_Theme.tres")
+var ceruleanTheme = load("res://Resources/Themes/Cerulean_Theme.tres")
+
+
 # Scene Loading
 var BGSGamebryoSequenceGenerator			= load("res://Nodes/BGSGamebryoSequenceGeneratorScene.tscn")
 var BSIsActiveModifier						= load("res://Nodes/BS/BSIsActiveModifierScene.tscn")
@@ -54,6 +69,4 @@ var hkbDampingModifier						= load("res://Nodes/hkbDampingModifierScene.tscn")
 var BSRagdollContactListenerModifier		= load("res://Nodes/BS/BSRagdollContactListenerModifierScene.tscn")
 var hkbLayer								= load("res://Nodes/hkbL/hkbLayerScene.tscn")
 var hkbLayerGenerator						= load("res://Nodes/hkbL/hkbLayerGeneratorScene.tscn")
-
-
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtrsj56jbquo8"
-path="res://.godot/imported/PinButton.png-97831a8e417b407c1cf3071e2fc3b92f.ctex"
+uid="uid://dtc4ja5slmyqt"
+path="res://.godot/imported/ConfirmDeleteButton.png-b5b1c99015dc4291920aaea3e89f83fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/PinButton.png"
-dest_files=["res://.godot/imported/PinButton.png-97831a8e417b407c1cf3071e2fc3b92f.ctex"]
+source_file="res://Resources/Icons/ConfirmDeleteButton.png"
+dest_files=["res://.godot/imported/ConfirmDeleteButton.png-b5b1c99015dc4291920aaea3e89f83fc.ctex"]
 
 [params]
 

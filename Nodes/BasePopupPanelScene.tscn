@@ -1,0 +1,377 @@
+[gd_scene load_steps=9 format=3 uid="uid://byjklb6f2hlin"]
+
+[ext_resource type="Theme" uid="uid://d1fqlcfqrwwdu" path="res://Resources/Themes/Blue_Theme.tres" id="1_wudcs"]
+[ext_resource type="Texture2D" uid="uid://dtc4ja5slmyqt" path="res://Resources/Icons/ConfirmDeleteButton.png" id="2_5u76j"]
+[ext_resource type="Texture2D" uid="uid://csneaifgmkfng" path="res://Resources/Icons/PaintButtonAlpha.png" id="3_l38vx"]
+[ext_resource type="Texture2D" uid="uid://bh1i3gursfdn1" path="res://Resources/Icons/PinButtonAlpha.png" id="4_hl7hm"]
+[ext_resource type="Texture2D" uid="uid://jrafqhji2unw" path="res://Resources/Icons/DeleteButton.png" id="6_8h0fl"]
+[ext_resource type="Script" path="res://Nodes/hkbS/Scripts/eventToSendidOptionButton.gd" id="6_dq4nj"]
+[ext_resource type="Script" path="res://Nodes/hkbS/Scripts/VariableOptionButton.gd" id="7_61lt5"]
+[ext_resource type="Script" path="res://Nodes/hkbS/Scripts/eventToSendPayloadOptionButton.gd" id="8_30ds5"]
+
+[node name="DataPopupPanel" type="PopupPanel"]
+transparent_bg = true
+initial_position = 1
+size = Vector2i(600, 489)
+visible = true
+borderless = false
+theme = ExtResource("1_wudcs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(590, 0)
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 596.0
+offset_bottom = 485.0
+
+[node name="BaseNode" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ConfirmDeleteButton" type="TextureButton" parent="VBoxContainer/BaseNode"]
+visible = false
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("2_5u76j")
+
+[node name="baseNodeLabel" type="Label" parent="VBoxContainer/BaseNode"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 18
+text = "   hkbStateMachine"
+vertical_alignment = 2
+
+[node name="Space" type="Control" parent="VBoxContainer/BaseNode"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="baseNodeLabel2" type="Label" parent="VBoxContainer/BaseNode"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "#"
+vertical_alignment = 1
+
+[node name="nodeIDSpinBox" type="SpinBox" parent="VBoxContainer/BaseNode"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+min_value = 90.0
+max_value = 9999.0
+value = 90.0
+rounded = true
+
+[node name="PaintButton" type="Button" parent="VBoxContainer/BaseNode"]
+layout_mode = 2
+text = "      "
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/BaseNode/PaintButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.5
+offset_top = -15.5
+offset_right = 23.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_l38vx")
+stretch_mode = 2
+
+[node name="PinButton" type="Button" parent="VBoxContainer/BaseNode"]
+layout_mode = 2
+toggle_mode = true
+text = "      "
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/BaseNode/PinButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.5
+offset_top = -15.5
+offset_right = 23.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_hl7hm")
+stretch_mode = 2
+
+[node name="DeleteButton" type="TextureButton" parent="VBoxContainer/BaseNode"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("6_8h0fl")
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="FoldingPanel" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="UpdateGraphData" type="HBoxContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Space2" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/UpdateGraphData"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="GraphDataButton" type="Button" parent="VBoxContainer/PanelContainer/FoldingPanel/UpdateGraphData"]
+custom_minimum_size = Vector2(560, 32)
+layout_mode = 2
+text = "Update Graph Data"
+
+[node name="Space" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/UpdateGraphData"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="userData" type="HBoxContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="userDataLabel" type="Label" parent="VBoxContainer/PanelContainer/FoldingPanel/userData"]
+layout_mode = 2
+text = "   userData"
+
+[node name="Space" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/userData"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="userDataButton" type="OptionButton" parent="VBoxContainer/PanelContainer/FoldingPanel/userData"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "0"
+popup/item_0/id = 0
+popup/item_1/text = "1"
+popup/item_1/id = 1
+popup/item_2/text = "2"
+popup/item_2/id = 2
+popup/item_3/text = "3"
+popup/item_3/id = 3
+
+[node name="startStateID" type="HBoxContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="startStateIDLabel" type="Label" parent="VBoxContainer/PanelContainer/FoldingPanel/startStateID"]
+layout_mode = 2
+text = "   startStateId"
+
+[node name="Space" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/startStateID"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="startStateIDSpinBox" type="SpinBox" parent="VBoxContainer/PanelContainer/FoldingPanel/startStateID"]
+layout_mode = 2
+
+[node name="randomTransitionEventId" type="HBoxContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="randomTransitionEventIdLabel" type="Label" parent="VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId"]
+layout_mode = 2
+text = "   randomTransitionEventId"
+
+[node name="Space" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="randomTransitionEventIdOptionButton" type="OptionButton" parent="VBoxContainer/PanelContainer/FoldingPanel/randomTransitionEventId"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("6_dq4nj")
+
+[node name="transitionToNextHigherStateEventId" type="HBoxContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="transitionToNextHigherStateEventIdLabel" type="Label" parent="VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId"]
+layout_mode = 2
+text = "   transitionToNextHigherStateEventId"
+
+[node name="Space" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="transitionToNextHigherStateEventIdOptionButton" type="OptionButton" parent="VBoxContainer/PanelContainer/FoldingPanel/transitionToNextHigherStateEventId"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("6_dq4nj")
+
+[node name="transitionToNextLowerStateEventId" type="HBoxContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="transitionToNextLowerStateEventIdLabel" type="Label" parent="VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId"]
+layout_mode = 2
+text = "   transitionToNextLowerStateEventId"
+
+[node name="Space" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="transitionToNextLowerStateEventIdOptionButton" type="OptionButton" parent="VBoxContainer/PanelContainer/FoldingPanel/transitionToNextLowerStateEventId"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("6_dq4nj")
+
+[node name="syncVariableIndex" type="HBoxContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="syncVariableIndexLabel" type="Label" parent="VBoxContainer/PanelContainer/FoldingPanel/syncVariableIndex"]
+layout_mode = 2
+text = "   syncVariableIndex"
+
+[node name="Space" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/syncVariableIndex"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="syncVariableIndexOptionButton" type="OptionButton" parent="VBoxContainer/PanelContainer/FoldingPanel/syncVariableIndex"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("7_61lt5")
+
+[node name="wrapAroundStateId" type="HBoxContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="wrapAroundStateIdLabel" type="Label" parent="VBoxContainer/PanelContainer/FoldingPanel/wrapAroundStateId"]
+layout_mode = 2
+text = "   wrapAroundStateId"
+
+[node name="Space" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/wrapAroundStateId"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="wrapAroundStateIdButton" type="OptionButton" parent="VBoxContainer/PanelContainer/FoldingPanel/wrapAroundStateId"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "False"
+popup/item_0/id = 0
+popup/item_1/text = "True"
+popup/item_1/id = 1
+
+[node name="startStateMode" type="HBoxContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="startStateModeLabel" type="Label" parent="VBoxContainer/PanelContainer/FoldingPanel/startStateMode"]
+layout_mode = 2
+text = "   startStateMode"
+
+[node name="Space" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/startStateMode"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="startStateModeButton" type="OptionButton" parent="VBoxContainer/PanelContainer/FoldingPanel/startStateMode"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "DEFAULT"
+popup/item_0/id = 0
+popup/item_1/text = "SYNC"
+popup/item_1/id = 1
+popup/item_2/text = "RANDOM"
+popup/item_2/id = 2
+
+[node name="selfTransitionMode" type="HBoxContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+clip_contents = true
+layout_mode = 2
+
+[node name="selfTransitionModeLabel" type="Label" parent="VBoxContainer/PanelContainer/FoldingPanel/selfTransitionMode"]
+layout_mode = 2
+text = "   selfTransitionMode"
+
+[node name="Space" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/selfTransitionMode"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="selfTransitionModeButton" type="OptionButton" parent="VBoxContainer/PanelContainer/FoldingPanel/selfTransitionMode"]
+clip_contents = true
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+clip_text = true
+item_count = 3
+selected = 0
+popup/item_0/text = "NO_TRANSITION"
+popup/item_0/id = 0
+popup/item_1/text = "TRANSITION_TO_START_STATE"
+popup/item_1/id = 1
+popup/item_2/text = "FORCE_TRANSITION_TO_START_STATE"
+popup/item_2/id = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/FoldingPanel/PanelContainer"]
+layout_mode = 2
+text = "EventToSend"
+horizontal_alignment = 1
+
+[node name="id" type="HBoxContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="idLabel" type="Label" parent="VBoxContainer/PanelContainer/FoldingPanel/id"]
+layout_mode = 2
+text = "   id
+"
+
+[node name="Space" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/id"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="eventToSendidOptionButton" type="OptionButton" parent="VBoxContainer/PanelContainer/FoldingPanel/id"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("6_dq4nj")
+
+[node name="payload" type="HBoxContainer" parent="VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="payloadLabel" type="Label" parent="VBoxContainer/PanelContainer/FoldingPanel/payload"]
+layout_mode = 2
+text = "   payload"
+
+[node name="Space" type="Control" parent="VBoxContainer/PanelContainer/FoldingPanel/payload"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="eventToSendPayloadOptionButton" type="OptionButton" parent="VBoxContainer/PanelContainer/FoldingPanel/payload"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "null"
+popup/item_0/id = 0
+script = ExtResource("8_30ds5")

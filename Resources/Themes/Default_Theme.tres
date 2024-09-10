@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c8416x8nale20"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ple2k"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.168627, 0.211765, 0.266667, 0.898039)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[resource]
+PopupPanel/styles/panel = SubResource("StyleBoxFlat_ple2k")

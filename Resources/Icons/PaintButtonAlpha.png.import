@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6ywaqan5akgh"
-path="res://.godot/imported/editicon.png-80ff933a7ee92f75948beaa662fbf56d.ctex"
+uid="uid://csneaifgmkfng"
+path="res://.godot/imported/PaintButtonAlpha.png-663a0061ae40ff2f0c99ded2139a5520.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/editicon.png"
-dest_files=["res://.godot/imported/editicon.png-80ff933a7ee92f75948beaa662fbf56d.ctex"]
+source_file="res://Resources/Icons/PaintButtonAlpha.png"
+dest_files=["res://.godot/imported/PaintButtonAlpha.png-663a0061ae40ff2f0c99ded2139a5520.ctex"]
 
 [params]
 

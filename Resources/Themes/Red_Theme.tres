@@ -1,0 +1,82 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://cgomtrhulb368"]
+
+[sub_resource type="Gradient" id="Gradient_7k1s7"]
+offsets = PackedFloat32Array(0, 0.976096, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.780345, 0, 0.15563, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_turcq"]
+gradient = SubResource("Gradient_7k1s7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3ynee"]
+texture = SubResource("GradientTexture1D_turcq")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loj83"]
+content_margin_left = 18.0
+content_margin_top = 12.0
+content_margin_right = 18.0
+content_margin_bottom = 12.0
+bg_color = Color(0.388235, 0.137255, 0.133333, 0.6)
+border_color = Color(0.325, 0.325, 0.325, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmef8"]
+content_margin_left = 18.0
+content_margin_top = 12.0
+content_margin_right = 18.0
+content_margin_bottom = 12.0
+bg_color = Color(0.388235, 0.137255, 0.133333, 0.6)
+border_color = Color(0.325, 0.325, 0.325, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2hpb"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.580392, 0.215686, 0.207843, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dvkm"]
+content_margin_left = 18.0
+content_margin_top = 12.0
+content_margin_right = 18.0
+content_margin_bottom = 12.0
+bg_color = Color(0.85098, 0.588235, 0.580392, 0.6)
+border_color = Color(0.325, 0.325, 0.325, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4jwc"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.572549, 0.219608, 0.215686, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[resource]
+/styles/RedPanel = SubResource("StyleBoxTexture_3ynee")
+GraphNode/styles/panel = SubResource("StyleBoxFlat_loj83")
+GraphNode/styles/panel_selected = SubResource("StyleBoxFlat_fmef8")
+GraphNode/styles/titlebar = SubResource("StyleBoxFlat_h2hpb")
+GraphNode/styles/titlebar_selected = SubResource("StyleBoxFlat_2dvkm")
+PopupPanel/styles/panel = SubResource("StyleBoxFlat_g4jwc")

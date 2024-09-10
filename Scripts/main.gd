@@ -398,6 +398,7 @@ func _create_node_diccionary(child, nodeConnection0, nodeConnection1, nodeConnec
 		"nodeTypeID": child.get("nodeTypeID"),
 		"nodePosition": child.get_position_offset(),
 		"nodeID": child.get("nodeID"),
+		"nodeColorID": child.get("nodeColorID"),
 		# Node Values
 		"nodeName": child.get("nodeName"),
 		"stateId": child.get("stateId"),

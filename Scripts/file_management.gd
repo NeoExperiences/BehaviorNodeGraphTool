@@ -582,6 +582,8 @@ func base_node_values(loadedNode, node):
 	loadedNode.title += ' - #' + str(node.nodeID)
 	loadedNode.nodeID = node.nodeID
 	loadedNode.position_offset = (string_to_vector2(str(node.nodePosition)))
+	if node.has("nodeColorID") && node.nodeColorID != null:
+		loadedNode.nodeColorID = int(node.nodeColorID)
 
 func string_to_vector2(string := "") -> Vector2:
 	if string:
