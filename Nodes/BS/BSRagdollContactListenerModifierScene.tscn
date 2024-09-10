@@ -1,24 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://dgv3s4juhsgcv"]
 
-[ext_resource type="Script" path="res://Nodes/BS/BSRagdollContactListenerModifierScene.gd" id="1_h5b0x"]
+[ext_resource type="Script" path="res://Nodes/BS/Scripts/BSRagdollContactListenerModifierScene.gd" id="1_h5b0x"]
 [ext_resource type="Texture2D" uid="uid://dtc4ja5slmyqt" path="res://Resources/Icons/ConfirmDeleteButton.png" id="2_6hamv"]
-[ext_resource type="Texture2D" uid="uid://dtrsj56jbquo8" path="res://Resources/Icons/PinButton.png" id="3_4t2q4"]
-[ext_resource type="Texture2D" uid="uid://csb3wjekhlmy1" path="res://Resources/Icons/UnpinButton.png" id="4_uhr11"]
+[ext_resource type="Texture2D" uid="uid://csneaifgmkfng" path="res://Resources/Icons/PaintButtonAlpha.png" id="3_dq1mu"]
+[ext_resource type="Texture2D" uid="uid://bh1i3gursfdn1" path="res://Resources/Icons/PinButtonAlpha.png" id="4_kq2tw"]
+[ext_resource type="Texture2D" uid="uid://b3jqrjqx6enly" path="res://Resources/Icons/UnpinButtonAlpha.png" id="5_ha86v"]
 [ext_resource type="Texture2D" uid="uid://jrafqhji2unw" path="res://Resources/Icons/DeleteButton.png" id="5_ud46s"]
 [ext_resource type="Script" path="res://Nodes/hkbS/Scripts/eventToSendidOptionButton.gd" id="6_wss4g"]
 [ext_resource type="Script" path="res://Nodes/hkbS/Scripts/eventToSendPayloadOptionButton.gd" id="7_s842g"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y45yo"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.168627, 0.211765, 0.266667, 0.898039)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 1
-anti_aliasing_size = 2.0
 
 [node name="BSRagdollContactListenerModifier" type="GraphNode"]
 offset_right = 340.0
@@ -98,15 +87,13 @@ placeholder_text = "Name"
 transparent_bg = true
 initial_position = 1
 size = Vector2i(543, 244)
-visible = true
 borderless = false
-theme_override_styles/panel = SubResource("StyleBoxFlat_y45yo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DataPopupPanel"]
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 538.0
-offset_bottom = 239.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 539.0
+offset_bottom = 240.0
 
 [node name="BaseNode" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer"]
 layout_mode = 2
@@ -144,11 +131,63 @@ max_value = 9999.0
 value = 90.0
 rounded = true
 
-[node name="PinButton" type="TextureButton" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+[node name="PaintButton" type="Button" parent="DataPopupPanel/VBoxContainer/BaseNode"]
+layout_mode = 2
+text = "      "
+
+[node name="BrushIcon" type="TextureRect" parent="DataPopupPanel/VBoxContainer/BaseNode/PaintButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.5
+offset_top = -15.5
+offset_right = 23.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_dq1mu")
+stretch_mode = 2
+
+[node name="PinButton" type="Button" parent="DataPopupPanel/VBoxContainer/BaseNode"]
 layout_mode = 2
 toggle_mode = true
-texture_normal = ExtResource("3_4t2q4")
-texture_pressed = ExtResource("4_uhr11")
+text = "      "
+
+[node name="PinIcon" type="TextureRect" parent="DataPopupPanel/VBoxContainer/BaseNode/PinButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.5
+offset_top = -15.5
+offset_right = 23.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_kq2tw")
+stretch_mode = 2
+
+[node name="UnpinIcon" type="TextureRect" parent="DataPopupPanel/VBoxContainer/BaseNode/PinButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.5
+offset_top = -15.5
+offset_right = 23.5
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_ha86v")
+stretch_mode = 2
 
 [node name="DeleteButton" type="TextureButton" parent="DataPopupPanel/VBoxContainer/BaseNode"]
 layout_mode = 2
@@ -287,6 +326,7 @@ script = ExtResource("7_s842g")
 [connection signal="popup_hide" from="DataPopupPanel" to="." method="_on_popup_panel_popup_hide"]
 [connection signal="pressed" from="DataPopupPanel/VBoxContainer/BaseNode/ConfirmDeleteButton" to="." method="_on_confirm_delete_button_pressed"]
 [connection signal="value_changed" from="DataPopupPanel/VBoxContainer/BaseNode/nodeIDSpinBox" to="." method="_on_node_id_spin_box_value_changed"]
+[connection signal="pressed" from="DataPopupPanel/VBoxContainer/BaseNode/PaintButton" to="." method="_on_paint_button_pressed"]
 [connection signal="toggled" from="DataPopupPanel/VBoxContainer/BaseNode/PinButton" to="." method="_on_pin_button_toggled"]
 [connection signal="pressed" from="DataPopupPanel/VBoxContainer/BaseNode/DeleteButton" to="." method="_on_delete_button_pressed"]
 [connection signal="item_selected" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/userData/userDataButton" to="." method="_on_user_data_button_item_selected"]
