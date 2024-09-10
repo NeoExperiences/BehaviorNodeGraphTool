@@ -105,6 +105,7 @@ func _on_delete_button_pressed():
 func _on_confirm_delete_button_pressed():
 	var parentGraph = get_parent()
 	parentGraph.remove_child(self)
+	parentGraph.get_parent().selected_nodes = []
 	self.queue_free()
 
 func _on_pin_button_toggled(toggled_on):

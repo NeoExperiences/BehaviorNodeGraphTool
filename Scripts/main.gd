@@ -90,14 +90,16 @@ func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 2:
 		if selected_nodes != []:
 			$ContextMenu.set_item_disabled(0, false)
-			$ContextMenu.set_item_disabled(1, false)
 			$ContextMenu.set_item_disabled(2, false)
 			$ContextMenu.set_item_disabled(3, false)
 		else:
 			$ContextMenu.set_item_disabled(0, true)
-			$ContextMenu.set_item_disabled(1, true)
 			$ContextMenu.set_item_disabled(2, true)
 			$ContextMenu.set_item_disabled(3, true)
+		if node_buffer != []:
+			$ContextMenu.set_item_disabled(1, false)
+		else:
+			$ContextMenu.set_item_disabled(1, true)
 		contextMenu.popup(Rect2i(get_global_mouse_position().x, get_global_mouse_position().y, 100, 30))
 		get_viewport().set_input_as_handled()
 
@@ -108,15 +110,19 @@ func _on_context_menu_id_pressed(id):
 		1:
 			_on_graph_edit_paste_nodes_request()
 		2:
-			_context_menu_change_color()
+			$PaintMenu.popup(Rect2i(get_global_mouse_position().x, get_global_mouse_position().y, 100, 30))
 		3:
 			$NodeDeletionConfirmationDialog.show()
 
-func _context_menu_change_color():
+func _on_paint_menu_id_pressed(id):
+	_context_menu_change_color(id - 1)
+
+func _context_menu_change_color(colorID):
 	for node in selected_nodes:
 		for child in $GraphEdit.get_children():
 			if is_instance_valid(node) && is_instance_valid(child):
 				if node.name == child.name:
+					child.nodeColorID = colorID
 					child._on_paint_button_pressed()
 
 func _on_node_deletion_confirmation_dialog_confirmed():

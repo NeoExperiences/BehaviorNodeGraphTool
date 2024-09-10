@@ -117,7 +117,7 @@ size = Vector2i(230, 85)
 dialog_text = "     Delete selected nodes?"
 
 [node name="ContextMenu" type="PopupMenu" parent="."]
-size = Vector2i(237, 89)
+size = Vector2i(237, 116)
 hide_on_checkable_item_selection = false
 item_count = 4
 item_0/text = "Copy Nodes"
@@ -128,6 +128,33 @@ item_2/text = "Change Node Color"
 item_2/id = 2
 item_3/text = "Delete Nodes"
 item_3/id = 3
+
+[node name="PaintMenu" type="PopupMenu" parent="."]
+size = Vector2i(237, 305)
+hide_on_checkable_item_selection = false
+item_count = 11
+item_0/text = "Default"
+item_0/id = 0
+item_1/text = "Red"
+item_1/id = 1
+item_2/text = "Orange"
+item_2/id = 2
+item_3/text = "Yellow"
+item_3/id = 3
+item_4/text = "Brown"
+item_4/id = 4
+item_5/text = "Green"
+item_5/id = 5
+item_6/text = "Light Green"
+item_6/id = 6
+item_7/text = "Light Blue"
+item_7/id = 7
+item_8/text = "Dark Blue"
+item_8/id = 8
+item_9/text = "Purple"
+item_9/id = 9
+item_10/text = "Light Purple"
+item_10/id = 10
 
 [node name="CreateNodeMenu" type="Control" parent="."]
 visible = false
@@ -522,6 +549,7 @@ show_grid_buttons = false
 [connection signal="confirmed" from="NodeDeletionConfirmationDialog" to="." method="_on_node_deletion_confirmation_dialog_confirmed"]
 [connection signal="id_pressed" from="ContextMenu" to="." method="_on_context_menu_id_pressed"]
 [connection signal="popup_hide" from="ContextMenu" to="." method="_on_context_menu_popup_hide"]
+[connection signal="id_pressed" from="PaintMenu" to="." method="_on_paint_menu_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuList" to="." method="_on_create_node_menu_list_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuBS" to="." method="_on_create_node_menu_bs_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbB" to="." method="_on_create_node_menuhkb_b_id_pressed"]
