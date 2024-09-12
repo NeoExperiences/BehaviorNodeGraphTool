@@ -1121,8 +1121,6 @@ func _parse_hkbBlendingTransitionEffect(file, transition, nodeExportIndex): # Do
 			file.store_string('            <hkparam name="selfTransitionMode">SELF_TRANSITION_MODE_RESET</hkparam>\r\n')
 		3:
 			file.store_string('            <hkparam name="selfTransitionMode">SELF_TRANSITION_MODE_BLEND</hkparam>\r\n')
-		_:
-			file.store_string('            <hkparam name="selfTransitionMode">SELF_TRANSITION_MODE_CONTINUE_IF_CYCLIC_BLEND_IF_ACYCLIC</hkparam>\r\n')
 	match transition.transitionEventMode:
 		0:
 			file.store_string('            <hkparam name="eventMode">EVENT_MODE_DEFAULT</hkparam>\r\n')
@@ -1132,8 +1130,6 @@ func _parse_hkbBlendingTransitionEffect(file, transition, nodeExportIndex): # Do
 			file.store_string('            <hkparam name="eventMode">EVENT_MODE_IGNORE_FROM_GENERATOR</hkparam>\r\n')
 		3:
 			file.store_string('            <hkparam name="eventMode">EVENT_MODE_IGNORE_TO_GENERATOR</hkparam>\r\n')
-		_:
-			file.store_string('            <hkparam name="eventMode">EVENT_MODE_DEFAULT</hkparam>\r\n')
 	file.store_string('            <!-- defaultEventMode SERIALIZE_IGNORED -->\r\n')
 	file.store_string('            <!-- patchedBindingInfo SERIALIZE_IGNORED -->\r\n')
 	file.store_string('            <!-- fromGenerator SERIALIZE_IGNORED -->\r\n')
@@ -1151,15 +1147,11 @@ func _parse_hkbBlendingTransitionEffect(file, transition, nodeExportIndex): # Do
 			file.store_string('            <hkparam name="flags">FLAG_IGNORE_TO_WORLD_FROM_MODEL</hkparam>\r\n')
 		4:
 			file.store_string('            <hkparam name="flags">FLAG_IGNORE_TO_WORLD_FROM_MODEL_ROTATION</hkparam>\r\n')
-		_:
-			file.store_string('            <hkparam name="flags">FLAG_NONE</hkparam>\r\n')
 	match transition.transitionEndMode:
 		0:
 			file.store_string('            <hkparam name="endMode">END_MODE_NONE</hkparam>\r\n')
 		1:
 			file.store_string('            <hkparam name="endMode">END_MODE_TRANSITION_UNTIL_END_OF_FROM_GENERATOR</hkparam>\r\n')
-		_:
-			file.store_string('            <hkparam name="endMode">END_MODE_NONE</hkparam>\r\n')
 	file.store_string('            <hkparam name="blendCurve">' + str(transition.transitionBlendCurve) + '</hkparam>\r\n')
 	file.store_string('            <hkparam name="alignmentBone">65535</hkparam>\r\n')
 	file.store_string('            <!-- fromPos SERIALIZE_IGNORED -->\r\n')

@@ -967,13 +967,13 @@ func import_transitions(objectList):
 			elif object.children[3].content == "SELF_TRANSITION_MODE_BLEND":
 				transitionData.transitionSelfTransitionMode = 3
 			if object.children[4].content == "EVENT_MODE_DEFAULT":
-				transitionData.transitionEndMode = 0
+				transitionData.transitionEventMode = 0
 			elif object.children[4].content == "EVENT_MODE_PROCESS_ALL":
-				transitionData.transitionEndMode = 1
+				transitionData.transitionEventMode = 1
 			elif object.children[4].content == "EVENT_MODE_IGNORE_FROM_GENERATOR":
-				transitionData.transitionEndMode = 2
+				transitionData.transitionEventMode = 2
 			elif object.children[4].content == "EVENT_MODE_IGNORE_TO_GENERATOR":
-				transitionData.transitionEndMode = 3
+				transitionData.transitionEventMode = 3
 			if object.children[7].content == "FLAG_NONE":
 				transitionData.transitionFlags = 0
 			elif object.children[7].content == "FLAG_IGNORE_FROM_WORLD_FROM_MODEL":
