@@ -598,12 +598,12 @@ func _create_node_diccionary(child, nodeConnection0, nodeConnection1, nodeConnec
 	return data
 
 func _on_import_button_pressed():
-	$VariableBoundsDialog.show()
+	$ImportSettingsDialog.show()
 
 func _on_variable_bounds_spin_box_value_changed(value):
 	variableBoundPadding = int(value)
 
-func _on_variable_bounds_dialog_confirmed():
+func _on_import_settings_dialog_confirmed():	
 	$ImportFileDialog.show()
 
 func _on_import_file_dialog_file_selected(path):
@@ -711,7 +711,4 @@ func _on_credits_button_pressed():
 
 #func _on_arrange_node_button_pressed():
 	#nodeArrangeScript._arrange_nodes($GraphEdit)
-
-
-
 
