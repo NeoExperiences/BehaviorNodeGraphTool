@@ -132,7 +132,7 @@ item_3/id = 3
 [node name="PaintMenu" type="PopupMenu" parent="."]
 size = Vector2i(237, 305)
 hide_on_checkable_item_selection = false
-item_count = 11
+item_count = 12
 item_0/text = "Default"
 item_0/id = 0
 item_1/text = "Red"
@@ -151,10 +151,12 @@ item_7/text = "Light Blue"
 item_7/id = 7
 item_8/text = "Blue"
 item_8/id = 8
-item_9/text = "Purple"
+item_9/text = "Dark Blue"
 item_9/id = 9
 item_10/text = "Light Purple"
 item_10/id = 10
+item_11/text = "Purple"
+item_11/id = 11
 
 [node name="CreateNodeMenu" type="Control" parent="."]
 visible = false
