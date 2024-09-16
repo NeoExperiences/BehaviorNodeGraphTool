@@ -111,6 +111,8 @@ func _node_processing(node, graphEdit, nodeIndex):
 					var loadedNode = globalVariable.hkbBehaviorGraph.instantiate()
 					base_node_values(loadedNode, node)
 					loadedNode.nodeName = node.nodeName
+					if node.has("className") && node.className != null:
+						loadedNode.className = node.className
 					graphEdit.add_child(loadedNode)
 				2:
 					print("hkbBehaviorGraphData loaded.")

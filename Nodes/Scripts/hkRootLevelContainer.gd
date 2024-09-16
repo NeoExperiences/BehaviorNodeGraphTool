@@ -6,10 +6,14 @@ extends GraphNode
 var buttonToggled = false
 @export var nodeColorID = 0
 
+#hkRootLevelContainer Values
+@export var className = "hkbBehaviorGraph"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$DataPopupPanel/VBoxContainer/BaseNode/nodeIDSpinBox.value = nodeID
 	change_theme(nodeColorID)
+	$DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/className/classNameLine.text = className
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.double_click:
@@ -76,6 +80,7 @@ func change_theme(index):
 		2:
 			self.set_theme(globalVariable.orangeTheme)
 			set_slot_color_left(0, Color(0.9,0.55,0.3,1))
+			set_slot_color_right(0, Color(0.9,0.55,0.3,1))
 			set_slot_color_right(1, Color(0.9,0.55,0.3,1))
 			set_slot_color_right(2, Color(0.9,0.55,0.3,1))
 			set_slot_color_right(3, Color(0.9,0.55,0.3,1))
@@ -85,6 +90,7 @@ func change_theme(index):
 		3:
 			self.set_theme(globalVariable.yellowTheme)
 			set_slot_color_left(0, Color(1,0.9,0.4,1))
+			set_slot_color_right(0, Color(1,0.9,0.4,1))
 			set_slot_color_right(1, Color(1,0.9,0.4,1))
 			set_slot_color_right(2, Color(1,0.9,0.4,1))
 			set_slot_color_right(3, Color(1,0.9,0.4,1))
@@ -94,6 +100,7 @@ func change_theme(index):
 		4:
 			self.set_theme(globalVariable.brownTheme)
 			set_slot_color_left(0, Color(0.7,0.6,0.5,1))
+			set_slot_color_right(0, Color(0.7,0.6,0.5,1))
 			set_slot_color_right(1, Color(0.7,0.6,0.5,1))
 			set_slot_color_right(2, Color(0.7,0.6,0.5,1))
 			set_slot_color_right(3, Color(0.7,0.6,0.5,1))
@@ -103,6 +110,7 @@ func change_theme(index):
 		5:
 			self.set_theme(globalVariable.greenTheme)
 			set_slot_color_left(0, Color(0.7,0.8,0.4,1))
+			set_slot_color_right(0, Color(0.7,0.8,0.4,1))
 			set_slot_color_right(1, Color(0.7,0.8,0.4,1))
 			set_slot_color_right(2, Color(0.7,0.8,0.4,1))
 			set_slot_color_right(3, Color(0.7,0.8,0.4,1))
@@ -112,6 +120,7 @@ func change_theme(index):
 		6:
 			self.set_theme(globalVariable.emeraldTheme)
 			set_slot_color_left(0, Color(0.5,0.8,0.5,1))
+			set_slot_color_right(0, Color(0.5,0.8,0.5,1))
 			set_slot_color_right(1, Color(0.5,0.8,0.5,1))
 			set_slot_color_right(2, Color(0.5,0.8,0.5,1))
 			set_slot_color_right(3, Color(0.5,0.8,0.5,1))
@@ -121,6 +130,7 @@ func change_theme(index):
 		7:
 			self.set_theme(globalVariable.ceruleanTheme)
 			set_slot_color_left(0, Color(0.4,0.7,0.7,1))
+			set_slot_color_right(0, Color(0.4,0.7,0.7,1))
 			set_slot_color_right(1, Color(0.4,0.7,0.7,1))
 			set_slot_color_right(2, Color(0.4,0.7,0.7,1))
 			set_slot_color_right(3, Color(0.4,0.7,0.7,1))
@@ -130,6 +140,7 @@ func change_theme(index):
 		8:
 			self.set_theme(globalVariable.blueTheme)
 			set_slot_color_left(0, Color(0.45,0.65,0.75,1))
+			set_slot_color_right(0, Color(0.45,0.65,0.75,1))
 			set_slot_color_right(1, Color(0.45,0.65,0.75,1))
 			set_slot_color_right(2, Color(0.45,0.65,0.75,1))
 			set_slot_color_right(3, Color(0.45,0.65,0.75,1))
@@ -139,6 +150,7 @@ func change_theme(index):
 		9:
 			self.set_theme(globalVariable.deepBlueTheme)
 			set_slot_color_left(0, Color(0.3,0.3,0.7,1))
+			set_slot_color_right(0, Color(0.3,0.3,0.7,1))
 			set_slot_color_right(1, Color(0.3,0.3,0.7,1))
 			set_slot_color_right(2, Color(0.3,0.3,0.7,1))
 			set_slot_color_right(3, Color(0.3,0.3,0.7,1))
@@ -148,6 +160,7 @@ func change_theme(index):
 		10:
 			self.set_theme(globalVariable.purpleTheme)
 			set_slot_color_left(0, Color(0.6,0.45,0.7,1))
+			set_slot_color_right(0, Color(0.6,0.45,0.7,1))
 			set_slot_color_right(1, Color(0.6,0.45,0.7,1))
 			set_slot_color_right(2, Color(0.6,0.45,0.7,1))
 			set_slot_color_right(3, Color(0.6,0.45,0.7,1))
@@ -157,6 +170,7 @@ func change_theme(index):
 		11:
 			self.set_theme(globalVariable.eggplantTheme)
 			set_slot_color_left(0, Color(0.7,0.4,0.6,1))
+			set_slot_color_right(0, Color(0.7,0.4,0.6,1))
 			set_slot_color_right(1, Color(0.7,0.4,0.6,1))
 			set_slot_color_right(2, Color(0.7,0.4,0.6,1))
 			set_slot_color_right(3, Color(0.7,0.4,0.6,1))
@@ -164,5 +178,5 @@ func change_theme(index):
 			set_slot_color_right(5, Color(0.7,0.4,0.6,1))
 			set_slot_color_right(6, Color(0.7,0.4,0.6,1))
 
-
-
+func _on_class_name_line_text_changed(new_text):
+	className = new_text

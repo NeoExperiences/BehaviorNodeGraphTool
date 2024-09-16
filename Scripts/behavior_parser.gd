@@ -168,8 +168,8 @@ func _parse_hkRootLevelContainer(file, node): # Done
 	file.store_string('        <hkobject class="hkRootLevelContainer" name="#' + str(node.nodeID) + '" signature="0x2772c11e">\r\n')
 	file.store_string('            <hkparam name="namedVariants" numelements="1">\r\n')
 	file.store_string('                <hkobject>\r\n')
-	file.store_string('                    <hkparam name="name">hkbBehaviorGraph</hkparam>\r\n')
-	file.store_string('                    <hkparam name="className">hkbBehaviorGraph</hkparam>\r\n')
+	file.store_string('                    <hkparam name="name">' + str(node.className) + '</hkparam>\r\n')
+	file.store_string('                    <hkparam name="className">' + str(node.className) + '</hkparam>\r\n')
 	if node.nodeConnection0.size() != 0:
 		file.store_string('                    <hkparam name="variant">#' + str(node.nodeConnection0[0][2]) + '</hkparam>\r\n')
 	else:

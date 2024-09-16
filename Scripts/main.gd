@@ -66,20 +66,20 @@ func initial_instance():
 	var NodeRoot = globalVariable.hkRootLevelContainer.instantiate()
 	NodeRoot.title += ' - #' + str(nodeIndex)
 	NodeRoot.nodeID = nodeIndex
-	NodeRoot.position_offset = Vector2(0, 60)
+	NodeRoot.position_offset = Vector2(220, 360)
 	$GraphEdit.add_child(NodeRoot)
 	nodeIndex += 1
 	var NodeGraph = globalVariable.hkbBehaviorGraph.instantiate()
 	NodeGraph.title += ' - #' + str(nodeIndex)
 	NodeGraph.nodeID = nodeIndex
-	NodeGraph.position_offset = Vector2(300, 20)
+	NodeGraph.position_offset = Vector2(520, 320)
 	$GraphEdit.add_child(NodeGraph)
 	nodeIndex += 1
 	$GraphEdit.connect_node(str(NodeRoot.name), 0, str(NodeGraph.name), 0)
 	var StateMachine = globalVariable.hkbStateMachine.instantiate()
 	StateMachine.title += ' - #' + str(nodeIndex)
 	StateMachine.nodeID = nodeIndex
-	StateMachine.position_offset = Vector2(640, 0)
+	StateMachine.position_offset = Vector2(860, 300)
 	$GraphEdit.add_child(StateMachine)
 	nodeIndex += 1
 	$GraphEdit.connect_node(str(NodeGraph.name), 0, str(StateMachine.name), 0)
@@ -289,6 +289,7 @@ func _on_create_node_menuhkb_t_id_pressed(id):
 # Graph Node Connections
 func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 	$GraphEdit.connect_node(from_node, from_port, to_node, to_port)
+	
 	_process_connections()
 
 func _on_graph_edit_disconnection_request(from_node, from_port, to_node, to_port):
@@ -300,8 +301,17 @@ func _process_connections():
 	for connection in $GraphEdit.get_connection_list():
 		var from_path := NodePath(connection["from_node"])
 		var to_path := NodePath(connection["to_node"])
+		#print($GraphEdit.get_node(from_path).get_output_port_position(0) + $GraphEdit.get_node(from_path).position_offset, $GraphEdit.get_node(to_path).get_input_port_position(connection["to_port"]) + $GraphEdit.get_node(to_path).position_offset)
 		var connectionData = [(connection["from_port"]),$GraphEdit.get_node(from_path).get("nodeID"),$GraphEdit.get_node(to_path).get("nodeID")]
 		connectionInfo.append(connectionData)
+
+#func _connection_coloring(from_node, from_port, to_node):
+	#match $GraphEdit.get_node(from_path).get("nodeColorID"):
+		#0:
+			#pass
+		#1:
+			#set_connection_activity(from_node, from_port, to_node, 0, amount)
+	
 
 # Graph Node Operations
 func _on_graph_edit_node_selected(node):
@@ -588,6 +598,7 @@ func _create_node_diccionary(child, nodeConnection0, nodeConnection1, nodeConnec
 		"forceFullFadeDurations": child.get("forceFullFadeDurations"),
 		"iStateToSetAs": child.get("iStateToSetAs"),
 		"iPriority": child.get("iPriority"),
+		"className": child.get("className"),
 		"nodeConnection0": nodeConnection0,
 		"nodeConnection1": nodeConnection1,
 		"nodeConnection2": nodeConnection2,

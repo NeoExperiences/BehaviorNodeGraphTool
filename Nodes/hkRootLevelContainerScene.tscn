@@ -42,15 +42,15 @@ text = "variant
 [node name="DataPopupPanel" type="PopupPanel" parent="."]
 transparent_bg = true
 initial_position = 1
-size = Vector2i(600, 39)
+size = Vector2i(598, 74)
 borderless = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DataPopupPanel"]
 custom_minimum_size = Vector2(590, 0)
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 596.0
-offset_bottom = 35.0
+offset_right = 594.0
+offset_bottom = 70.0
 
 [node name="BaseNode" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer"]
 layout_mode = 2
@@ -151,6 +151,32 @@ layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("6_l7jxs")
 
+[node name="PanelContainer" type="PanelContainer" parent="DataPopupPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="FoldingPanel" type="VBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="className" type="HBoxContainer" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/className"]
+layout_mode = 2
+text = "   className"
+
+[node name="Space" type="Control" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/className"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="classNameLine" type="LineEdit" parent="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/className"]
+custom_minimum_size = Vector2(180, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "hkbBehaviorGraph"
+placeholder_text = "hkbBehaviorGraph"
+alignment = 3
+
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="slot_updated" from="." to="." method="_on_slot_updated"]
 [connection signal="pressed" from="connection/EditButton" to="." method="_on_edit_button_pressed"]
@@ -160,3 +186,4 @@ texture_normal = ExtResource("6_l7jxs")
 [connection signal="pressed" from="DataPopupPanel/VBoxContainer/BaseNode/PaintButton" to="." method="_on_paint_button_pressed"]
 [connection signal="toggled" from="DataPopupPanel/VBoxContainer/BaseNode/PinButton" to="." method="_on_pin_button_toggled"]
 [connection signal="pressed" from="DataPopupPanel/VBoxContainer/BaseNode/DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="text_changed" from="DataPopupPanel/VBoxContainer/PanelContainer/FoldingPanel/className/classNameLine" to="." method="_on_class_name_line_text_changed"]

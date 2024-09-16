@@ -88,6 +88,7 @@ func _object_processing(object, graphEdit, connections, transitionValues, payloa
 					print("hkRootLevelContainer loaded.")
 					var loadedNode = globalVariable.hkRootLevelContainer.instantiate()
 					base_node_values(loadedNode, object)
+					loadedNode.className = object.children[0].children[0].children[1].content
 					if object.children[0].children[0].children[2].content != "null":
 						connections.append([0, int(object.attributes.name.replace("#","")), int(object.children[0].children[0].children[2].content.replace("#",""))])
 					graphEdit.add_child(loadedNode)

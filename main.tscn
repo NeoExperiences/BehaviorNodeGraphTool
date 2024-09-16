@@ -130,7 +130,7 @@ item_3/text = "Delete Nodes"
 item_3/id = 3
 
 [node name="PaintMenu" type="PopupMenu" parent="."]
-size = Vector2i(237, 305)
+size = Vector2i(122, 332)
 hide_on_checkable_item_selection = false
 item_count = 12
 item_0/text = "Default"
@@ -378,51 +378,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="NewButton" type="Button" parent="Buttons"]
-top_level = true
-layout_mode = 0
-offset_left = 305.0
-offset_top = 10.0
-offset_right = 375.0
-offset_bottom = 45.0
-text = "New"
-
-[node name="SaveButton" type="Button" parent="Buttons"]
-top_level = true
-layout_mode = 0
-offset_left = 455.0
-offset_top = 10.0
-offset_right = 525.0
-offset_bottom = 45.0
-text = "Save"
-
-[node name="LoadButton" type="Button" parent="Buttons"]
-top_level = true
-layout_mode = 0
-offset_left = 380.0
-offset_top = 10.0
-offset_right = 450.0
-offset_bottom = 45.0
-text = "Load"
-
-[node name="ExportButton" type="Button" parent="Buttons"]
-top_level = true
-layout_mode = 1
-offset_left = 530.0
-offset_top = 10.0
-offset_right = 600.0
-offset_bottom = 45.0
-text = "Export"
-
-[node name="ImportButton" type="Button" parent="Buttons"]
-top_level = true
-layout_mode = 0
-offset_left = 605.0
-offset_top = 10.0
-offset_right = 675.0
-offset_bottom = 45.0
-text = "Import"
-
 [node name="CreditsButton" type="Button" parent="Buttons"]
 top_level = true
 layout_mode = 1
@@ -531,6 +486,51 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_ck3fk")
 text = "Variables"
 
+[node name="NewButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 0
+offset_left = 165.0
+offset_top = 10.0
+offset_right = 235.0
+offset_bottom = 45.0
+text = "New"
+
+[node name="SaveButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 0
+offset_left = 315.0
+offset_top = 10.0
+offset_right = 385.0
+offset_bottom = 45.0
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 0
+offset_left = 240.0
+offset_top = 10.0
+offset_right = 310.0
+offset_bottom = 45.0
+text = "Load"
+
+[node name="ExportButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 1
+offset_left = 390.0
+offset_top = 10.0
+offset_right = 460.0
+offset_bottom = 45.0
+text = "Export"
+
+[node name="ImportButton" type="Button" parent="Buttons"]
+top_level = true
+layout_mode = 0
+offset_left = 465.0
+offset_top = 10.0
+offset_right = 535.0
+offset_bottom = 45.0
+text = "Import"
+
 [node name="GraphEdit" type="GraphEdit" parent="."]
 layout_direction = 1
 layout_mode = 1
@@ -540,7 +540,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 right_disconnects = true
-zoom_min = 0.1
+zoom = 0.7
+zoom_min = 0.3
 show_grid_buttons = false
 
 [connection signal="confirmed" from="NewFileConfirmationDialog" to="." method="_on_new_file_confirmation_dialog_confirmed"]
@@ -566,11 +567,6 @@ show_grid_buttons = false
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbS" to="." method="_on_create_node_menuhkb_s_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbR" to="." method="_on_create_node_menuhkb_r_id_pressed"]
 [connection signal="id_pressed" from="CreateNodeMenu/CreateNodeMenuhkbT" to="." method="_on_create_node_menuhkb_t_id_pressed"]
-[connection signal="pressed" from="Buttons/NewButton" to="." method="_on_new_button_pressed"]
-[connection signal="pressed" from="Buttons/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="Buttons/LoadButton" to="." method="_on_load_button_pressed"]
-[connection signal="pressed" from="Buttons/ExportButton" to="." method="_on_export_button_pressed"]
-[connection signal="pressed" from="Buttons/ImportButton" to="." method="_on_import_button_pressed"]
 [connection signal="pressed" from="Buttons/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="Buttons/CreateNodeButton" to="." method="_on_create_node_button_pressed"]
 [connection signal="pressed" from="Buttons/ArrangeNodeButton" to="." method="_on_arrange_node_button_pressed"]
@@ -579,6 +575,11 @@ show_grid_buttons = false
 [connection signal="toggled" from="Buttons/EventsButton" to="." method="_on_events_button_toggled"]
 [connection signal="toggled" from="Buttons/PropertiesButton" to="." method="_on_properties_button_toggled"]
 [connection signal="toggled" from="Buttons/VariablesButton" to="." method="_on_variables_button_toggled"]
+[connection signal="pressed" from="Buttons/NewButton" to="." method="_on_new_button_pressed"]
+[connection signal="pressed" from="Buttons/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="Buttons/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="Buttons/ExportButton" to="." method="_on_export_button_pressed"]
+[connection signal="pressed" from="Buttons/ImportButton" to="." method="_on_import_button_pressed"]
 [connection signal="connection_request" from="GraphEdit" to="." method="_on_graph_edit_connection_request"]
 [connection signal="copy_nodes_request" from="GraphEdit" to="." method="_on_graph_edit_copy_nodes_request"]
 [connection signal="disconnection_request" from="GraphEdit" to="." method="_on_graph_edit_disconnection_request"]
